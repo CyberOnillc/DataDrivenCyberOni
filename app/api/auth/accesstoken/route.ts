@@ -1,5 +1,6 @@
 import { CreateBlogDTO, createCredentialsDTO } from "@/crud/DTOs";
 import { create } from "@/crud/credentials";
+import { HttpError } from "@/lib/utils";
 import { prisma } from "@/prisma/prismaClient";
 import { NextResponse } from "next/server";
 
@@ -10,6 +11,8 @@ export async function POST(req: Request) {
         return NextResponse.json({ message: "Add success", data: apiCredentials });
 
     } catch (error) {
-        return NextResponse.json({ message: (error as Error).message }, { status: 500 });
+        console.log(error);
+        let err = error as HttpError
+        return NextResponse.json((err.message), {status: err.status || 500})
     }
 }

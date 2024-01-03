@@ -9,14 +9,15 @@ export async function verifyAccess(user: DisplayUserDTO, req: NextRequest): Prom
     const path = req.nextUrl.pathname;
     const method = req.method;
     const token = req.headers.get("Authorization")?.split(' ')[1];
+    // console.log(token);
     if (token) {
         try {
             const verifyRes = await fetch(`${req.nextUrl.origin}/api/auth/verifytoken`, {
                 method: 'POST',
                 body: JSON.stringify({ token })
             })
-            const { role } = await verifyRes.json();
-            user.role = role;
+            const {id, email ,role } = await verifyRes.json();
+            user = {role, id ,email };
         } catch (error) {
             console.log("token parse error:", error);
         }

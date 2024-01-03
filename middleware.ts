@@ -33,8 +33,9 @@ export default withAuth(
       authorized: async ({ token, req }) => {
 
         // console.log("authorize",token);
-        return verifyAccess(token?.user as DisplayUserDTO,req)
+        return verifyAccess(token?.user as DisplayUserDTO, req)
       },
+
 
     },
 
