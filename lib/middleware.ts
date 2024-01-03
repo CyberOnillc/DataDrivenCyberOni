@@ -1,14 +1,27 @@
 
 import { DisplayUserDTO } from "@/crud/DTOs";
 import { Role } from "@prisma/client";
-import { HttpError } from "./utils";
-
+import { NextRequest } from "next/server";
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
+export async function verifyAccess(user: DisplayUserDTO, req: NextRequest): Promise<boolean> {
+    const path = req.nextUrl.pathname;
+    const method = req.method;
+    const token = req.headers.get("Authorization")?.split(' ')[1];
+    if (token) {
+        try {
+            const verifyRes = await fetch(`${req.nextUrl.origin}/api/auth/verifytoken`, {
+                method: 'POST',
+                body: JSON.stringify({ token })
+            })
+            const { role } = await verifyRes.json();
+            user.role = role;
+        } catch (error) {
+            console.log("token parse error:", error);
+        }
 
-
-export async function verifyAccess(user: DisplayUserDTO, path: string, method: HttpMethod): Promise<boolean> {
+    }
 
     if (user.role === Role.SUPERUSER) return true;
     if (user.role === Role.ADMIN) return true;
@@ -46,7 +59,7 @@ export async function verifyAccess(user: DisplayUserDTO, path: string, method: H
         if (path.match(/^\/api\/prompts\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/) && method === 'GET') {
             return true;
         }
-        if (path.match(/^\/api\/prompts\/all/)&& method === 'GET') {
+        if (path.match(/^\/api\/prompts\/all/) && method === 'GET') {
             return true;
         }
         if (path.match(/^\/api\/prompts\/add/)) {

@@ -13,7 +13,8 @@ export async function create(credentials: createCredentialsDTO, prisma: PrismaCl
         const credentials = prisma.apiCredential;
         const accessToken = sign({
             id: user.id,
-            email: user.email
+            email: user.email,
+            role: user.role
         }, process.env.NEXTAUTH_SECRET as string, {
             expiresIn: "90d"
         })
@@ -33,8 +34,8 @@ export async function create(credentials: createCredentialsDTO, prisma: PrismaCl
                         id: user.id
                     }
                 },
-                refreshTokenExpiry: new Date(new Date().getTime() + 1000*60*60*24*365),
-                tokenExpiry: new Date(new Date().getTime() + 1000*60*60*24*90)
+                refreshTokenExpiry: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365),
+                tokenExpiry: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 90)
             }
         })
 
