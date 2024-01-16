@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     try {
         const credentials = await req.json() as CreateCredentialsDTO;
         const apiCredentials = await create(credentials, prisma);
-        return NextResponse.json({ message: "Add success", data: apiCredentials });
+        return NextResponse.json({ message: "success", data: apiCredentials });
 
     } catch (error) {
         console.log(error);
