@@ -1,4 +1,4 @@
-import { CreateBlogDTO, createCredentialsDTO } from "@/crud/DTOs";
+import { CreateBlogDTO, CreateCredentialsDTO } from "@/crud/DTOs";
 import { create } from "@/crud/credentials";
 import { prisma } from "@/prisma/prismaClient";
 import { Role } from "@prisma/client";

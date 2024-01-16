@@ -147,7 +147,7 @@ export type CreateTagDTO = {
     name: string;
 };
 
-export type createCredentialsDTO = {
+export type CreateCredentialsDTO = {
     email: string;
     password: string;
 } 

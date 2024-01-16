@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
-import { CreateAddressDTO, createCredentialsDTO } from "./DTOs";
+import { CreateAddressDTO, CreateCredentialsDTO } from "./DTOs";
 import { authorizeWithPassword } from "./user";
 import { HttpError } from "@/lib/utils";
 import { sign } from "jsonwebtoken";
 
 
-export async function create(credentials: createCredentialsDTO, prisma: PrismaClient) {
+export async function create(credentials: CreateCredentialsDTO, prisma: PrismaClient) {
     const user = await authorizeWithPassword(credentials, prisma);
     if (!user) HttpError(401, "Invalid credentials, try reseting your password")
     if (user) {
