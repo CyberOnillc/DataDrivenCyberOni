@@ -9,6 +9,7 @@ import EmailLetter from "@/components/home/EmailLetter";
 import CalendlyPopup from "@/components/Calendly";
 import { companies, homeSections, sildes } from "@/data/homeData";
 import Link from "next/link";
+import VideoModal from "@/components/home/VideoModal";
 export default async function Home() {
   return (
     <>
@@ -29,8 +30,17 @@ export default async function Home() {
               </div>
               <div className="mx-3 h-[1px] bg-gradient-purple w-full" />
               <div className="flex justify-center lg:justify-start">
-                <div id="__next" className="m-3 bg-gradient-purple w-fit rounded-full py-[0.1rem] px-[0.1rem]">
-                  <CalendlyPopup CTAText="Schedule a consultation" className="bg-white dark:bg-gray-900 p-[0.4rem] rounded-full" />
+                <div id="__next" className="m-3 flex justify-center items-center bg-gradient-purple w-fit rounded-full py-[0.1rem] px-[0.1rem]">
+                  <CalendlyPopup CTAText="Schedule a consultation" className="bg-white dark:bg-gray-900 p-[0.6rem] rounded-full" />
+                </div>
+                <div
+                  className={`m-3 w-fit rounded-full bg-gradient-purple px-[0.1rem] py-[0.1rem] hover:shadow-md dark:hover:shadow-[0_4px_10px_1px_#000000]`}
+                >
+                  <div
+                    className="rounded-full bg-white p-[0.6rem] dark:bg-gray-900 "
+                  >
+                    <VideoModal text="Learn More" videoUrl="https://www.youtube.com/embed/oAUjdNnp0i8?si=AAE73oyrOXc7Ci_1" ></VideoModal>
+                  </div>
                 </div>
               </div>
             </div>
