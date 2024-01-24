@@ -16,12 +16,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
     },
     ...blogs.records.map(blog => ({
-      url: `${baseUrl}/blogs/post/${seoUrl(blog.title, blog.id)}`,
+      url: `${baseUrl}/blogs/post/${blog.id}/${seoUrl(blog.title)}`,
       lastModified: new Date(),
 
     })),
     ...services.records.map(service => ({
-      url: `${baseUrl}/services/${seoUrl(service.title, service.id)}`,
+      url: `${baseUrl}/services/${service.id}/${seoUrl(service.title)}`,
       lastModified: new Date(),
 
     }))

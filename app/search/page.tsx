@@ -38,7 +38,7 @@ async function SearchResults({ searchParams }: { searchParams: { q: string, page
                                     <div className="ml-4 flex flex-col gap-5">
                                         {blogs.map((blog, index) => ((
                                             <div key={index} >
-                                                <Link href={`/blogs/post/${seoUrl(blog.title, blog.id)}`} className="flex flex-col gap-2">
+                                                <Link href={`/blogs/post/${blog.id}/${seoUrl(blog.title)}`} className="flex flex-col gap-2">
                                                     <div className="text-blue-500">{blog.title}</div>
                                                     <div className="line-clamp-3 text-gray-400">{blog.subTitle}</div>
                                                 </Link>
@@ -52,7 +52,7 @@ async function SearchResults({ searchParams }: { searchParams: { q: string, page
                                     <div className="ml-4 flex flex-col gap-5">
                                         {services.map((service, index) => ((
                                             <div key={index}>
-                                                <Link href={`/services/${service.id}`}>
+                                                <Link href={`/services/${service.id}/${seoUrl(service.title)}`}>
                                                     <div className="text-blue-500">{service.title}</div>
                                                     <div className="line-clamp-3 text-gray-400">{service.previewContent}</div></Link>
                                             </div>

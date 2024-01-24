@@ -95,7 +95,7 @@ async function BlogAuthor({
           return (
             <div key={index} className={`w-full  p-5  lg:h-[500px]`}>
               <Link
-                href={`/blogs/post/${seoUrl(blog.title, blog.id)}`}
+                href={`/blogs/post/${blog.id}/${seoUrl(blog.title)}`}
                 className=""
               >
                 <div className="h-full overflow-hidden rounded-lg   shadow-lg dark:bg-gray-700">
@@ -136,7 +136,7 @@ async function BlogAuthor({
             return (
               <div key={index} className="p-4">
                 <Link
-                  href={`/blogs/post/${seoUrl(blog.title, blog.id)}`}
+                  href={`/blogs/post/${blog.id}/${seoUrl(blog.title)}`}
                   className="my-1 p-2 hover:underline"
                 >
                   <p className="p-4">{blog.title}</p>
@@ -170,7 +170,7 @@ async function BlogAuthor({
                 ></Image>
                 <div className="w-2/3">
                   <Link
-                    href={`/blogs/post/${seoUrl(blog.title, blog.id)}`}
+                    href={`/blogs/post/${blog.id}/${seoUrl(blog.title)}`}
                     className="my-1 p-2 hover:underline"
                   >
                     <p>{blog.title}</p>

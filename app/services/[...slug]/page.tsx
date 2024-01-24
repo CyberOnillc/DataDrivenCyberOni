@@ -47,6 +47,11 @@ export async function generateMetadata({ params, searchParams }: ServiceProps, p
   }
   metadata.category = service?.tags.join(" ")
   metadata.keywords = service?.tags?.map(tag => tag.name)
+  if (params.slug[1]) {
+    metadata.alternates = {
+        canonical: `${process.env.HOST}/services/${id}`
+    }
+}
   return metadata
 }
 async function Services({ params }: ServiceProps) {

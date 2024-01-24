@@ -37,6 +37,12 @@ type CaseStudyProps = {
   
     }
     metadata.keywords = caseStudy?.title.split('')
+    if (params.slug[1]) {
+        metadata.alternates = {
+            canonical: `${process.env.HOST}/casestudy/${id}`
+        }
+    }
+
     return metadata
   }
 async function CaseStudy({ params }: CaseStudyProps) {

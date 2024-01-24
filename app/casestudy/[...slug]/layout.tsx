@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 export async function generateStaticParams() {
     const cases = await getAll(0, 0, prisma)
     return cases.records.map((caseStudy) => ({
-        id: seoUrl(caseStudy.title, caseStudy.id)
+        slug: [caseStudy.id, seoUrl(caseStudy.title)]
     }))
 }
 

@@ -36,7 +36,7 @@ function PortfolioCarousel({ services }: { services: DisplayServiceDTO[] }) {
                     {currentGrid?.map((caseStudy, index) => {
                         return (
                             <div key={index} className={`rounded-2xl aspect-square  w-1/2 p-3 overflow-hidden lg:w-1/4`}>
-                                <Link className="w-full h-full " href={`/casestudy/${seoUrl(caseStudy.title, caseStudy.id)}`}>
+                                <Link className="w-full h-full " href={`/casestudy/${caseStudy.id}/${seoUrl(caseStudy.title)}`}>
                                     <Image className="rounded-lg object-cover" src={`${caseStudy.images ? (caseStudy.images as CaseImage[])[0].src : `https://picsum.photos/200?random=1`}`} alt="Case-study-image" height={400} width={400} />
                                 </Link>
                             </div>
