@@ -1,5 +1,5 @@
 'use client'
-import { LikeFormState, submitLike } from "@/app/blogs/post/[id]/addlike";
+import { LikeFormState, submitLike } from "@/app/blogs/post/[...slug]/addlike";
 import { Heart } from "lucide-react";
 import { redirect, useRouter } from "next/navigation";
 import React, { FormEvent, useEffect, useState } from 'react'

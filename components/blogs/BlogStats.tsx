@@ -1,4 +1,4 @@
-import { submitLike } from "@/app/blogs/post/[id]/addlike";
+import { submitLike } from "@/app/blogs/post/[...slug]/addlike";
 import { Eye, Heart, View } from "lucide-react";
 import { useRouter } from "next/router";
 import { useState } from "react";

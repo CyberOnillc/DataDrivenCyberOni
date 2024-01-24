@@ -3,7 +3,7 @@ import React, { FormEvent, useState } from 'react';
 import ClientInput from "../layout/ClientInput";
 import Link from "next/link";
 import { CommentDTO, DisplayCommentDTO } from "@/crud/DTOs";
-import { submitComment } from "@/app/blogs/post/[id]/submitComment";
+import { submitComment } from "@/app/blogs/post/[...slug]/submitComment";
 import GoogleCaptchaWrapper from "../GoogleCaptchaWrapper";
 import { useReCaptcha } from "next-recaptcha-v3";
 
