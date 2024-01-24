@@ -39,6 +39,8 @@ export default async function Home() {
               alt={"hero-1"}
               height={500}
               width={500}
+              priority={true}
+              fetchPriority="high"
             ></Image>
           </div>
 
@@ -98,7 +100,7 @@ export default async function Home() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-lg font-semibold text-blue-600 hover:text-blue-800"
-              aria-label="View our business"
+              aria-label="Write a Review"
             >
               Write a Review
             </Link>

@@ -40,6 +40,7 @@ const TermsModal: React.FC<TermsModalProps> = ({
           <span
             className={className +" "+ "cursor-pointer "}
             onClick={handleToggle}
+            role="button"
           >
             {triggerTitle}
           </span>

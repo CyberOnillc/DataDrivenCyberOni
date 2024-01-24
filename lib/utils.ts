@@ -178,6 +178,10 @@ export function generateRandomArray(originalArray: string[] | number[], n: numbe
   return randomArray;
 }
 
+export function getRandomIntWithSeed(seed: string, min: number, max: number): number {
+  const rng = seedRandom(seed);
+  return Math.floor(rng() * (max - min) + min);
+}
 
 export function cleanHtmlString(inputString: string) {
   // Remove HTML tags (including partial tags)

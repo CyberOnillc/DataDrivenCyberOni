@@ -183,7 +183,7 @@ export default function NavBar({ session, darkMode }: { session: Session | null,
                   placeholder="Search"
                   className="dark:bg-[#272F43] text-gray-950 dark:text-white rounded-md py-1 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-32 xl:w-38"
                 />
-                <button type="submit" className="absolute right-2 top-1/2 transform -translate-y-1/2">
+                <button aria-label="search button"  type="submit" role="search" className="absolute right-2 top-1/2 transform -translate-y-1/2">
                   <Search />
                 </button>
               </form>
