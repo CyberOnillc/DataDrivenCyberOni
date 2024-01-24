@@ -7,18 +7,17 @@ import { Metadata, ResolvingMetadata } from "next";
 import { extractUUID, stripFileExtension } from "@/lib/utils";
 
 
-type Props = {
-    params: { id: string }
+type CaseStudyProps = {
+    params: { slug: string[] }
     searchParams: { [key: string]: string | string[] | undefined }
   }
   
   
   
   
-  export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+  export async function generateMetadata({ params, searchParams }: CaseStudyProps, parent: ResolvingMetadata): Promise<Metadata> {
     // read route params
-    const seoTitle = params.id
-    const id = extractUUID(seoTitle)
+    const [id,seoTitle] = params.slug
     const caseStudy = await read(id, prisma)
   
     // optionally access and extend (rather than replace) parent metadata
@@ -40,9 +39,8 @@ type Props = {
     metadata.keywords = caseStudy?.title.split('')
     return metadata
   }
-async function CaseStudy({ params }: { params: { id: string } }) {
-    const seoTitle = params.id
-    const id = extractUUID(seoTitle)
+async function CaseStudy({ params }: CaseStudyProps) {
+    const [id,seoTitle] = params.slug
     const caseStudy = await read(id, prisma)
 
     return (

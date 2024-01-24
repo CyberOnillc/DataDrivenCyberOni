@@ -44,7 +44,7 @@ async function Blogs() {
                         </div>
                         {data.recent.slice(0, 4).map((blog, index) => {
                             return (
-                                <Link key={index} href={`/blogs/post/${seoUrl(blog.title, blog.id)}`} className="p-5">
+                                <Link key={index} href={`/blogs/post/${blog.id}/${seoUrl(blog.title)}`} className="p-5">
                                     <div key={index} className="flex flex-col">
                                         <span className="font-thin">{(new Date(blog.date)).toLocaleString()}</span>
                                         <span className="hover:underline hover:text-[#FF5480]">{blog.title}</span>
@@ -105,7 +105,7 @@ async function Blogs() {
             <div className="my-10 container mx-auto">
                 <div className="text-2xl font-bold my-2">Random</div>
                 {random &&
-                    <Link href={`/blogs/post/${seoUrl(random.title, random.id)}`} className="conatiner relative flex overflow-hidden flex-col md:flex-row-reverse my-5 h-80 w-full rounded-2xl shadow-lg">
+                    <Link href={`/blogs/post/${ random.id}/${seoUrl(random.title)}`} className="conatiner relative flex overflow-hidden flex-col md:flex-row-reverse my-5 h-80 w-full rounded-2xl shadow-lg">
                         <div className="w-full absolute h-full lg:w-1/2 lg:static">
                             {random.images[0] ?
                                 // eslint-disable-next-line @next/next/no-img-element

@@ -16,18 +16,17 @@ import AccordionItem from "@/components/services/AccordianItem";
 import ServiceFeatures from "@/components/services/ServiceFeatures";
 import { redirect } from "next/navigation";
 import { extractUUID, seoUrl } from "@/lib/utils";
-type Props = {
-  params: { id: string }
+type ServiceProps = {
+  params: { slug: string[] }
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
 
 
 
-export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: ServiceProps, parent: ResolvingMetadata): Promise<Metadata> {
   // read route params
-  const seoTitle = params.id
-  const id = extractUUID(seoTitle)
+  const [id, seoTitle] = params.slug
   const service = await read(id, prisma);
 
   // optionally access and extend (rather than replace) parent metadata
@@ -50,9 +49,8 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
   metadata.keywords = service?.tags?.map(tag => tag.name)
   return metadata
 }
-async function Services({ params }: { params: { id: string } }) {
-  const seoTitle = params.id
-  const id = extractUUID(seoTitle)
+async function Services({ params }: ServiceProps) {
+  const [id, seoTitle] = params.slug
   const service = await read(id, prisma) as DisplayServiceDTO
   const services = await getAll(1, 10, prisma);
 
@@ -127,7 +125,7 @@ async function Services({ params }: { params: { id: string } }) {
               className="container mx-auto my-5 flex flex-wrap gap-2 lg:gap-5"
             >
               <Link
-                href={`/casestudies/${caseStudy.id}`}
+                href={`/casestudy/${caseStudy.id}/${seoUrl(caseStudy.title)}`}
                 className="relative w-1/2 flex-col items-center justify-center overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl lg:w-[170px]"
               >
                 <Image

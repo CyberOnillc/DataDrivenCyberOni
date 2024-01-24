@@ -1,5 +1,15 @@
 import { Suspense } from "react";
 
+export async function generateStaticParams() {
+    return [
+        {list: 'new'},
+        {list: 'popular'},
+        {list: 'essential'}
+
+    ]
+  }
+
+  
 function BlogListLayout({ children }: {
     children: React.ReactNode;
 }) {

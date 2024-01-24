@@ -14,7 +14,7 @@ function DetailedCard({ author, title, description, images, id }: DetailedProps)
 
     // console.log(author, title, description)
     return (
-        <Link href={`/blogs/post/${seoUrl(title, id)}`}>
+        <Link href={`/blogs/post/${id}/${seoUrl(title)}`}>
 
             <div className="relative rounded-lg shadow-lg overflow-hidden w-full h-full flex justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}

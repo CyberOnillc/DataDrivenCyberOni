@@ -20,7 +20,7 @@ function CaseStudyCard({ id, image, previewContent, title }: CasestudyCardProps)
             <div className="p-5 z-10 bg-gray-950/20 text-white h-full flex flex-col justify-center">
                 <div className="border-l-4 border-service-green px-3 mb-5 font-bold text-xl">{title}</div>
                 <div className="mb-5 line-clamp-3">{previewContent}</div>
-                < Link href={`/casestudy/${seoUrl(title, id)}#description`} className="flex gap-x-3 mb-5 text-blue-500">Learn more  <MoveRight /></Link>
+                < Link href={`/casestudy/${id}/${seoUrl(title)}`} className="flex gap-x-3 mb-5 text-blue-500">Learn more  <MoveRight /></Link>
             </div>
         </div>
 

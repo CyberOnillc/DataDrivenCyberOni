@@ -17,17 +17,16 @@ import { authOptions } from "@/lib/nextAuthAdapter";
 
 export const dynamic = 'force-dynamic';
 
-type Props = {
-    params: { id: string }
+interface BlogPostProps {
+    params: { slug: string[] }
     searchParams: { [key: string]: string | string[] | undefined }
 }
 
 
 
-export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: BlogPostProps, parent: ResolvingMetadata): Promise<Metadata> {
     // read route params
-    const seoTitle = params.id
-    const id = extractUUID(seoTitle)
+    const [id, seoTitle] = params.slug
     const blog = await read(id, prisma) as DisplayBlogDTO;
 
     // optionally access and extend (rather than replace) parent metadata
@@ -43,26 +42,31 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
     metadata.twitter = {
         title: blog.title,
         images: [blog.images.length > 0 ? blog.images[0].src : ""],
-        description: blog.description,      
+        description: blog.description,
 
     }
     metadata.category = blog.tags.join(" ")
     metadata.keywords = blog.tags?.map(tag => tag.name)
+    if (params.slug[1]) {
+        metadata.alternates = {
+            canonical: `${process.env.HOST}/blogs/post/${blog.id}`
+        }
+    }
+
     return metadata
 }
 
 
-async function BlogPost({ params }: { params: { id: string } }) {
+async function BlogPost({ params }: BlogPostProps) {
     const session = await getServerSession(authOptions);
 
-    const seoTitle = params.id
-    const id = extractUUID(seoTitle)
-    const blog = await getData(id, session?.user?.email?? "");
+    const [id, seoTitle] = params.slug
+    const blog = await getData(id, session?.user?.email ?? "");
 
     // console.log("Currect url", seoTitle, encodeURIComponent(seoUrl(blog.title, blog.id)));
     if (!blog) redirect('/404');
 
-    if (seoTitle !== seoUrl(blog.title, blog.id)) redirect('/404'); //redirec if link in not matching
+    //if (seoTitle !== seoUrl(blog.title, blog.id)) redirect('/404'); //redirec if link in not matching
 
 
     const cookieStore = cookies();
@@ -82,9 +86,9 @@ async function BlogPost({ params }: { params: { id: string } }) {
                     </div>
                 </div>
                 <div className="relative mx-auto flex flex-col  items-center my-10 xl:py-10  xl:px-10 px-1 py-5 min-h-screen container">
-                    <div className="max-w-full flex justify-center items-center">{blog.images[0] ? <Image priority={true} className="object-contain m-2 w-full h-[40vh] rounded-lg" src={blog.images[0].src} alt={ stripFileExtension(blog.images[0].name || 'blog_image')} width={500} height={300}></Image> : <></>}</div>
+                    <div className="max-w-full flex justify-center items-center">{blog.images[0] ? <Image priority={true} className="object-contain m-2 w-full h-[40vh] rounded-lg" src={blog.images[0].src} alt={stripFileExtension(blog.images[0].name || 'blog_image')} width={500} height={300}></Image> : <></>}</div>
                     {<BlogContent href={`${process.env.NEXTAUTH_URL}/blogs/post/${seoTitle}`} content={blog.content} theme={theme} />}
-                    <BlogContainer href={`${process.env.NEXTAUTH_URL}/blogs/post/${seoTitle}`} liked={blog.Likes? blog.Likes.length>0 : false} blog={blog}  session={session}/>
+                    <BlogContainer href={`${process.env.NEXTAUTH_URL}/blogs/post/${seoTitle}`} liked={blog.Likes ? blog.Likes.length > 0 : false} blog={blog} session={session} />
 
                 </div>
 
@@ -102,7 +106,7 @@ async function BlogPost({ params }: { params: { id: string } }) {
                         {blog.author.firstName || blog.author.email}
                     </div>
                 </div>
-                <CommentForm email={session?.user?.email as string} href={`${process.env.NEXTAUTH_URL}/blogs/post/${seoTitle}`}  id={id} comments={blog.Comments} />
+                <CommentForm email={session?.user?.email as string} href={`${process.env.NEXTAUTH_URL}/blogs/post/${seoTitle}`} id={id} comments={blog.Comments} />
             </div>
         </div>
 
@@ -110,8 +114,8 @@ async function BlogPost({ params }: { params: { id: string } }) {
 }
 
 
-async function getData(id: string, userEmail?:string ) {
-    const blog = await addView({id,userEmail }, prisma)
+async function getData(id: string, userEmail?: string) {
+    const blog = await addView({ id, userEmail }, prisma)
     // console.log(blog.title, userEmail);
     if (blog) return blog as DisplayBlogDTO
     else redirect('/404')

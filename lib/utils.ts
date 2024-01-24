@@ -144,10 +144,8 @@ export function extractUUID(dataURI: string) {
 }
 
 
-export function seoUrl(title: string, id: string) {
-  return encodeURIComponent(slugify(`${title} ${id}`, {
-    replacement: '-'
-  }))
+export function seoUrl(title: string ) {
+  return encodeURIComponent(slugify(`${title}`, { replacement: '-' }))
 
 
 }
