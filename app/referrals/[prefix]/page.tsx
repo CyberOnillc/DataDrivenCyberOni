@@ -1,4 +1,3 @@
-'use client'
 import apiHandler from "@/errorHandler";
 import { addClick, update } from "@/crud/referral";
 import { ReferralType } from "@prisma/client";

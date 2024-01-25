@@ -1,4 +1,3 @@
-'use client'
 import { prisma } from "@/prisma/prismaClient";
 import { addClick, update } from "@/crud/referral";
 import { ReferralType } from "@prisma/client";
