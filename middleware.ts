@@ -6,7 +6,7 @@ import { ApiError } from "next/dist/server/api-utils";
 import { verifyAccess } from "./lib/middleware";
 
 export const config = {
-  matcher: ['/api/((?!auth|captcha|sitemap).*)'],
+  matcher: ['/api/((?!auth|captcha|sitemap|chat).*)'],
 
 }
 

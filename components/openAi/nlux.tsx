@@ -1,7 +1,9 @@
+'use client'
 import React from "react";
 import { AiChat } from "@nlux/react";
 import { useAdapter } from "@nlux/openai-react";
 import "@nlux/themes/nova.css";
+import { openAiStreamingAdapter } from "./adapter";
 
 interface OpenAIAdapterProps {
   show: boolean;
@@ -9,28 +11,17 @@ interface OpenAIAdapterProps {
   // Include other props as needed
 }
 
-export const OpenAIAdapter: React.FC<OpenAIAdapterProps> = ({
-  show,
-  temperature,
-}) => {
-  // Config should use the props if needed
-  const adapterConfig = {
-    apiKey: "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",
-    systemMessage:
-      "Give sound, tailored financial advice. Explain concepts simply. " +
-      "Write concise answers under 5 sentences. Be funny.",
-    // Use temperature or other props in config if applicable and supported
-  };
+export const OpenAIChat: React.FC = () => {
 
-  const chatGptAdapter = useAdapter(adapterConfig);
+  const chatGptAdapter = openAiStreamingAdapter;
 
   // Corrected conditional rendering
-  return show ? (
+  return (
     <AiChat
       adapter={chatGptAdapter}
       promptBoxOptions={{ placeholder: "How can I help you today?" }}
     />
-  ) : null;
+  );
 };
 
-export default OpenAIAdapter;
+export default OpenAIChat;
