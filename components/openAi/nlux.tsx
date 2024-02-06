@@ -20,6 +20,14 @@ export const OpenAIChat: React.FC = () => {
     <AiChat
       adapter={chatGptAdapter}
       promptBoxOptions={{ placeholder: "How can I help you today?" }}
+      conversationOptions={{
+        scrollWhenGenerating: true,
+
+      }}
+      layoutOptions={{
+
+      }}
+      
     />
   );
 };

@@ -5,7 +5,7 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 })
 
-export async function getResponse(messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[]) {
+export async function getOpenAiResponse(messages: OpenAI.Chat.Completions.ChatCompletionUserMessageParam[]) {
     const response = await openai.chat.completions.create({
         model: 'gpt-3.5-turbo',
         stream: true,

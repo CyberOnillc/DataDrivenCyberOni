@@ -1,5 +1,6 @@
+'use client'
 import { NextRequest, NextResponse, } from "next/server";
-import { getResponse } from "@/lib/externalRequests/openai";
+import { getOpenAiResponse } from "@/lib/externalRequests/openai";
 
 
 export async function POST(req: NextRequest) {
@@ -7,7 +8,7 @@ export async function POST(req: NextRequest) {
     try {
 
         const { messages } = await req.json();
-        return getResponse(messages)
+        return getOpenAiResponse(messages)
 
     } catch (error) {
         console.log(error);

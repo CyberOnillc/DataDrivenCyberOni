@@ -1,7 +1,12 @@
-import OpenAIChat from "@/components/OpenAi/nlux";
+import AiAssitant from "@/components/Assitants";
+import { OpenAiStreamResponse } from "@/components/Assitants/adapter";
 
 function ChatPage() {
-    return ( <OpenAIChat /> );
+    return (
+
+        <div className="container mx-auto">
+            <AiAssitant  adapter={{streamText: OpenAiStreamResponse}} />
+        </div>);
 }
 
 export default ChatPage;
