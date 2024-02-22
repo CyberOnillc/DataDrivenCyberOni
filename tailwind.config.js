@@ -33,7 +33,9 @@ module.exports = {
         "enterprise-bg-3": "url('/images/enterprise-bg-3.png')",
         "contact-bg": "url('/images/contact-bg.png')",
         "login-bg": "url('/images/login-bg.png')",
-        "signup-bg": "url('/images/signup-bg.png')"
+        "signup-bg": "url('/images/signup-bg.png')",
+        "onboarding-intro-bg": "url('/images/onboarding-1.svg')"
+
       },
       boxShadow: {
         "left-shift-lg": "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
