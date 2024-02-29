@@ -1,4 +1,4 @@
-import PaymentModal from "@/components/PaymentModal"
+import PaymentModal from "@/components/PaymentWrapper"
 import React from 'react'
 import prisma from "@/lib/prisma"
 import { createPaymentIntent } from "@/lib/externalRequests/stripe"

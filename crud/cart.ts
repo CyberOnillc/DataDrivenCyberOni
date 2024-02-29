@@ -19,7 +19,11 @@ export const getServiceCart = async (userId: string, prisma: PrismaClient) => {
             include: {
                 items: {
                     include: {
-                        service: true,
+                        service: {
+                            include: {
+                                image:true
+                            }
+                        },
                         addons: true
 
                     },
@@ -38,7 +42,11 @@ export const getServiceCart = async (userId: string, prisma: PrismaClient) => {
                 
                 items: {
                     include: {
-                        service: true,
+                        service:  {
+                            include: {
+                                image:true
+                            }
+                        },
                         addons: true
 
                     },

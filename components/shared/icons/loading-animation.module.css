@@ -1,0 +1,62 @@
+@keyframes draw {
+  0% {
+    stroke: #2980b9;
+  }
+
+  100% {
+    stroke-dashoffset: 300;
+  }
+}
+
+@keyframes letterflash {
+  0% {
+    fill: #2980b9;
+  }
+
+  100% {
+    fill: #8e44ad;
+  }
+}
+
+@keyframes spinnerflash {
+  0% {
+    stroke: #2980b9;
+  }
+
+  100% {
+    stroke: #8e44ad;
+  }
+}
+
+.circle {
+  stroke-dasharray: 150;
+  animation: draw 2s linear infinite;
+}
+
+.one , .two, .three, .four, .five, .six{
+  animation: letterflash 2s ease-in-out infinite;
+}
+
+.six {
+  animation-delay: 0.5s;
+}
+
+.five {
+  animation-delay: 0.4s;
+}
+
+.four {
+  animation-delay: 0.3s;
+}
+
+.three {
+  animation-delay: 0.2s;
+}
+
+.two {
+  animation-delay: 0.1s;
+}
+
+.one {
+  animation-delay: 0s;
+}

@@ -6,25 +6,18 @@ import { DisplayServiceCartItemDTO, UpdateServiceCartItemDTO } from "@/crud/DTOs
 import { calculateServiceCartTotal } from "@/lib/utils";
 import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
-import CalendlyModal from "../Calendly/CalendlyModal";
 import CalendlyPopup from "../Calendly";
 import Link from "next/link";
 import { useNotify } from "../Notification";
+import CheckoutForm from "../CheckoutForm";
+import PaymentModal from "../PaymentWrapper";
+import { MoveRight } from "lucide-react";
 
-const Cart = ({ cartItems, session }: { cartItems: DisplayServiceCartItemDTO[], session: Session }) => {
+const Cart = ({ cartItems, session, cartId, clientSecret }: { cartItems: DisplayServiceCartItemDTO[], session: Session, cartId: string, clientSecret?: string }) => {
 
     const router = useRouter();
     const notify = useNotify();
 
-    function removeFromCartItems(itemId: string, subServiceId: string) {
-
-        let current = cartItems.find(item => item.id === itemId)?.addons as SubService[]
-
-        current = current.filter(addon => addon.id !== subServiceId)
-        // console.log(current, subServiceId);
-        updateCart(itemId, current)
-
-    }
 
     const [scheduled, setScheduled] = useState(false);
 
@@ -47,28 +40,38 @@ const Cart = ({ cartItems, session }: { cartItems: DisplayServiceCartItemDTO[], 
     }
 
     return (
-        <div className="max-w-md mx-auto p-4">
-            <h2 className="text-2xl font-bold mb-4">Your Cart</h2>
+        <div className="container mx-auto p-4">
+            <h2 className="text-2xl font-bold mb-4 text-center py-4 border-b-2 ">Cart</h2>
             {cartItems.length === 0 ? (
-                <p>Your cart is empty.</p>
+                <div className="flex flex-col gap-5 justify-center items-center">
+                    <p className="text-center my-10">Your cart is empty.</p>
+                    <Link href={'/services'} className="flex justify-center items-center gap-4 hover:text-blue-400">Find services <MoveRight /></Link>
+                </div>
             ) : (
-                <div>
-                    {cartItems.map((item, index) => (
-                        <div key={index}>
-                            <CartItem removeFromCart={removeFromCartItems} item={item} />
-                        </div>
-                    ))}
-                    <div className="mt-4 flex justify-between items-center">
-                        <div className="">
-                            <p className="text-lg font-semibold">Total: ${calculateServiceCartTotal(cartItems)}</p>
-                        </div>
-                        <div id="__next" onClick={() => setScheduled(true)}>
-                            <CalendlyPopup CTAText="Click to schedule" className="hover:underline text-blue-600" />
+                    <div className="flex flex-col lg:flex-row w-full px-5 gap-5">
+                        <div className="lg:w-1/2">
+                            {cartItems.map((item, index) => (
+                            <CartItem key={index} updateCart={updateCart} item={item} />
+                        ))}
+                            <div className="mt-4 flex justify-between items-center">
+                                <div className="">
+                                    <p className="text-lg font-semibold">Total: ${calculateServiceCartTotal(cartItems)}</p>
+                                </div>
+                            </div>
+                            <div className="w-full text-center flex justify-center" onClick={() => setScheduled(true)}>
+                                <CalendlyPopup CTAText="Click to schedule" className="rounded-lg text-gray-900 dark:text-inherit bg-gray-300 dark:bg-gray-700 p-2 hover:shadow-lg hover:underline " />
                         </div>
                     </div>
 
-                    <div className="flex justify-center items-center" onClick={onClickPay}>
-                        <Link href={{ pathname: scheduled ? '/payments/services' : '#' }} className="inline-block px-4 py-2 bg-blue-500 text-white rounded cursor-pointer">Complete Payment</Link>
+
+                        <div className="lg:w-1/2">
+                            {clientSecret && window &&
+                                <PaymentModal
+                                    redirect={`${window.origin}/onboarding?cartId=${cartId}`}
+                                    checkoutMessage="Save 10% By Choosing to pre purchase services, you will be charged 50% of the total cost  of the project. And receive priority booking privileges."
+                                    active={scheduled} activationError="schedule meeting before payment"
+                                    cartId={cartId}
+                                    clientSecret={clientSecret} />}
                     </div>
 
                 </div>

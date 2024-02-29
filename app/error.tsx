@@ -1,11 +1,13 @@
+'use client'
 import Error from "@/components/shared/ErrorPage";
 
-export default function notFound() {
+function ErrorPage() {
     return (
         <div className="h-full max-h-full">
-            <Error errorMessage="Oops! The page you're looking for doesn't seem to exist."
+            <Error errorMessage="Oops! An Error occured on our servers try again later"
                 redirect="/"
                 errorButtonMessage="back to home" />
-        </div>
-    );
+        </div>);
 }
+
+export default ErrorPage;

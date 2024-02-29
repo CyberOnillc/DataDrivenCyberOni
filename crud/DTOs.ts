@@ -202,6 +202,7 @@ export type RemoveServiceCartItem = {
 
 export type DisplayServiceCartItemDTO = ServiceCartItem & {
     service?: Service & {
+        image?: Image
     } | null,
     addons: DisplaySubServiceDTO[]
 }

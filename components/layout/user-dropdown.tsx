@@ -34,7 +34,7 @@ export default function UserDropdown({ session }: { session: Session }) {
               <LayoutDashboard className="h-4 w-4" />
               <p className="text-sm">Dashboard</p>
             </button>
-            <div className="relative flex w-full items-center justify-start space-x-2 gap-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100  ">
+            <div className="relative flex w-full items-center justify-start space-x-2 gap-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100 dark:hover:bg-gray-700  ">
 
               <Link href={'/cart/services'} className="flex gap-2 justify-center items-center">
                 <ShoppingCart className="h-4 w-4" />

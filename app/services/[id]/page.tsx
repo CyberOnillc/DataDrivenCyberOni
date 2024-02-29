@@ -126,7 +126,7 @@ async function Services({ params }: { params: { id: string } }) {
       {service.SubServices && service.SubServices.length > 0 && (
         <section className="my-5 font-nunito">
           <SubServiceCarousel
-            subservices={service.SubServices as DisplaySubServiceDTO[]}
+            subServices={service.SubServices as DisplaySubServiceDTO[]}
             session={session}
           />
         </section>

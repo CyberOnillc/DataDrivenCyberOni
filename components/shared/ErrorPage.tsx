@@ -17,7 +17,7 @@ type ErrorPageProps = {
   redirect?: string;
 };
 
-const ErrorPage: React.FC<ErrorPageProps> = ({
+const Error: React.FC<ErrorPageProps> = ({
   errorMessage, errorButtonMessage, redirect
 }) => {
   // Default message if none provided
@@ -70,4 +70,4 @@ const ErrorPage: React.FC<ErrorPageProps> = ({
   );
 };
 
-export default ErrorPage;
+export default Error;

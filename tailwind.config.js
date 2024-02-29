@@ -40,7 +40,9 @@ module.exports = {
       boxShadow: {
         "left-shift-lg": "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
         "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
-        top: "0 -10px 10px 2px rgba(0, 0, 0, 0.3)",
+        "top": "0 -10px 10px 2px rgba(0, 0, 0, 0.3)",
+        "dark-md": "0 2rem 2rem 0 rgba(0, 0, 0, 0.3)",
+
       },
       keyframes: {
         // Fade up and down

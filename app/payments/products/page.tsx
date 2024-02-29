@@ -1,4 +1,4 @@
-import PaymentModal from "@/components/PaymentModal"
+import PaymentModal from "@/components/PaymentWrapper"
 import CheckoutServices from "@/components/services/Checkout"
 import { getAll } from "@/crud/service"
 import React from 'react'
@@ -12,7 +12,6 @@ async function PaymentPage() {
   return (
     <div>
       {/* <CheckoutServices services={services.records} /> */}
-      <PaymentModal cartId="" clientSecret={intent.client_secret as string}></PaymentModal>
     </div>
   )
 }

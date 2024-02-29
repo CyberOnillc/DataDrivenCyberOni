@@ -17,7 +17,7 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
         async function fetchCaseStudies() {
             const res = await fetch('/api/casestudies/recent')
             const { data } = await res.json()
-            return data as CaseStudy[]
+            return data.slice(0, 3) as CaseStudy[]
 
         }
 
