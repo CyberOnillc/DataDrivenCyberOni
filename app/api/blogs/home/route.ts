@@ -1,6 +1,6 @@
 import {  getEssential, getFeatured, getPopular, getRecent } from "@/crud/blog";
 import prisma from "@/lib/prisma";
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 import apiHandler from "@/errorHandler";
 
 const get = async () => {

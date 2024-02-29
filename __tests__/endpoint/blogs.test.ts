@@ -35,7 +35,6 @@ describe('Testing blogs Api', () => {
             { name: 'Image 1', src: 'https://picsum.photos/200' } as CreateImageDTO,
             { name: 'Image 2', src: 'https://picsum.photos/200' } as CreateImageDTO,
         ],
-        publishDate: new Date()
     };
 
     let createdblog: Blog;
