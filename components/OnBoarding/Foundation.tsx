@@ -1,14 +1,21 @@
+'use client'
 import { MoveRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 function Foundation() {
+    const router = useRouter();
+    async function submit() {
+        router.push('/onboarding/base')
+
+    }
     return (
-        <div className="flex flex-col container mx-auto bg-onboarding-intro-bg lg:bg-[length:300px_450px]  bg-left bg-no-repeat bg-contain min-h-screen px-5">
+        <div className="flex flex-col container mx-auto  min-h-screen px-5">
             <div className="text-left">
                 <h1>Lets Build The Foundation</h1>
                 <h3 className="font-light">Add your assets directly by logging into your Facebook account.</h3>
 
 
-                <form action="">
+                <form action={submit}>
                     <div className="flex flex-col gap-3">
                         <div className="w-full">
                             <h2 className="text-xl">What is the main service you require?</h2>

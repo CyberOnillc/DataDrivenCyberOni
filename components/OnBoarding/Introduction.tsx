@@ -1,15 +1,18 @@
 'use client'
 
 import { MoveRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 function Introduction() {
 
+    const router = useRouter()
     async function getStarted() {
+        router.push('/onboarding/foundation')
 
     }
     return (
 
-        <div className="flex flex-col container mx-auto bg-onboarding-intro-bg lg:bg-[length:300px_450px]  bg-left bg-no-repeat bg-contain min-h-screen">
+        <div className="flex flex-col container mx-auto  min-h-screen">
             <div className="text-center">
                 <h1>Build Your App</h1>
                 <h3 className="font-light">Artificial Intelligence For Your Business Needs</h3>
