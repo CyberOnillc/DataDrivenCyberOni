@@ -72,7 +72,7 @@ const Notification = () => {
         }, 3000)
       }
     }
-  }, [notify, router, autoClose]);
+  }, [notify, router, autoClose, searchParams]);
 
 
   function close() {

@@ -5,7 +5,7 @@ import NavBar from "@/components/layout/navbar";
 import { Owner } from "@/data/ownerData";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { getServerSession } from "next-auth";
 import Head from "next/head";
 import { cookies } from "next/headers";
@@ -38,17 +38,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
-  themeColor: "#0074e4",
   other: {
     "fb:app_id": process.env.FACEBOOK_ID as string,
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5
+
   },
 
 };
+
+
+export const viewport:Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0074e4"
+  
+}
 
 export default async function RootLayout({
   children,
