@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   themeColor: "#0074e4",
   other: {
-    "fb:app_id": process.env.FACEBOOK_ID as string,
+    "fb:app_id": process.env.FACEBOOK_ID as string,   
   },
   viewport: {
     width: "device-width",

@@ -16,13 +16,16 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
     useEffect(() => {
         async function fetchCaseStudies() {
             const res = await fetch('/api/casestudies/recent')
+            console.log(res.status);
             const { data } = await res.json()
-            return data.slice(0, 3) as CaseStudy[]
+            return (data as CaseStudy[]).slice(0, 3)
 
         }
 
         async function fetchBlogs() {
             const res = await fetch('/api/blogs/home')
+            console.log(res.status);
+
             const { data } = await res.json()
             return (data.recent as Blog[]).slice(0, 3)
 

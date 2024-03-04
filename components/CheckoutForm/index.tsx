@@ -10,7 +10,7 @@ import { PaymentIntent, PaymentIntentResult, StripeElements } from "@stripe/stri
 import { useNotify } from "../Notification";
 
 
-const CheckoutForm = ({ clientSecret, cartId, active, activationError, message, redirect }: { clientSecret: string, cartId: string, active: boolean, activationError: string, redirect: string, message?: string }) => {
+const CheckoutForm = ({ clientSecret, cartId, active, activationError, message, redirect, amount }: { clientSecret: string, cartId: string, amount: number, active: boolean, activationError: string, redirect: string, message?: string }) => {
   const stripe = useStripe();
   const elements = useElements();
   const notify = useNotify();
@@ -20,10 +20,14 @@ const CheckoutForm = ({ clientSecret, cartId, active, activationError, message, 
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [product, setProduct] = useState({
-    price: 0,
+    price: amount,
     name: '',
     description: '',
   });
+
+  useEffect(() => {
+    setProduct(prev => ({ ...prev, price: amount }))
+  }, [amount]);
 
   const searchParams = useSearchParams();
 
@@ -65,13 +69,11 @@ const CheckoutForm = ({ clientSecret, cartId, active, activationError, message, 
           name: "Service Checkout",
         })
       }
-
     }
     if (stripe) {
       fetchData()
 
     }
-
   }, [clientSecret, stripe])
 
 
@@ -89,7 +91,7 @@ const CheckoutForm = ({ clientSecret, cartId, active, activationError, message, 
       {error && (
         <>
           <div className="fixed inset-0 left-0 top-0  z-50 mx-auto flex h-full items-center justify-center backdrop-blur-lg ">
-            <div className="container mx-auto flex flex-col items-center justify-center py-10">
+            <div className="w-fit mx-auto rounded-md flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100" >
               <XCircle className="text-rose-600" />
               <div>{error}</div>
               <button className="bg-blue-600 my-5 text-white rounded-md p-2 text-" onClick={() => window.location.reload()}>retry</button>

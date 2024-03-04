@@ -1,7 +1,7 @@
 import ms from "ms";
 import slugify from "slugify";
 import seedRandom from 'seedrandom'
-import { ServiceCartItem } from "@prisma/client";
+import { Discount, ServiceCartItem } from "@prisma/client";
 import { DisplayServiceCartItemDTO } from "@/crud/DTOs";
 export interface HttpError extends Error {
   status: number;
@@ -215,13 +215,33 @@ export function objectToSearchParams(obj: any): string {
   return searchParams.toString();
 }
 
-export function calculateServiceCartTotal(cartItems: DisplayServiceCartItemDTO[]) {
-  return cartItems.reduce((total, item) => {
+export function calculateServiceCartTotal(cartItems: DisplayServiceCartItemDTO[], discounts?: Discount[]) {
+  let total: number = cartItems.reduce((total, item) => {
     return total + (item.service?.hourlyRate ?? 0) * item.addons.reduce((total, addon) => { return total + addon.estimated_hours_times_one_hundred_percent * (addon.pricingModel === 'DEFAULT' ? 1 : 1.5) }, 0)
   }, 0);
+
+  if (discounts) {
+
+    total = calculateDiscountedPrice(total, discounts)
+  }
+  return total
 }
 
 export function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+
+export function calculateDiscountedPrice(total: number, discounts: Discount[]): number {
+  let discountedPrice = total;
+
+  for (const discount of discounts) {
+    // Calculate the discount amount based on the percentage value
+    const discountAmount = (total * discount.value) / 100;
+    // Subtract the discount amount from the discounted price
+    discountedPrice -= discountAmount;
+  }
+
+  // Ensure the discounted price is not negative
+  return Math.max(discountedPrice, 0);
+}

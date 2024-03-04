@@ -7,7 +7,7 @@ import CheckoutForm from "../CheckoutForm";
 import useTheme from "@/lib/hooks/use-theme";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY as string);
 
-function PaymentModal(props: { clientSecret: string, cartId: string, active: boolean, activationError: string, redirect:string, checkoutMessage?:string }) {
+function PaymentModal(props: { clientSecret: string, cartId: string, active: boolean, amount:number, activationError: string, redirect:string, checkoutMessage?:string }) {
     const { theme } = useTheme();
 
 
@@ -23,6 +23,7 @@ function PaymentModal(props: { clientSecret: string, cartId: string, active: boo
 
                     }
                 }
+                
 
             }}>
                 <CheckoutForm {...props} message={props.checkoutMessage} />

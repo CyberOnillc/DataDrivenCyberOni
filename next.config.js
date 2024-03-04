@@ -2,18 +2,18 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  
+
   images: {
-    dangerouslyAllowSVG:true,
+    dangerouslyAllowSVG: true,
     domains: [
-      "lh3.googleusercontent.com", 
-    "vercel.com",
-    "placehold.co",
-    "images.unsplash.com", 
-    "res.cloudinary.com", 
-    "picsum.photos",
-    "api.dicebear.com",
-  "avatars.githubusercontent.com"],
+      "lh3.googleusercontent.com",
+      "vercel.com",
+      "placehold.co",
+      "images.unsplash.com",
+      "res.cloudinary.com",
+      "picsum.photos",
+      "api.dicebear.com",
+      "avatars.githubusercontent.com"],
   },
   async redirects() {
     return [
@@ -47,7 +47,7 @@ const nextConfig = {
         destination: "https://g.page/r/CfS7tYPMVQ8ZEAI/review",
         permanent: true,
       },
-       {
+      {
         source: "/leave_a_review",
         destination: "https://g.page/r/CfS7tYPMVQ8ZEAI/review",
         permanent: true,
