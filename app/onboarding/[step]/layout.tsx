@@ -31,7 +31,7 @@ function BlogPostLayout({
                 {children}
             </div>
             {currentStep.path !== "start" ? (
-                <div className="lg:h-screen lg:w-3/12">
+                <div className="lg:h-screen lg:min-w-fit lg:w-3/12">
                     {" "}
                     <SidePanel currentStep={params.step} />
                 </div>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from "next/navigation";
+import FileUploader from "./FileUpdaloader";
 
 
 function BaseSetup() {
@@ -34,6 +35,9 @@ function BaseSetup() {
 
                 <div className="flex justify-center"><button type="submit" className="bg-sky-600 p-4 flex gap-1 text-white">Save & go next</button></div>
 
+                <div className="relative w-full bg-gray-50 dark:bg-gray-700">
+                    <FileUploader />
+                </div>
             </form>
 
         </div>
