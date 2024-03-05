@@ -1,7 +1,7 @@
 'use client'
 import { MoveRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import FileUploader from "./fileUploader";
+import FilePicker from "./FilePicker";
 
 function Foundation() {
     const router = useRouter();
@@ -48,10 +48,10 @@ function Foundation() {
                     <div>
                         <p>Examples of software you like</p>
                         <div className="flex gap-3">
-                            <FileUploader type={'video'} />
-                            <FileUploader type={'image'} maxFiles={10} />
-                            <FileUploader type={'file'} />
-                            <FileUploader type={'file'} />
+                            <FilePicker type={'video'} />
+                            <FilePicker type={'image'} maxFiles={10} />
+                            <FilePicker type={'file'} />
+                            <FilePicker type={'file'} />
                         </div>
 
                         <div className="w-full"><textarea className="rounded-md w-full dark:bg-gray-700" rows={5} placeholder="What did you like about these examples?" /></div>
