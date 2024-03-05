@@ -1,6 +1,7 @@
 'use client'
 import { MoveRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import FileUploader from "./fileUploader";
 
 function Foundation() {
     const router = useRouter();
@@ -22,28 +23,40 @@ function Foundation() {
                             <h3 className="font-light text-xl">If a specific service is selected, then display related sub-service options.</h3>
                         </div>
                         <div className="w-full">
-                            <select className="w-full">
+                            <select className="w-full dark:bg-gray-700">
                                 <option value="">Service Select</option>
                             </select>
 
                         </div>
                         <div>
-                            <select className="w-full">
+                            <select className="w-full dark:bg-gray-700">
                                 <option value="">Sub-Service Select</option>
                             </select>
 
                         </div>
                         <div className="w-full">
-                            <select className="w-full">
+                            <select className="w-full dark:bg-gray-700">
                                 <option value="">What design styles do you prefer?</option>
                             </select>
                         </div>
 
-                        <div className="w-full"><textarea className="rounded-md w-full" rows={5} placeholder="What functionalities are essential for your software?" /></div>
+                        <div className="w-full"><textarea className="rounded-md w-full dark:bg-gray-700" rows={5} placeholder="What functionalities are essential for your software?" /></div>
 
 
                     </div>
-                    <div className="flex justify-center"><button type="submit" className="bg-sky-600 p-4 flex gap-1 text-white">Save & go next</button></div>
+
+                    <div>
+                        <p>Examples of software you like</p>
+                        <div className="flex gap-3">
+                            <FileUploader type={'video'} />
+                            <FileUploader type={'image'} maxFiles={10} />
+                            <FileUploader type={'file'} />
+                            <FileUploader type={'file'} />
+                        </div>
+
+                        <div className="w-full"><textarea className="rounded-md w-full dark:bg-gray-700" rows={5} placeholder="What did you like about these examples?" /></div>
+                    </div>
+                    <div className="flex justify-center"><button type="submit" className="bg-blue-700 p-4 flex gap-1 text-white rounded-md">Save & go next</button></div>
 
                 </form>
             </div>

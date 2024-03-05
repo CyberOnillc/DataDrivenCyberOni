@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { MouseEventHandler, ReactNode, useState } from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import useWindowSize from "@/lib/hooks/use-window-size";
 import Leaflet from "./leaflet";
@@ -11,12 +11,14 @@ export default function Tooltip({
   fullWidth,
   type,
   disabled,
+  onClick
 }: {
   children: ReactNode;
   content: ReactNode | string;
   fullWidth?: boolean;
   type?: 'button' | 'submit',
   disabled?: boolean;
+  onClick?: MouseEventHandler<HTMLButtonElement>
 }) {
   const [openTooltip, setOpenTooltip] = useState(false);
 
@@ -30,6 +32,7 @@ export default function Tooltip({
           className={`${fullWidth ? "w-full" : "inline-flex"}`}
           onDoubleClick={() => setOpenTooltip(true)}
           disabled={disabled ?? false}
+          onClick={onClick}
 
         >
           {children}
@@ -53,7 +56,8 @@ export default function Tooltip({
               <button
                 type={type}
                 className={`${fullWidth ? "w-full" : "inline-flex"}`}
-                disabled={disabled??false}
+                disabled={disabled ?? false}
+                onClick={onClick}
 
               >
                 {children}

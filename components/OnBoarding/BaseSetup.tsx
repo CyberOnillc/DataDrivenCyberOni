@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from "next/navigation";
-import FileUploader from "./FileUpdaloader";
+import FileDropzone from "./FileDropzone";
 
 
 function BaseSetup() {
@@ -33,10 +33,10 @@ function BaseSetup() {
                     <p>Add your assets directly by logging into your Facebook account.</p>
                 </div>
 
-                <div className="flex justify-center"><button type="submit" className="bg-sky-600 p-4 flex gap-1 text-white">Save & go next</button></div>
+                <div className="flex justify-center"><button type="submit" className="bg-blue-700 p-4 flex gap-1 text-white rounded-md">Save & go next</button></div>
 
                 <div className="relative w-full bg-gray-50 dark:bg-gray-700">
-                    <FileUploader />
+                    <FileDropzone />
                 </div>
             </form>
 

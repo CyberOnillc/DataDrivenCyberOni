@@ -88,10 +88,10 @@ function AppBuilderColorPicker(props: Props) {
                 ))}
 
                 <div className="flex justify-end">
-                    <Tooltip content="add color" type="button">
-                        <button className="text-blue-400" type="button" onClick={addColor}>
+                    <Tooltip onClick={addColor} content="add color" type="button">
+                        <div className="text-blue-400" >
                             <PlusCircle />
-                        </button>
+                        </div>
                     </Tooltip>
                 </div>
             </div>

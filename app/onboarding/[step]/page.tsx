@@ -6,7 +6,7 @@ function OnboardingPage({ params }: { params: { step: string } }) {
 
     return (
 
-        <OnBoardingForm step={steps.findIndex((step) => step.path === params.step)} />
+        <OnBoardingForm step={params.step == 'building' ? 6 : steps.findIndex((step) => step.path === params.step)} />
 
     );
 }

@@ -8,8 +8,9 @@ export const steps = [
 
     { path: 'builder', name:  'App Builder' },
 
-    { path: 'creative', name: 'Creative setup'},
+    { path: 'content', name: 'Content setup' },
 
-    { path: 'optimize', name: 'Optimization setup' },
+    { path: 'marketing', name: 'Optimize Marketing' },
+    
 
     ];

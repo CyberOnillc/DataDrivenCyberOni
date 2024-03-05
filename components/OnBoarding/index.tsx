@@ -4,6 +4,9 @@ import Foundation from "./Foundation";
 import Introduction from "./Introduction";
 import FullscreenButton from "../shared/FullScreenButton";
 import AppBuilder from "./AppBuilder";
+import ContentSetup from "./ContentSetup";
+import MarketingSetup from "./MarketingSetup";
+import BuilderLoading from "./Loading";
 
 function OnBoardingForm({ step }: { step: number }) {
   const forms = [
@@ -11,6 +14,9 @@ function OnBoardingForm({ step }: { step: number }) {
     <Foundation key={2} />,
     <BaseSetup key={3} />,
     <AppBuilder key={4} />,
+    <ContentSetup key={5}/>,
+    <MarketingSetup key={6} />,
+    <BuilderLoading key={7}/>
   ];
 
   return (

@@ -20,7 +20,7 @@ function BlogPostLayout({
     children: React.ReactNode;
     params: { step: string };
 }) {
-    const currentStep = steps.filter((step) => params.step === step.path)[0];
+    const currentStep = steps.filter((step) => params.step === step.path)[0] || params.step ==='building';
     if (!currentStep) redirect("/not-found");
     return (
         <div className="flex w-full flex-col-reverse gap-2 lg:flex-row">
