@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 
 import AppBuilderColorPicker from "./AppBuilderColorPicker";
+import FilePicker from "./FilePicker";
 
 interface ComponentFormProps {
     name: "Navbar" | "Hero" | "About" | "Services";
@@ -76,7 +77,10 @@ function ComponentForm({ build, name, title }: ComponentFormProps) {
     return (
         <form action={submit} className="w-full flex-col gap-3">
             <h3>{title}</h3>
-            <div className="flex justify-end">
+            <div className="flex justify-between">
+                <div className="h-fit">
+                    <FilePicker type="image" />
+                </div>
                 <AppBuilderColorPicker
                     colors={colors}
                     onChange={(colors) => setColors(colors)}

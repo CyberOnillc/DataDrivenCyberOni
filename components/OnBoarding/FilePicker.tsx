@@ -15,11 +15,11 @@ const DocumentMimeType = {
     'application/octet-stream': ['.pdf', '.docx',],
     'text/*': ['.txt', '.md', '.html']
 }
-interface FileUploaderProps {
+interface FilePickerProps {
     type: "file" | "video" | "image";
-    maxFiles?: number | 1 ;
+    maxFiles?: number | 1;
 }
-function FileUploader({ type, maxFiles }: FileUploaderProps) {
+function FilePicker({ type, maxFiles }: FilePickerProps) {
     const notify = useNotify()
     const [loaded, setLoaded] = useState(false);
     const onDrop = useCallback((acceptedFiles: any) => {
@@ -66,7 +66,7 @@ function FileUploader({ type, maxFiles }: FileUploaderProps) {
 
             <div className="flex w-fit items-center justify-center gap-2 px-1">
                 <div className="flex items-center justify-center ">
-                    {loaded? <FileCheck  className="text-green-300"/> :<FileSearch className="text-gray-500 dark:text-gray-300" />}
+                    {loaded ? <FileCheck className="text-green-300" /> : <FileSearch className="text-gray-500 dark:text-gray-300" />}
                     <span className="">Browse</span>
                 </div>
                 <p className="m-0 border-l-2 px-1 py-1">{type}</p>
@@ -75,4 +75,4 @@ function FileUploader({ type, maxFiles }: FileUploaderProps) {
     );
 }
 
-export default FileUploader;
+export default FilePicker;
