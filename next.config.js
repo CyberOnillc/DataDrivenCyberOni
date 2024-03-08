@@ -47,6 +47,11 @@ const nextConfig = {
         destination: "https://g.page/r/CfS7tYPMVQ8ZEAI/review",
         permanent: true,
       },
+       {
+        source: "/leave_a_review",
+        destination: "https://g.page/r/CfS7tYPMVQ8ZEAI/review",
+        permanent: true,
+      },
       {
         source: "/google-business",
         destination: "https://maps.app.goo.gl/44BHLXSPYw6mNotMA",

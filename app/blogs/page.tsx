@@ -16,7 +16,9 @@ export type BlogHomeProps = {
 
 }
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
+
+
 async function Blogs() {
     const data = (await getData()) as BlogHomeProps
     const random = data.recent[Math.floor(Math.random() * (data.recent.length))]
@@ -105,7 +107,7 @@ async function Blogs() {
             <div className="my-10 container mx-auto">
                 <div className="text-2xl font-bold my-2">Random</div>
                 {random &&
-                    <Link href={`/blogs/post/${seoUrl(random.title, random.id)}`} className="conatiner relative flex overflow-hidden flex-col md:flex-row-reverse my-5 h-80 w-full rounded-2xl shadow-lg">
+                    <Link href={`/blogs/post/${seoUrl(random.title, random.id)}`} className="container relative flex overflow-hidden flex-col md:flex-row-reverse my-5 h-80 w-full rounded-2xl shadow-lg">
                         <div className="w-full absolute h-full lg:w-1/2 lg:static">
                             {random.images[0] ?
                                 // eslint-disable-next-line @next/next/no-img-element

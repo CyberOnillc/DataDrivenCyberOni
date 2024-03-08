@@ -1,6 +1,5 @@
-import { getAll, getEssential, getFeatured, getPopular, getRecent, read, remove, update } from "@/crud/blog";
-import { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "@/prisma/prismaClient";
+import {  getEssential, getFeatured, getPopular, getRecent } from "@/crud/blog";
+import prisma from "@/lib/prisma";
 import { NextResponse } from 'next/server'
 import apiHandler from "@/errorHandler";
 
@@ -9,7 +8,7 @@ const get = async () => {
     const recent = await getRecent(prisma);
     const popular = await getPopular(prisma);
     const essential = await getEssential(prisma);
-    return NextResponse.json({ message: "found", data: {featured, recent, popular, essential} })
+    return NextResponse.json({ message: "found", data: { featured, recent, popular, essential } })
 
 }
 

@@ -1,9 +1,9 @@
 import { Service, PrismaClient, Prisma, Image, Tag, SubService, ServiceDescription, FAQ, CaseStudy } from "@prisma/client";
 import { create as createTag, connectOrCreateObject as connectTags } from "./tags";
 import { CreateImageDTO, CreateTagDTO } from "./DTOs";
-import {  create as createImage, connectOrCreateObject as connectImage } from "./images";
+import { create as createImage, connectOrCreateObject as connectImage } from "./images";
 import { CreateSubServiceDTO, create as createSubService, update as updateSubService } from "./subService";
-import { prisma } from "@/prisma/prismaClient";
+import prisma from "@/lib/prisma";
 
 
 export type CreateServiceDTO = {
@@ -193,6 +193,7 @@ async function read(serviceId: string, prismaClient: PrismaClient) {
             SubServices: {
                 include: {
                     image: true,
+                    CaseStudies: true
                 }
             },
             ServiceDescription: {
@@ -229,6 +230,10 @@ async function getAll(page: number, pageSize: number, prismaClient: PrismaClient
         include: {
             image: true,
             tags: true,
+            SubServices: true
+        },
+        orderBy: {
+
         }
     })
 
@@ -253,13 +258,27 @@ export async function getFeatured(prisma: PrismaClient) {
 
 }
 
+export async function getRecent(prisma: PrismaClient) {
+    const caseStudies = prisma.service;
+    let allRecords = await caseStudies.findMany({
+        take: 10,
+        where: {
+            featured: { equals: true }
+        },
+        orderBy: {
+            createdAt: 'desc'
+        }
+    })
+    return allRecords
+
+}
 
 export async function getBySearchTerm(search: string, page: number, prisma: PrismaClient) {
     const services = prisma.service;
 
 
     const records = await services.findMany({
-        skip: page === 0 ? 0 : (page - 1) * 5, 
+        skip: page === 0 ? 0 : (page - 1) * 5,
         take: page === 0 ? 9999 : 5,
         where: {
             OR: [

@@ -1,4 +1,5 @@
-import { Blog, BlogComment, BlogLike, EventStatus, Image, PricingModel, Role, Service, ServiceDescription, SubService, Tag, User } from "@prisma/client";
+import { Blog, BlogComment, BlogLike, CaseStudy, EventStatus, Image, PricingModel, Role, Service, ServiceCart, ServiceCartItem, ServiceDescription, SubService, Tag, User } from "@prisma/client";
+import { UserPersona } from "./casestudy";
 
 export type CreateBlogDTO = {
     title: string;
@@ -60,11 +61,15 @@ export type CreateFaqDTO = {
 };
 
 export type DisplayServiceDTO = Service & {
-    image?: Image;
+    image?: Image | null;
     tags?: Tag[];
-    SubServices?: SubService[];
+    SubServices?: DisplaySubServiceDTO[];
     ServiceDescription?: (ServiceDescription & { image: Image; })[];
 
+};
+export type DisplaySubServiceDTO = SubService & {
+    image?: Image | null;
+    CaseStudies: CaseStudy[]
 };
 export type CreateSubServiceDTO = {
     id?: string;
@@ -152,5 +157,73 @@ export type CreateOrderDTO = {
 
     productId: string;
     userEmail: string;
-    address : CreateAddressDTO | string
+    address: CreateAddressDTO | string
 }
+export type ProductCartItemDTO = {
+    quantity: number;
+    productId: string;
+    sessionId: string;
+    userId: string;
+};
+
+export type DisplayServiceCartDTO = ServiceCart & {
+    items: DisplayServiceCartItemDTO[]
+}
+export type CreateServicePaymentDTO = {
+    paymentId: string;
+    cartId: string;
+};
+export type CreateServiceCartItemDTO = {
+    userId: string;
+    serviceId: string;
+    description: string | null;
+    addons: {
+        id: string;
+
+    }[];
+
+
+};
+
+export type UpdateServiceCartItemDTO = {
+    cartItemId: string;
+    userId: string | null;
+    description: string | null;
+    addons: {
+        id: string;
+
+    }[];
+
+
+};
+export type RemoveServiceCartItem = {
+    cartItemId: string;
+};
+
+export type DisplayServiceCartItemDTO = ServiceCartItem & {
+    service?: Service & {
+        image?: Image
+    } | null,
+    addons: DisplaySubServiceDTO[]
+}
+export type CreateCaseStudy = {
+    id?: string;
+    title: string;
+    serviceId?: string | null;
+    subServices: { id: string; }[];
+    preview: string;
+    problemStatement: string;
+    userProblems: string[]; //comma seaprated
+    possibleSolutions: string[]; //comma seaprated
+    goals: string[]; //comma seaprated
+    images: CreateImageDTO[];
+    uniqueFeatures: string;
+    userResearch: string;
+    keyLearning: string;
+    userPersonas: UserPersona[];
+    competetiveAnalysis: CreateImageDTO[];
+    wireFrames?: CreateImageDTO[];
+    hifiDesign?: CreateImageDTO[];
+    userFlow?: CreateImageDTO[];
+    architecture?: CreateImageDTO[];
+};

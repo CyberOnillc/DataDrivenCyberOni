@@ -182,3 +182,32 @@ export async function sendPasswordReset(email: string, token: string, subject: s
     return response[0].statusCode
   
   }
+
+
+  export async function updatePaymentStatus(email: string, status: boolean, listName: string,) {
+    const list = await getList(listName as string);
+    if (!list) return;
+    const data = {
+        list_ids: [
+            list.id,
+        ],
+
+        "contacts": [
+            {
+                "email": email,
+                "custom_fields": {
+                    "PaymentIsActive": status ? "True" : "False",
+                }
+            }
+        ]
+    };
+
+    const request: ClientRequest = {
+        url: `/v3/marketing/contacts`,
+        method: 'PUT',
+        body: data
+    }
+    let response = await client.request(request);
+    return response[0].statusCode
+
+}

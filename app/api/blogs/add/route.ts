@@ -1,6 +1,6 @@
 import { CreateBlogDTO } from "@/crud/DTOs";
 import { create } from "@/crud/blog";
-import { prisma } from "@/prisma/prismaClient";
+import prisma from "@/lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 

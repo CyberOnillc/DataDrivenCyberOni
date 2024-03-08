@@ -19,11 +19,14 @@ describe('Testing blogs Api', () => {
         content: 'testcontent',
         description: 'test  description',
         date: new Date(),
-        featured:false,
+        featured: false,
         subTitle: 'preview',
+        
         author: {
             email: 'nehal.sk.99@gmail.com'
+
         },
+        publishDate: new Date(),
         tags: [
             { name: 'Tech' },
             { name: 'Mobile' },
@@ -32,6 +35,7 @@ describe('Testing blogs Api', () => {
             { name: 'Image 1', src: 'https://picsum.photos/200' } as CreateImageDTO,
             { name: 'Image 2', src: 'https://picsum.photos/200' } as CreateImageDTO,
         ],
+        publishDate: new Date()
     };
 
     let createdblog: Blog;

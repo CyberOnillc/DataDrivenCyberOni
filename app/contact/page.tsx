@@ -322,7 +322,6 @@ function ContactUs({ searchParams }: { searchParams: { name: string, email: stri
                   <select
                     name="timeline"
                     title="Project Time Line"
-                    placeholder="Project Time Line"
                     className="bg-contact-input rounded-md border-2 text-gray-700 outline-none ring-0 invalid:border-transparent invalid:text-rose-600 invalid:outline-red-500"
                     required
                     onChange={handleInputChange}

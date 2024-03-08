@@ -1,17 +1,12 @@
+import Loading from "@/components/Loading"
+import React from 'react'
 
-
-// Define props if needed, for now, we don't have any specific props
-interface LoadingProps {}
-
-const Loading: React.FC<LoadingProps> = () => {
+function loading() {
   return (
-    <div
-      
-      className="flex h-screen items-center justify-center"
-    >
-      <p>Loading...</p>
+    <div className="">
+      <Loading />
     </div>
-  );
-};
+  )
+}
 
-export default Loading;
+export default loading

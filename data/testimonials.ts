@@ -41,3 +41,20 @@ export const testimonials = [
     },
   ];
   
+
+ export const serviceReviews = [
+    {
+      content:
+        "Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.",
+      image: "/images/prof1.png",
+      name: "Charlie rose",
+      position: "Ceo",
+    },
+    {
+      content:
+        "Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.",
+      image: "/images/prof2.png",
+      name: "Charlie rose",
+      position: "Ceo",
+    },
+  ]

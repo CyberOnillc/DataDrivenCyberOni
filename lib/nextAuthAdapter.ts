@@ -1,7 +1,7 @@
 import Credentials from "next-auth/providers/credentials";
 import { NextAuthOptions, RequestInternal, SessionOptions } from "next-auth";
 import { authorizeWithPassword, createWithPassword, getUserByEmail, getUserByAccount as getAccount, read as getUser, update, remove, link, unLink } from "@/crud/user";
-import { prisma } from "@/prisma/prismaClient";
+import prisma from "@/lib/prisma";
 import { PrismaClient, Role } from "@prisma/client";
 import { Adapter, AdapterAccount, AdapterSession, AdapterUser } from "next-auth/adapters";
 import { CreateUserDTO, DisplayUserDTO } from "@/crud/DTOs";

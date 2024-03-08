@@ -2,10 +2,10 @@
 import { Check, Info, X } from "lucide-react";
 import { redirect, useRouter, useSearchParams } from "next/navigation";
 import React, { useState, useEffect, useRef } from 'react';
+import { NotificationType } from "./server";
 
 
 
-export type NotificationType = 'success' | 'fail' | 'neutral'
 export type NotificationProps = {
   message: string;
   type: NotificationType;
@@ -60,15 +60,17 @@ const Notification = () => {
 
   useEffect(() => {
     if (notify && autoClose) {
-
       if (autoClose) {
         setTimeout(() => {
-          router.replace('?')
+         const newSearch = new URLSearchParams(searchParams)
+         newSearch.delete('notify');
+         newSearch.delete('message');
+         newSearch.delete('autoClose');
+         newSearch.delete('notifyType');
+          router.replace('?'+ newSearch.toString())
           setNotify(false)
         }, 3000)
       }
-
-
     }
   }, [notify, router, autoClose]);
 

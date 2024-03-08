@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "@/prisma/prismaClient";
+import prisma from "@/lib/prisma";
 import { CreateServiceDTO, read, remove as removeService, update } from "@/crud/service";
 import { NextRequest, NextResponse } from 'next/server'
 import apiHandler from "@/errorHandler";

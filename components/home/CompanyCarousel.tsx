@@ -8,10 +8,12 @@ export type Company = {
 function CompanyCarousel({ cards }: { cards: Company[] }) {
     return (
         <>
-            <div className="flex flex-wrap gap-1 justify-center items-center">
+            <div className="relative flex flex-wrap gap-1 justify-center items-center object-contain">
                 {cards.map((card, index)=> {
                     return (
-                        <Image key={index} className=" h-20 w-[14%] object-scale-down p-1" src={card.image} alt={card.name} width={70} height={50}></Image>
+                        <div key={index} className="flex items-center h-20 w-30">
+                            <Image key={index} className="object-scale-down p-5" src={card.image} alt={card.name} width={160} height={100}></Image>
+                        </div>
                     )
                 })}
             </div>

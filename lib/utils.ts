@@ -1,6 +1,8 @@
 import ms from "ms";
 import slugify from "slugify";
 import seedRandom from 'seedrandom'
+import { ServiceCartItem } from "@prisma/client";
+import { DisplayServiceCartItemDTO } from "@/crud/DTOs";
 export interface HttpError extends Error {
   status: number;
   message: string;
@@ -203,7 +205,7 @@ export function objectToSearchParams(obj: any): string {
     if (obj[key] !== undefined && obj[key] !== null) {
       if (Array.isArray(obj[key])) {
         // If it's an array, add each element separately
-        obj[key].forEach((element: string |number) => searchParams.append(key, element.toString()));
+        obj[key].forEach((element: string | number) => searchParams.append(key, element.toString()));
       } else {
         searchParams.set(key, obj[key].toString());
       }
@@ -212,3 +214,14 @@ export function objectToSearchParams(obj: any): string {
 
   return searchParams.toString();
 }
+
+export function calculateServiceCartTotal(cartItems: DisplayServiceCartItemDTO[]) {
+  return cartItems.reduce((total, item) => {
+    return total + (item.service?.hourlyRate ?? 0) * item.addons.reduce((total, addon) => { return total + addon.estimated_hours_times_one_hundred_percent * (addon.pricingModel === 'DEFAULT' ? 1 : 1.5) }, 0)
+  }, 0);
+}
+
+export function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
