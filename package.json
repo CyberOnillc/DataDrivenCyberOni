@@ -91,7 +91,6 @@
     "prettier": "^2.8.2",
     "prettier-plugin-tailwindcss": "^0.2.1",
     "prisma": "^5.7.1",
-    "snyk": "^1.1278.0",
     "tailwind-scrollbar": "^3.0.5",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.2.2"
