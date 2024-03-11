@@ -17,6 +17,7 @@
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
     "@nlbridge/express": "^0.2.7",
+    "@nlux/nlbridge": "^1.0.1",
     "@nlux/openai-react": "^0.10.6",
     "@nlux/react": "^0.10.6",
     "@nlux/themes": "^0.10.6",

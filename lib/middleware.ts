@@ -35,6 +35,9 @@ export async function verifyAccess(user: DisplayUserDTO, path: string, method: H
         if (path.match(/^\/api\/users\/all/)) {
             return false;
         }
+        if (path.match(/^\/api\/chat/)) {
+            return true;
+        }
 
         if (path.match(/^\/api\/users\/[a-z0-9]{25,}$/) && method === 'GET') {
             const userId = path.split('/')[3];
