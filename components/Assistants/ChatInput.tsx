@@ -1,8 +1,10 @@
 import { Message } from "ai";
 import { BrainCircuit } from "lucide-react";
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
+
 interface inputProps {
-    onSendMessage: (message: Omit<Message, "id">) => Promise<void>
+    onSendMessage: (message: Message) => Promise<void>
     disabled: boolean
 }
 
@@ -17,7 +19,7 @@ const ChatInput: React.FC<inputProps> = ({ onSendMessage, disabled }) => {
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         if (message.trim() !== "") {
-            onSendMessage({ content: message.trim(), role: 'user', });
+            onSendMessage({ content: message.trim(), role: 'user', id:  uuidv4()});
             setMessage("");
         }
     };

@@ -5,9 +5,6 @@ import { useAdapter } from "@nlux/openai-react";
 import "@nlux/themes/nova.css";
 import { openAiStreamingAdapter } from "./adapter";
 
-const adapterOptions: ChatAdapterOptions = {
-    url: 'http://localhost:8080/chat-api',
-};
 interface OpenAIAdapterProps {
   show: boolean;
   temperature?: number;
@@ -28,7 +25,7 @@ export const OpenAIChat: React.FC = () => {
 
       }}
       layoutOptions={{
-
+        maxHeight : '90vh'
       }}
       
     />

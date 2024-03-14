@@ -1,6 +1,5 @@
 'use client'
 import { Adapter, StreamingAdapterObserver } from "@nlux/react"
-import {createChatAdapter} from '@nlux/nlbridge';
 export const openAiStreamingAdapter: Adapter = {
     streamText: streamText
 }
@@ -38,7 +37,6 @@ async function readStreamToString(stream: ReadableStream<Uint8Array>, observer: 
         if (done) {
             observer.complete();
             complete=true
-            break;
         }
         observer.next(new TextDecoder().decode(value));
     }

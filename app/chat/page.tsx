@@ -1,11 +1,11 @@
-import AiAssitant from "@/components/Assitants";
-import { OpenAiStreamResponse } from "@/components/Assitants/adapter";
+import AiAssistant from "@/components/Assistants";
+import { OpenAiStreamResponse } from "@/components/Assistants/adapter";
 
 function ChatPage() {
     return (
 
-        <div className="container mx-auto">
-            <AiAssitant  adapter={{streamText: OpenAiStreamResponse}} />
+        <div className="container mx-auto  px-10 max-h-screen">
+            <AiAssistant adapter={{ streamText: OpenAiStreamResponse }} />
         </div>);
 }
 
