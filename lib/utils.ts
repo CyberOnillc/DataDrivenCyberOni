@@ -3,6 +3,7 @@ import slugify from "slugify";
 import seedRandom from 'seedrandom'
 import { Discount, ServiceCartItem } from "@prisma/client";
 import { DisplayServiceCartItemDTO } from "@/crud/DTOs";
+
 export interface HttpError extends Error {
   status: number;
   message: string;
@@ -245,3 +246,16 @@ export function calculateDiscountedPrice(total: number, discounts: Discount[]): 
   // Ensure the discounted price is not negative
   return parseFloat(Math.max(discountedPrice, 0).toFixed(2));
 }
+
+
+export function generateRandomString(length: number): string {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
+

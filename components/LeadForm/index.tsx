@@ -20,7 +20,6 @@ function LeadForm() {
 
     useEffect(() => {
         setIsClient(true)
-        window.localStorage.setItem('leadFormShown', 'false')
 
     }, [])
 

@@ -11,7 +11,7 @@ import Github from "next-auth/providers/github";
 import Facebook from "next-auth/providers/facebook";
 import Google from "next-auth/providers/google";
 import Email from "next-auth/providers/email";
-
+import LinkedIn from "next-auth/providers/linkedin";
 export const authOptions: NextAuthOptions = {
     //adapter: MyAdapter(prisma),
     providers: [
@@ -42,6 +42,16 @@ export const authOptions: NextAuthOptions = {
             clientId: process.env.GITHUB_CLIENT_ID as string,
             clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
             allowDangerousEmailAccountLinking: true
+        }),
+        LinkedIn({
+            clientId: process.env.LINKEDIN_CLIENT_ID!,
+            clientSecret: process.env.LINKEDIN_CLIENT_SECRET!,
+            allowDangerousEmailAccountLinking: true,
+            authorization: {
+                params: {
+                    scope: "r_liteprofile r_emailaddress w_member_social"
+                }
+            },
         }),
     ],
     pages: {
