@@ -9,7 +9,7 @@ function UserPage() {
 
     const faceBookParams = new URLSearchParams()
 
-    faceBookParams.set('scope', 'email,public_profile,pages_manage_posts,pages_show_list,pages_read_engagement')
+    faceBookParams.set('scope', 'email,public_profile,pages_manage_posts,pages_show_list,pages_read_engagement,business_management,ads_read,ads_management')
     useEffect(() => {
         async function fetchSessions() {
             const sessions = await getSession();

@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import { getPagesList, postToFacebook } from "@/lib/externalRequests/facebook";
+import { createFacebookAd, getPagesList, postToFacebook } from "@/lib/externalRequests/facebook";
 import { generateRandomString } from "@/lib/utils";
 import { describe, expect, test, it, beforeAll } from "@jest/globals";
 import { createCanvas } from 'canvas'
@@ -29,7 +29,7 @@ export function createTestImage() {
     return binaryImage;
 }
 describe("test Facebook functions", () => {
-    const accessToken = "EAAlZCjrHXQlABOxAUwosCO1OEtquJVcJZCWoygSUIEfUhDF1EiSdSFCWf3WHZAqat4PKoN0tgahdbMiN2N9rOXBrpJvlxx3TH8oRigK6B0u0Mz87wqt9ldZAxx5T5R2HTo9fzh6VhprjCmfF0NCyVVlWvHMTZAl7WKDXblt5uPfq55tpmTtqDgNShZBoKFVJlZBtSk47w3ONCDaeblLUrdUKbNgIoLDknZBrxIh2ZC1Sb5SMmpLgZCtt4mAjjVhT5p"
+    const accessToken = "EAAlZCjrHXQlABO9qLsZBdpHy5uoYS2Pi02tpKdge21PF8Wgte0T60iNdQWzZA26Xpy39W3aeVURKzfk8tudZC5Gm2CWptoGmmwWh9N3NySZBZAPPLyHNcG7ZBC68TeCFRwr9vSGsAPc5UKdQSWFE42DzouDk1bjqfMyASIHXnrw7Gr1okGRwlYzC2QppsZBYyXtB5qII8B2rC2ITkoOzH6bkL7ZAatu3rhJ26FIjytWxw9IzrskTsD75Bhx3CB1QT"
     const blogUrl = "https://www.cybershoptech.com"
     let pageId = ""
     let pageAccessToken = ""
@@ -52,6 +52,45 @@ describe("test Facebook functions", () => {
 
         expect(res.id).toBeDefined();
     }, 10000)
+
+    test("test create adset and ad creative", async () => {
+        const today: Date = new Date();// Get the date one week from today
+        const oneWeekLater: Date = new Date();
+        oneWeekLater.setDate(today.getDate() + 7);
+        const res = await createFacebookAd(accessToken, "act_797505938829409", "120209335476350615", {
+            bid_amount: "1000",
+            name: "test add0",
+            daily_budget: "3777",
+            billing_event: 'IMPRESSIONS',
+            startTime: today,
+            endTime: oneWeekLater,
+            status: "PAUSED",
+            targeting: {
+                geo_locations: {
+                    countries: ["US"]
+
+                }
+            }
+        }, {
+            body: "tets ad body",
+            image_url: "https://picsum.photos/200",
+            link_url: "https://cybershoptech.com",
+            name: "test ad title",
+            title: "test ad title",
+            object_story_spec: {
+                page_id: "293524287172624",
+
+            }
+        },
+            "293524287172624"
+
+        )
+
+        expect(res).toBe(true);
+
+    }, 10000)
+
+
 
 
 })
