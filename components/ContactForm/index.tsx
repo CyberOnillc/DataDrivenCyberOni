@@ -57,7 +57,7 @@ function ContactFormLOC(props: { onModal?: boolean, showModal?: boolean, setShow
 
         return
       }
-      let res = await fetch(`/api/marketing/contact`, { method: "POST", body: JSON.stringify({ name, email, subject: selectedInterest, message, referral }) })
+      let res = await fetch(`/api/marketing/contact`, { method: "POST", body: JSON.stringify({ name, email, subject: selectedInterest, message, referral }) , credentials: 'include'})
       setShowForm(false)
       if (res.status === 200) {
         setShowThanks(true)

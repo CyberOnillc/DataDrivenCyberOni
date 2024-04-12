@@ -356,6 +356,9 @@ export async function getBySearchTerm(search: string, page: number, prisma: Pris
                     lte: new Date()
                 }
             }]
+        },
+        orderBy: {
+            publishDate: 'desc'
         }
     })
     return records

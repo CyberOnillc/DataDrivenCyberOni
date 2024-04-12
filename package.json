@@ -15,6 +15,7 @@
     "schema": "node_modules/@techwithty/cyberoni-schema/schema.prisma"
   },
   "dependencies": {
+    "@motionone/utils": "^10.17.0",
     "@next-auth/prisma-adapter": "^1.0.5",
     "@nlbridge/express": "^0.2.7",
     "@nlux/nlbridge": "^1.0.1",
@@ -30,7 +31,7 @@
     "@sendgrid/mail": "^8.0.0",
     "@stripe/react-stripe-js": "^2.4.0",
     "@stripe/stripe-js": "^2.3.0",
-    "@techwithty/cyberoni-schema": "^1.0.3",
+    "@techwithty/cyberoni-schema": "^1.0.4",
     "@vercel/analytics": "^0.1.11",
     "@vercel/og": "^0.6.2",
     "@vercel/speed-insights": "^1.0.6",
@@ -54,6 +55,7 @@
     "nodemailer": "^6.9.9",
     "openai": "^4.26.1",
     "react": "^18.2.0",
+    "react-alice-carousel": "^2.8.0",
     "react-calendly": "^4.3.0",
     "react-dom": "18.2.0",
     "react-markdown": "^8.0.4",

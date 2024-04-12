@@ -15,6 +15,11 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { getFeatured } from "../../crud/service";
+import ServiceCard from "@/components/enterprise/ServiceCard";
+import FeatureCard from "@/components/enterprise/FeatureCard";
+import { HowItWorksSteps, featureCards } from "@/data/enterpriseData";
+import HowItWorks from "@/components/enterprise/HowItWorks";
+import DevelopmentPathItem from "@/components/enterprise/DevelopmentPathItem";
 async function Enterprise() {
   const services = await getFeatured(prisma);
 
@@ -134,77 +139,26 @@ async function Enterprise() {
             </div>
           </div>
 
-          <div className="grid w-full grid-cols-1 grid-rows-4 gap-3 text-center lg:grid-cols-4 lg:grid-rows-1">
-            <div className="flex flex-1 flex-col items-center justify-center">
-              <Image
-                src={"/images/step-1.png"}
-                alt="step-1"
-                className="h-40 w-40 object-contain lg:w-full"
-                height={300}
-                width={300}
-              />
-              <div className="flex flex-col gap-3">
-                <div className="text-3xl text-[#E4A321]">
-                  Initial Consultation
-                </div>
-                <div className="mx-auto w-2/3">
-                  Understand client needs and challenges.
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-1 flex-col items-center justify-center">
-              <Image
-                src={"/images/step-2.png"}
-                alt="step-2"
-                className=" h-40 w-40 object-contain lg:w-full"
-                height={300}
-                width={300}
-              />
-              <div className="flex flex-col gap-3">
-                <div className="text-3xl text-[#E4A321]">Solution Design</div>
-                <div className="mx-auto w-2/3">
-                  {" "}
-                  Cyberoni experts design a custom solution blueprint, focusing
-                  on scalability and integration with current systems.
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-1 flex-col items-center justify-center">
-              <Image
-                src={"/images/step-3.png"}
-                alt="step-3"
-                className="h-40 w-40 object-contain lg:w-full"
-                height={300}
-                width={300}
-              />
-              <div className="flex flex-col gap-3">
-                <div className="text-3xl text-[#E4A321]">Proof of Concept</div>
-                <div className="mx-auto w-2/3">
-                  {" "}
-                  Implement a pilot project using a subset of the client&apos;s
-                  data to demonstrate the effectiveness of the solution.
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-1 flex-col items-center justify-center">
-              <Image
-                src={"/images/step-4.png"}
-                alt="step-4"
-                className="h-40 w-40 object-contain lg:w-full"
-                height={300}
-                width={300}
-              />
-              <div className="flex flex-col gap-3">
-                <div className="text-3xl text-[#E4A321]">
-                  System Integration
-                </div>
-                <div className="mx-auto w-2/3">
-                  Use APIs, middleware, or custom development to connect
-                  Cyberoni&apos;s software with existing databases, CRM, ERP, or
-                  other software systems.
-                </div>
-              </div>
-            </div>
+          <div className="flex flex-col w-full gap-3 text-center lg:flex-row">
+            <DevelopmentPathItem
+              image="/images/step-1.png"
+              name="Initial Consultation"
+              content="Understand client needs and challenges." />
+            <DevelopmentPathItem
+              image="/images/step-2.png"
+              name="Solution Design"
+              content="Cyberoni experts design a custom solution blueprint, focusing on scalability and integration with current systems." />
+
+            <DevelopmentPathItem
+              image="/images/step-3.png"
+              name="Proof of Concept"
+              content="Implement a pilot project using a subset of the client's data to demonstrate the effectiveness of the solution." />
+
+            <DevelopmentPathItem
+              image="/images/step-4.png"
+              name="System Integration"
+              content="Use APIs, middleware, or custom development to connect Cyberoni's software with existing databases, CRM, ERP, or other software systems." />
+
           </div>
         </div>
       </section>
@@ -223,78 +177,16 @@ async function Enterprise() {
           </div>
           <div className="container overflow-x-auto lg:w-1/2 ">
             <div className="grid  w-fit gap-5  lg:grid-cols-2 lg:grid-rows-2">
-              <div className="relative h-fit overflow-hidden rounded-xl bg-gray-100  p-5 text-black hover:bg-[#0F172A] hover:text-white lg:h-52">
-                <div className="absolute right-0 top-0 h-3 w-full bg-blue-400"></div>
-                <div className="flex w-full justify-start">
-                  <Monitor />
-                </div>
-                <div className="text-2xl font-bold">
-                  Web Design & Web Development
-                </div>
-                <div className="flex w-full justify-end">
-                  <Link
-                    className=" rounded-sm bg-blue-400 p-3 shadow-md"
-                    href={"/services/web-development"}
-                  >
-                    <Redo />
-                  </Link>
-                </div>
-              </div>
-              <div className="relative h-fit overflow-hidden rounded-xl bg-gray-100  p-5 text-black hover:bg-[#0F172A] hover:text-white lg:h-52">
-                <div className="absolute right-0 top-0 h-3 w-full bg-blue-400"></div>
-                <div className="flex w-full justify-start">
-                  <ShoppingCart />
-                </div>
-                <div className="text-2xl font-bold">E-commerce Solutions</div>
-                <div className="flex w-full justify-end">
-                  <Link
-                    className=" rounded-sm bg-blue-400 p-3 shadow-md"
-                    href={"/services/web-development"}
-                  >
-                    <Redo />
-                  </Link>
-                </div>
-              </div>
-              <div className="relative h-fit overflow-hidden rounded-xl bg-gray-100  p-5 text-black hover:bg-[#0F172A] hover:text-white lg:h-52">
-                <div className="absolute right-0 top-0 h-3 w-full bg-blue-400"></div>
-                <div className="flex w-full justify-start">
-                  <LayoutGrid />
-                </div>
-                <div className="text-2xl font-bold">
-                  Customized application development
-                </div>
-                <div className="flex w-full justify-end">
-                  <Link
-                    className=" rounded-sm bg-blue-400 p-3 shadow-md"
-                    href={"/services/web-development"}
-                  >
-                    <Redo />
-                  </Link>
-                </div>
-              </div>
-              <div className="relative h-fit overflow-hidden rounded-xl bg-gray-100  p-5 text-black hover:bg-[#0F172A] hover:text-white lg:h-52">
-                <div className="absolute right-0 top-0 h-3 w-full bg-blue-400"></div>
-                <div className=" relative flex w-full justify-start">
-                  <Activity className="" />
-                </div>
-                <div className="text-2xl font-bold">
-                  Search Engine Optimization & Digital Marketing
-                </div>
-                <div className="flex w-full justify-end">
-                  <Link
-                    className=" rounded-sm bg-blue-400 p-3 shadow-md"
-                    href={"/services/web-development"}
-                  >
-                    <Redo />
-                  </Link>
-                </div>
-              </div>
+              <ServiceCard title={'Web Design & Web Development'} icon={<Monitor />} link={"/services"} />
+              <ServiceCard title={'Customized application development'} icon={<LayoutGrid />} link={"/services"} />
+              <ServiceCard title={'E-commerce Solutions'} icon={<ShoppingCart />} link={"/services"} />
+              <ServiceCard title={'Search Engine Optimization & Digital Marketing'} icon={<Activity />} link={"/services"} />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-enterprise-bg-2 bg-cover bg-no-repeat py-10  backdrop-blur-lg lg:min-h-screen dark:bg-[#061122]">
+      <section className="bg-enterprise-bg-2 bg-cover bg-no-repeat py-10  backdrop-blur-lg dark:bg-[#061122]">
         <div className="container mx-auto px-4 ">
           <div className="text-center">
             <div className="font-bold text-[#5380EA]">Why choose us</div>
@@ -309,83 +201,24 @@ async function Enterprise() {
             </div>
           </div>
 
-          <div className="container mt-20 flex flex-wrap justify-center gap-5">
-            <div className="flex flex-col items-center justify-center gap-2 rounded-lg bg-gray-200 p-3 text-black shadow-md lg:w-1/4">
-              <Image
-                src={"/images/team.png"}
-                alt="team"
-                height={50}
-                width={50}
-              ></Image>
-              <div className="text-2xl font-bold">Experience</div>
-              <div className="text-base text-zinc-800">
-                With Cyberoni, you gain access to a wealth of professional web
-                development experience. We stay at the forefront of technology
-                and trends to ensure that your project not only meets but
-                exceeds industry standards. Our goal is to transform your vision
-                into a digital reality, delivering a project that is not just
-                complete but ahead of its time. Our team’s dedication to growth
-                ensures your website will always be on the cutting edge.
-              </div>
-            </div>
-            <div className=" flex flex-col items-center justify-center gap-2 rounded-lg bg-gray-200 p-3 text-black shadow-md lg:w-1/4">
-              <Image
-                src={"/images/brain.png"}
-                alt="brain"
-                height={50}
-                width={50}
-              ></Image>
-              <div className="text-2xl font-bold">Committed Team</div>
-              <div className="text-base text-zinc-800">
-                Our team is the heart of Cyberoni. We are a group of driven,
-                tech-savvy professionals, dedicated to delivering only the best.
-                We understand that our success is measured by the success of
-                your website. That’s why we immerse ourselves in every project,
-                applying meticulous attention to detail to create websites that
-                are not just functional but also thrive in today’s digital
-                landscape.
-              </div>
-            </div>
-            <div className=" flex flex-col items-center justify-center gap-2 rounded-lg bg-gray-200 p-3 text-black shadow-md lg:w-1/4">
-              <Image
-                src={"/images/stopwatch.png"}
-                alt="watch"
-                height={50}
-                width={50}
-              ></Image>
-              <div className="text-2xl font-bold">Efficient Delivery</div>
-              <div className="text-base text-zinc-800">
-                At Cyberoni, we value your time. That&apos;s why we are
-                committed to delivering high-quality, fully-tested websites
-                promptly. We understand the pace of business and strive to
-                provide you with fast turnaround times without compromising on
-                quality. From initial concept to final launch, we streamline our
-                development process to get your project live, allowing you to
-                start meeting your business objectives faster.
-              </div>
-            </div>
-            <div className=" flex flex-col items-center justify-center gap-2 rounded-lg bg-gray-200 p-3 text-black shadow-md lg:w-1/4">
-              <Image
-                src={"/images/price-tag.png"}
-                alt="price"
-                height={50}
-                width={50}
-              ></Image>
-              <div className="text-2xl font-bold">Fair Pricing</div>
-              <div className="text-base text-zinc-800">
-                We believe in offering outstanding value without hidden costs.
-                Cyberoni provides competitive pricing structures that cater to
-                businesses of all sizes. While maintaining high-quality
-                standards, we ensure that your investment in your website is
-                transparent and yields tangible results. Partner with us for
-                cost-effective solutions that don&apos;t sacrifice quality.
-              </div>
-            </div>
+          <div className="container mt-20 flex flex-wrap justify-center  ">
+            {featureCards.map((featureCard, index) => (
+              <div key={index} className="p-3 lg:w-1/4">
+                <FeatureCard
+                  description={featureCard.description}
+                  image={featureCard.image}
+                  title={featureCard.title}
+                />
+              </div>))}
           </div>
         </div>
       </section>
 
-      <section className="py-10">
+      <section className="">
+
+        <HowItWorks steps={HowItWorksSteps} />
+      </section>
+      <section className="py-10 max-w-full">
         <div className="mx-auto flex w-fit flex-1 flex-col items-center justify-center text-center">
           <div className="font-nunito text-4xl font-bold">Our Portfolio</div>
           <Image

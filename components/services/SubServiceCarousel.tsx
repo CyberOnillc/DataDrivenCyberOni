@@ -24,6 +24,7 @@ export type SubServiceProps = {
 const imageArray = ['/images/subservice-1.svg', '/images/subservice-2.svg', '/images/subservice-3.svg']
 function SubServiceCarousel({ subServices, session }: { subServices: DisplaySubServiceDTO[], session?: Session | null }) {
     const params = useParams();
+    const search = useSearchParams();
     const router = useRouter();
     const seoTitle = params.id as string
     const serviceId = extractUUID(seoTitle)
@@ -59,28 +60,12 @@ function SubServiceCarousel({ subServices, session }: { subServices: DisplaySubS
     }, [highlightedElementId, isMobile]); // Run the effect whenever the ID changes
 
     useEffect(() => {
-        const handleLocationChange = () => {
-            console.log('window.location.href changed:', window.location.href);
-            let id = window.location.href.split('#')[1];
-            setHighlightedElementId(decodeURIComponent(id).toLowerCase())
-            // Add your logic here to handle the URL change
-        };
-
-        // Add event listener for 'hashchange' event
-
-        if (typeof window !== 'undefined') {
-            let id = window.location.href.split('#')[1];
-            setHighlightedElementId(decodeURIComponent(id).toLowerCase())
-            window.addEventListener('hashchange', handleLocationChange);
-
-            // Clean up by removing the event listener when the component unmounts
-            return () => {
-                window.removeEventListener('hashchange', handleLocationChange);
-            };
+        const id = search.get('id') as string;
+        console.log(id);
+        if (id) setHighlightedElementId(decodeURIComponent(id).toLowerCase())
 
 
-        }
-    }, [subServices]);
+    }, [subServices, search]);
 
 
     async function addToCart(subService: DisplaySubServiceDTO) {
@@ -189,7 +174,7 @@ function SubServiceCarousel({ subServices, session }: { subServices: DisplaySubS
             <div className="bg-purple-200 dark:bg-purple-600 pb-10 w-full max-w-full mx-auto overflow-x-auto scroll-smooth snap-x scrollbar-thin scrollbar-thumb-gray-400  scrollbar-track-gray-50 scrollbar-thumb-rounded-md dark:scrollbar-track-slate-600 ">
                 <div className="relative flex flex-row gap-10 p-5 lg:px-10 justify-start w-fit">
                     {subServices.map((subService, index) =>
-                        <div data-id={subService.id} ref={subService.title.toLowerCase() === highlightedElementId ? highlightedElementRef : undefined} id={subService.title.toLowerCase()} key={index} className={`relative flex flex-col w-[80vw] lg:w-[30vw] ${subService.title.toLowerCase() === highlightedElementId ? 'bg-purple-500 dark:bg-purple-800' : ''} snap-start scoll-ml-3 p-2 lg:p-8 gap-3 rounded-xl ${checkSubserviceAdded(subService) ? 'bg-green-300' : 'bg-gray-100 dark:bg-gray-800'}  border-4 border-[#AAC3F5]  text-center justify-center mt-10 lg:px-10 pb-10 focus:bg-purple-500`}>
+                        <div data-id={subService.id} ref={subService.title.trim().toLowerCase() === highlightedElementId ? highlightedElementRef : undefined} id={subService.title.trim().toLowerCase()} key={index} className={`relative flex flex-col w-[80vw] lg:w-[30vw] ${subService.title.trim().toLowerCase() === highlightedElementId ? 'bg-purple-500 dark:bg-purple-800' : ''} snap-start scoll-ml-3 p-2 lg:p-8 gap-3 rounded-xl ${checkSubserviceAdded(subService) ? 'bg-green-300' : 'bg-gray-100 dark:bg-gray-800'}  border-4 border-[#AAC3F5]  text-center justify-center mt-10 lg:px-10 pb-10 focus:bg-purple-500`}>
                             <div className=" w-full text-center  lg:text-left h-fit">
                                 <h3 className="text-lg font-semibold">{subService.title}</h3>
                             </div>

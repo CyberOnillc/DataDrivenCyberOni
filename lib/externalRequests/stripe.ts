@@ -1,6 +1,5 @@
 import stripe from "stripe";
 import prisma from "../prisma";
-import { HttpError } from "../utils";
 import { createServicePayment } from "@/crud/payments";
 import { updateServiceCartStatus } from "@/crud/cart";
 import { updatePaymentStatus } from "./sendgrid";
@@ -91,6 +90,27 @@ export async function createPaymentIntent({ price, description, metadata }: { pr
     return paymentIntent
 
 }
+
+export async function updatePaymentIntent({ price, description, metadata, intentId }: { intentId: string, price: number, description?: string, metadata?: Record<string, string> }) {
+
+    const paymentIntent = await client.paymentIntents.retrieve(intentId)
+    const newPaymentIntent = await client.paymentIntents.update(paymentIntent.id, {
+
+        amount: price!,
+        currency: "usd",
+        payment_method_types: [
+            'card',
+            'cashapp',
+            'afterpay_clearpay',
+            'klarna'
+
+        ]
+
+    });
+    return newPaymentIntent
+
+}
+
 
 export async function createSubscription(priceId: string, customerId: string, paymentMehtod: string) {
     // console.log(paymentMehtod);

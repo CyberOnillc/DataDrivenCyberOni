@@ -15,7 +15,8 @@ import { abel, inter, nunito, sfPro } from "./fonts";
 import "./globals.css";
 import { authOptions } from "@/lib/nextAuthAdapter";
 import { WebVitals } from "@/components/WebVitals";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import LeadForm from "@/components/LeadForm";
 import FacebookPixel from "@/components/FbPixel";
 
 export const metadata: Metadata = {
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
   },
   themeColor: "#0074e4",
   other: {
-    "fb:app_id": process.env.FACEBOOK_ID as string,
+    "fb:app_id": process.env.FACEBOOK_ID as string,   
   },
   viewport: {
     width: "device-width",
@@ -120,6 +121,11 @@ export default async function RootLayout({
             ></iframe>
           </noscript>
         </main>
+        {
+          <Suspense>
+            <LeadForm />
+          </Suspense>
+        }
         {
           <Suspense>
             <Notification />

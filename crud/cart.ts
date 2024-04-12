@@ -2,6 +2,7 @@ import { Product, ProductCartItem, ServiceCartItem, ServiceCart, PrismaClient, S
 import { DisplayServiceCartDTO, ProductCartItemDTO, UpdateServiceCartItemDTO } from "./DTOs";
 import { CreateServiceCartItemDTO } from "./DTOs";
 import { RemoveServiceCartItem } from "./DTOs";
+import { HttpError } from "@/lib/utils";
 
 
 
@@ -17,14 +18,20 @@ export const getServiceCart = async (userId: string, prisma: PrismaClient) => {
                 status: { in: ['EMPTY', 'PENDING'] }, // You may customize this based on your requirements
             },
             include: {
+                discounts: true,
                 items: {
                     include: {
                         service: {
                             include: {
-                                image:true
+                                image: true,
                             }
                         },
-                        addons: true
+
+                        addons: {
+                            include: {
+                                CaseStudies: true
+                            }
+                        }
 
                     },
                 },
@@ -33,33 +40,38 @@ export const getServiceCart = async (userId: string, prisma: PrismaClient) => {
 
         if (serviceCart) return serviceCart as DisplayServiceCartDTO;
 
-        else return( await prisma.serviceCart.create({
+        else return (await prisma.serviceCart.create({
             data: {
                 userId,
                 status: 'EMPTY', // Initial status for a new cart
             },
             include: {
-                
+                discounts: true,
+
                 items: {
                     include: {
-                        service:  {
+                        service: {
                             include: {
-                                image:true
+                                image: true
                             }
                         },
-                        addons: true
+                        addons: {
+                            include: {
+                                CaseStudies: true
+                            }
+                        }
 
                     },
                 }
             }
-        })  ) as DisplayServiceCartDTO
+        })) as DisplayServiceCartDTO
     } catch (error) {
         console.error('Error retrieving service cart:', error);
         throw error;
     }
 };
 
-async function create(cartItem: ProductCartItemDTO, prisma: PrismaClient) {
+export async function create(cartItem: ProductCartItemDTO, prisma: PrismaClient) {
     const cartItems = prisma.productCartItem;
     let createdcartItem = await cartItems.create({ data: cartItem });
     return createdcartItem
@@ -103,7 +115,7 @@ export const addServiceCartItem = async (input: CreateServiceCartItemDTO, prisma
             }
         },
         include: {
-            addons:true
+            addons: true
         }
     });
 
@@ -132,6 +144,30 @@ async function update(cartItemId: string, cartItem: ProductCartItemDTO, prisma: 
 
     return item
 
+}
+
+export async function applyServiceDiscount(userId: string, discounts: string[], prisma: PrismaClient) {
+
+    const carts = prisma.serviceCart
+    const cart = await carts.findFirst({
+        where: {
+            user: {
+                id: userId,
+            },
+            status: { in: ['EMPTY', 'PENDING'] },
+        }
+    })
+
+    if(!cart) throw HttpError(403, 'Cart not available')
+    const updated = await carts.update({
+        where: {
+            id: cart.id
+        }, data: {
+            discounts: { set: discounts.map(discount => ({ name: discount })) }
+        }
+    })
+
+    return updated
 }
 
 
@@ -196,7 +232,7 @@ export async function getServiceOrder(orderId: string, userId: string, prisma: P
         include: {
             items: {
                 include: {
-                    service:true,
+                    service: true,
                     addons: true
                 }
             }

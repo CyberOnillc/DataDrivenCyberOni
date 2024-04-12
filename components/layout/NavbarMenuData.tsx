@@ -16,13 +16,16 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
     useEffect(() => {
         async function fetchCaseStudies() {
             const res = await fetch('/api/casestudies/recent')
+            console.log(res.status);
             const { data } = await res.json()
-            return data.slice(0, 3) as CaseStudy[]
+            return (data as CaseStudy[]).slice(0, 3)
 
         }
 
         async function fetchBlogs() {
             const res = await fetch('/api/blogs/home')
+            console.log(res.status);
+
             const { data } = await res.json()
             return (data.recent as Blog[]).slice(0, 3)
 
@@ -112,7 +115,7 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
                     icon: <HelpCircle className="fill-blue-700 text-gray-50" />,
                 },
                 {
-                    href: "/casestudy",
+                    href: "/casestudies",
                     name: "Case Studies",
                     subTitle: "All about how to use ",
                     icon: <BookCheck className="fill-blue-700 text-gray-50" />,
@@ -139,25 +142,25 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
             title: "Business Solutions",
             links: [
                 {
-                    href: "/services/Digital-Marketing-7f580f52-b972-46ad-b5f8-35c209044ac1#Convert",
+                    href: "/services/Digital-Marketing-7f580f52-b972-46ad-b5f8-35c209044ac1?id=Convert",
                     name: "Convert",
                     subTitle: "Analyze conversation",
                     icon: <Repeat2 className=" text-blue-700" />,
                 },
                 {
-                    href: "/services/Digital-Marketing-7f580f52-b972-46ad-b5f8-35c209044ac1#Engage",
+                    href: "/services/Digital-Marketing-7f580f52-b972-46ad-b5f8-35c209044ac1?id=Engage",
                     name: "Enage",
                     subTitle: "Measure active usage",
                     icon: <PlusCircle className="text-blue-700" />,
                 },
                 {
-                    href: "/services/Digital-Marketing-7f580f52-b972-46ad-b5f8-35c209044ac1#Retain",
+                    href: "/services/Digital-Marketing-7f580f52-b972-46ad-b5f8-35c209044ac1?id=Retain",
                     name: "Retain",
                     subTitle: "Find retentation drivers",
                     icon: <Fullscreen className="text-blue-700" />,
                 },
                 {
-                    href: "/services/Digital-Marketing-7f580f52-b972-46ad-b5f8-35c209044ac1#Product Adoption",
+                    href: "/services/Digital-Marketing-7f580f52-b972-46ad-b5f8-35c209044ac1?id=Product Adoption",
                     name: "Product Adoption",
                     subTitle: "Maximize all customers",
                     icon: <Users className="text-blue-700" />,
@@ -193,38 +196,38 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
             title: "Powerful and Simple Analytics",
             links: [
                 {
-                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126#Interactive%20Reports",
+                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126?id=Interactive%20Reports",
                     name: "Interactive Reports",
                     subTitle: "Learn about your users",
                     icon: <BarChart className=" text-blue-700" />,
                 },
                 {
-                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126#Interactive%20Reports",
+                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126?id=Team%20Dashboard",
                     name: "Team Dashboard & Alerts",
                     subTitle: "Monitor your metricse",
                     icon: <AppWindow className="text-blue-700" />,
                 },
                 {
-                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126#Behavioral%20Analytics",
+                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126?id=Behavioral%20Analytics",
                     name: "Behavioral Analytics",
                     subTitle: "Real-time analytics user trends",
                     icon: <ActivitySquare className="text-blue-700" />,
                 },
                 {
-                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126#Audience%20Segmentation",
+                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126?id=Audience%20Segmentation",
                     name: "Audience Segmentation",
                     subTitle: "Segments with perfect target",
                     icon: <PieChart className="text-blue-700" />,
                 },
 
                 {
-                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126#Group%20Analyticss",
+                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126?id=Group%20Analytics",
                     name: "Group Analytics",
                     subTitle: "Measure B2B account health",
                     icon: <Group className="text-blue-700" />,
                 },
                 {
-                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126#Limitless%20Segmentation",
+                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126?id=Limitless%20Segmentation",
                     name: "Limitless Segmentation",
                     subTitle: "Surface hidden trends",
                     icon: <Layers3 className="text-blue-700" />,
@@ -236,19 +239,19 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
             title: "Tools for Trusted Data",
             links: [
                 {
-                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126#Data%20Integrations",
+                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126?id=Data%20Integrations",
                     name: "Data Integrations",
                     subTitle: "Connect to your warehouse",
                     icon: <Cpu className=" text-blue-700" />,
                 },
                 {
-                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126#Data%20Management",
+                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126?id=Data%20Management",
                     name: "Data Management",
                     subTitle: "Keep data clean & usable",
                     icon: <FileStack className="text-blue-700" />,
                 },
                 {
-                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126#Security%20%26%20Privacy",
+                    href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126?id=Security%20%26%20Privacy",
                     name: "Security & Privacy",
                     subTitle: "Protect customer data",
                     icon: <Lock className="text-blue-700" />,
