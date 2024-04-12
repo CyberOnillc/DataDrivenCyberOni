@@ -39,7 +39,7 @@ export async function create(caseStudy: CreateCaseStudy, prisma: PrismaClient) {
 export async function read(caseStudyId: string, prisma: PrismaClient) {
     const cases = prisma.caseStudy;
     const caseStudy = await cases.findUnique({ where: { id: caseStudyId }, include: { subServices: { select: { id: true, title: true } } } })
-    if(caseStudy) return caseStudy
+    if (caseStudy) return caseStudy
 
 
 }
@@ -97,7 +97,7 @@ export async function getAll(page: number, pageSize: number, prismaClient: Prism
 }
 
 export async function getRecent(prisma: PrismaClient) {
-    const caseStudies= prisma.caseStudy;
+    const caseStudies = prisma.caseStudy;
     let allRecords = await caseStudies.findMany({
         take: 10,
         where: {
@@ -107,9 +107,60 @@ export async function getRecent(prisma: PrismaClient) {
         }
     })
     return allRecords
-    
-}
 
+}
+export async function getBySearchTerm(search: string, page: number, prisma: PrismaClient) {
+    const caseStudies = prisma.caseStudy;
+
+
+    const records = await caseStudies.findMany({
+        skip: page === 0 ? 0 : (page - 1) * 5,
+        take: page === 0 ? 9999 : 5,
+        where: {
+            OR: [
+                {
+                    title: {
+                        contains: search
+                    }
+                },
+
+                {
+                    goals: {
+                        string_contains: search
+                    }
+                },
+
+                {
+                    problemStatement: {
+                        contains: search
+                    }
+                },
+                {
+                    preview: {
+                        contains: search
+                    }
+                }, {
+
+                    userResearch: {
+                        contains: search
+                    }
+                },
+                {
+                    keyLearning: {
+                        contains: search
+                    },
+                    
+                }, {
+                    uniqueFeatures: {
+                        contains: search
+                    }
+                }
+            ]
+        }
+    })
+
+    return records;
+}
 
 export async function getGroup(group: string, prismaClient: PrismaClient) {
     const caseStudys = prismaClient.caseStudy;
