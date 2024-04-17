@@ -46,9 +46,8 @@ export const metadata: Metadata = {
   viewport: {
     width: "device-width",
     initialScale: 1,
-    maximumScale: 5
+    maximumScale: 5,
   },
-
 };
 
 export default async function RootLayout({
@@ -62,7 +61,6 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER}`}
@@ -79,11 +77,22 @@ export default async function RootLayout({
   `}
       </Script>
       <FacebookPixel />
-      <Script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></Script>
-      <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1982663534926302"
-        crossOrigin="anonymous"></Script>
-      <Script async src="https://www.google.com/adsense/new/u/2/pub-1982663534926302/myads/sites/preview?url=cybershoptech.com"
-        crossOrigin="anonymous"></Script>
+      <Script
+        async
+        defer
+        crossOrigin="anonymous"
+        src="https://connect.facebook.net/en_US/sdk.js"
+      ></Script>
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1982663534926302"
+        crossOrigin="anonymous"
+      ></Script>
+      <Script
+        async
+        src="https://www.google.com/adsense/new/u/2/pub-1982663534926302/myads/sites/preview?url=cybershoptech.com"
+        crossOrigin="anonymous"
+      ></Script>
 
       <body
         className={`${cx(
@@ -101,7 +110,7 @@ export default async function RootLayout({
             darkMode={theme?.value === "dark" ? true : false}
           />
         </Suspense>
-        <main className="relative min-h-screen w-full  overflow-x-hidden pt-16 xl:pt-24 dark:bg-gray-900 dark:text-white">
+        <main className="relative min-h-screen w-full  overflow-x-hidden pt-16 dark:bg-gray-900 dark:text-white xl:pt-24">
           {children}
           <noscript>
             <iframe
