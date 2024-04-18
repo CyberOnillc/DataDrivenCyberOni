@@ -25,7 +25,7 @@ describe('OpenAI API integration tests', () => {
     let assistant: Assistant
     let thread: Thread
     let file: FileObject
-    it.skip('getOpenAiResponse should call the API and return a response', async () => {
+    it('getOpenAiResponse should call the API and return a response', async () => {
         const messages = [{ role: 'user', content: 'Hello' }] as ChatCompletionUserMessageParam[];
         const response = await getOpenAiResponse(messages);
         expect(response).toBeDefined(); // You might want to check specific properties based on your needs
@@ -38,19 +38,21 @@ describe('OpenAI API integration tests', () => {
 
             while (!streamFinished && reader) {
                 const { done, value } = await reader.read();
+                if(done) break
+                let nextChunk = new TextDecoder().decode(value)
 
-                result = result + value;
+                result = result + nextChunk;
                 streamFinished = done
 
             }
 
             res(result)
 
-
+            
         });
 
         expect(text).toBeDefined()
-
+        console.log(text);
     }, 30000);
 
     it.skip('createThread should initialize a thread and return thread details', async () => {
