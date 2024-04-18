@@ -84,7 +84,6 @@ export async function addUserMessageToThread(threadId: string, { message, fileId
 
 export async function listAssistants() {
     const assistants = await openai.beta.assistants.list({
-
         order: "desc"
     })
 

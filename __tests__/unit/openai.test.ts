@@ -25,7 +25,7 @@ describe('OpenAI API integration tests', () => {
     let assistant: Assistant
     let thread: Thread
     let file: FileObject
-    it('getOpenAiResponse should call the API and return a response', async () => {
+    it.skip('getOpenAiResponse should call the API and return a response', async () => {
         const messages = [{ role: 'user', content: 'Hello' }] as ChatCompletionUserMessageParam[];
         const response = await getOpenAiResponse(messages);
         expect(response).toBeDefined(); // You might want to check specific properties based on your needs
@@ -55,8 +55,8 @@ describe('OpenAI API integration tests', () => {
         console.log(text);
     }, 30000);
 
-    it.skip('createThread should initialize a thread and return thread details', async () => {
-        const starter = 'Hello, start a thread!';
+    it('createThread should initialize a thread and return thread details', async () => {
+        const starter = 'Hello, start a thread!, this test thread provide small response for testing';
         const createdThread = await createThread({ starter });
         expect(createdThread).toBeDefined();
         thread = createdThread
@@ -68,6 +68,7 @@ describe('OpenAI API integration tests', () => {
         expect(assistants).toBeDefined();
         expect(assistants.data.length).toBeGreaterThanOrEqual(0);
         assistant = assistants.data[0];
+        console.log(assistants);
     });
 
     it('fetchAssistant should retrieve assistant details', async () => {
@@ -78,17 +79,33 @@ describe('OpenAI API integration tests', () => {
         console.log(fetchedAssistant);
     });
 
-    it.skip('runAssistant should run the assistant within a thread', async () => {
+    it('runAssistant should run the assistant within a thread', async () => {
         // Assuming you have a valid thread and assistant ID
         const threadId = thread.id;
         const assistantId = assistant.id;
         const run = await runAssistant({ threadId, assistantId });
         expect(run).toBeDefined();
-
+        const stream =  run.toReadableStream();
+        const reader = stream.getReader()
         const status = await new Promise(async (res) => {
 
-            res(undefined)
+            let result = "";
+            let streamFinished = false
+
+            while (!streamFinished && reader) {
+                const { done, value } = await reader.read();
+                if(done) break
+                let nextChunk = new TextDecoder().decode(value)
+                console.log("chunk:" , nextChunk);
+                result = result + nextChunk;
+                streamFinished = done
+
+            }
+
+            res(result)
         })
+
+        console.log(status);
     }, 30000);
 
     it.skip('retrieveThread should retrieve details of a thread', async () => {

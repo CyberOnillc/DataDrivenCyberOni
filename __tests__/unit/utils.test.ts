@@ -3,7 +3,7 @@
  */
 
 import { CreateFaqDTO, CreateImageDTO, CreateServiceDTO, CreateServiceDescription, CreateSubServiceDTO, CreateTagDTO, DisplayServiceCartItemDTO, DisplayServiceDTO, DisplaySubServiceDTO } from "@/crud/DTOs";
-import { calculateServiceCartTotal } from "@/lib/utils";
+import { calculateServiceCartTotal, extractPrices, fetchHtml } from "@/lib/utils";
 import { describe, expect, test, it, beforeAll } from '@jest/globals';
 import { Discount, ServiceCartItem } from "@prisma/client";
 
@@ -116,6 +116,15 @@ describe('CJshipping api tests', () => {
         expect(price).toBeGreaterThanOrEqual(0);
         //expect(price).toBe(7200)
 
+
+    })
+
+    it('should fetch hugging prices ', async()=> {
+        const url = 'https://huggingface.co/pricing#endpoints';
+        const html = await fetchHtml(url)
+        const prices = extractPrices(html);
+
+        console.log(JSON.stringify(prices, null, 2));
 
     })
 

@@ -12,6 +12,7 @@ async function textCompletion(prompt: string, history?: ChatCompletionMessagePar
         messages: [...(history ?? []), { role: 'user', content: prompt }],
         model: 'router',
         stream: options?.stream,
+        tools: []
     });
 
 
