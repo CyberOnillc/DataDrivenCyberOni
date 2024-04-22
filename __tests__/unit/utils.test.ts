@@ -3,6 +3,7 @@
  */
 
 import { CreateFaqDTO, CreateImageDTO, CreateServiceDTO, CreateServiceDescription, CreateSubServiceDTO, CreateTagDTO, DisplayServiceCartItemDTO, DisplayServiceDTO, DisplaySubServiceDTO } from "@/crud/DTOs";
+import { fetchHuggingfacePrices } from "@/lib/externalRequests/huggingface";
 import { calculateServiceCartTotal } from "@/lib/utils";
 import { describe, expect, test, it, beforeAll } from '@jest/globals';
 import { Discount, ServiceCartItem } from "@prisma/client";
@@ -117,6 +118,10 @@ describe('CJshipping api tests', () => {
         //expect(price).toBe(7200)
 
 
+    })
+
+    it('should calculate discounted price', async () => {
+        const res = await fetchHuggingfacePrices();
     })
 
 
