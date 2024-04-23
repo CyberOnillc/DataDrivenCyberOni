@@ -16,6 +16,8 @@ import "./globals.css";
 import { authOptions } from "@/lib/nextAuthAdapter";
 import { WebVitals } from "@/components/WebVitals";
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import LeadForm from "@/components/LeadForm";
+import FacebookPixel from "@/components/FbPixel";
 
 export const metadata: Metadata = {
   title: Owner.seo.metaTitle,
@@ -39,7 +41,7 @@ export const metadata: Metadata = {
   },
   themeColor: "#0074e4",
   other: {
-    "fb:app_id": process.env.FACEBOOK_ID as string,
+    "fb:app_id": process.env.FACEBOOK_ID as string,   
   },
   viewport: {
     width: "device-width",
@@ -68,28 +70,20 @@ export default async function RootLayout({
       />
       <Script strategy="afterInteractive" id="google-tag-manager">
         {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER}', {
-      page_path: window.location.pathname,
-    });
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER}', {
+            page_path: window.location.pathname,
+          });
   `}
       </Script>
-      <Script strategy="afterInteractive" id="facebook-pixel">
-        {`
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL}');
-      fbq('track', 'PageView');
-    `}
-      </Script>
+      <FacebookPixel />
+      <Script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></Script>
+      <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1982663534926302"
+        crossOrigin="anonymous"></Script>
+      <Script async src="https://www.google.com/adsense/new/u/2/pub-1982663534926302/myads/sites/preview?url=cybershoptech.com"
+        crossOrigin="anonymous"></Script>
 
       <body
         className={`${cx(
@@ -120,12 +114,17 @@ export default async function RootLayout({
         </main>
         {
           <Suspense>
+            <LeadForm />
+          </Suspense>
+        }
+        {
+          <Suspense>
             <Notification />
           </Suspense>
         }
         <ContactButton />
         <Footer />
-        <Analytics  />
+        <Analytics />
         <SpeedInsights />
         {/* <WebVitals /> */}
       </body>

@@ -4,7 +4,7 @@ import { verifyCaptcha } from "@/lib/externalRequests/google";
 import { addToSendGrid, sendMailHtml } from "@/lib/externalRequests/sendgrid";
 import { createBackgroundTemplate } from "@/lib/utils";
 import { redirect } from "next/navigation";
-import { addToMarketingCrm, upsertRecord } from "../../lib/externalRequests/notion";
+import { addRecord, addToMarketing, upsertRecord } from "../../lib/externalRequests/notion";
 const template = `<div>
 <p>Contact filled by {{firstName}} {{lastName}} </p>
 
@@ -66,19 +66,19 @@ export async function submitContact(formData: FormData, token: string) {
         }
 
         await addToSendGrid({ email: data.email, firstName: data.firstName, lastName: data.lastName })
-        await upsertRecord({
-            email: data.email,
-            name: `${data.firstName} ${data.lastName}`,
-            message: data.message,
-            budget: data.budget,
-            challenges: data.challenges,
-            company: data.companyName,
-            employess: data.companySize,
-            phone: data.phone,
-            referral: data.source,
-            requirements: Object.keys(requirement).map((key) => requirement[key]).filter((value) => value),
-            timeline: data.timeline,
-            howHelp: data.reason as string
+        await addToMarketing({
+            "Email Address": { type: 'email', content: data.email },
+            "Name": { type: 'title', content: `${data.firstName} ${data.lastName}` },
+            "Message": { type: 'text', content: data.message },
+            "Budget": { type: 'text', content: data.budget },
+            "Current Challenges": { type: 'text', content: data.challenges },
+            "Company": { type: 'text', content: data.companyName },
+            "Number of Employees": { type: 'number', content: Number(data.companySize) },
+            "Phone": { type: 'phone', content: data.phone },
+            "Referral": { type: 'text', content: data.source },
+            "Requirements": { type: 'multiSelect', content: Object.keys(requirement).map((key) => requirement[key]).filter((value) => value) },
+            "Time Line": { type: 'text', content: data.timeline },
+            "How_we_help": { type: 'text', content: data.reason as string }
 
         })
         const response = await sendMailHtml(formData.get('email') as string,

@@ -1,7 +1,7 @@
 import { createWithPassword } from "@/crud/user";
 import { CreateUserDTO } from "@/crud/DTOs";
 import apiHandler from "@/errorHandler";
-import { prisma } from "@/prisma/prismaClient";
+import prisma from "@/lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 

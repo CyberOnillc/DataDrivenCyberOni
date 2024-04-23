@@ -1,8 +1,6 @@
 'use client'
-import { Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import { PopupModal } from "react-calendly";
-import 'react-toastify/dist/ReactToastify.css';
 import { useNotify } from "../Notification";
 import { useRouter } from "next/navigation";
 function CalendlyModal({ open, onCloseModal }: { open: boolean, onCloseModal: () => void }) {
@@ -33,12 +31,11 @@ function CalendlyModal({ open, onCloseModal }: { open: boolean, onCloseModal: ()
                 open={open}
                 onModalClose={closeModal}
                 rootElement={rootElement as HTMLElement}
-                url="https://calendly.com/theapartmentguru/30min"
+                url="https://calendly.com/cyberoni/quick-zoom-meeting"
 
 
             />}
-            {/* <ToastContainer icon={Info} autoClose={false} hideProgressBar={true} toastClassName={`z-[10000]`} position="bottom-right" >
-            </ToastContainer> */}
+
         </div>
 
     </>);

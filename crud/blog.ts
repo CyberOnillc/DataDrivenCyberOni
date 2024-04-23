@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { connectOrCreateObject as connectTags } from "./tags";
 import { connectOrCreateObject as connectImages } from "./images";
-import { cleanHtmlString } from "@/lib/utils";
+import { cleanHtmlString, getRandomFromArray } from "@/lib/utils";
 import { CommentDTO, CreateBlogDTO } from "./DTOs";
 import { getUserByEmail } from "./user";
 
@@ -106,13 +106,17 @@ async function getAll(page: number, pageSize: number, prismaClient: PrismaClient
 
 }
 
-export function getFeatured(prisma: PrismaClient) {
-    const featured = prisma.blog.findFirst({
+export async function getFeatured(prisma: PrismaClient) {
+    const featured = await prisma.blog.findMany({
+        take: 10,
         where: {
             featured: true,
             publishDate: {
                 lte: new Date()
             }
+        },
+        orderBy: {
+            publishDate: 'desc'
         },
         include: {
             tags: true,
@@ -124,7 +128,7 @@ export function getFeatured(prisma: PrismaClient) {
             images: true
         }
     });
-    return featured;
+    return getRandomFromArray(featured);
 
 }
 export async function addView({ id, userEmail }: { id: string, userEmail?: string }, prisma: PrismaClient) {
@@ -352,6 +356,9 @@ export async function getBySearchTerm(search: string, page: number, prisma: Pris
                     lte: new Date()
                 }
             }]
+        },
+        orderBy: {
+            publishDate: 'desc'
         }
     })
     return records

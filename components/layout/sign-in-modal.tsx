@@ -53,7 +53,7 @@ const SignInModal = ({
             }}
           >
             {signInClicked ? (
-              <LoadingDots color="#808080" />
+              <LoadingDots />
             ) : (
               <>
                 <Google className="h-5 w-5" />

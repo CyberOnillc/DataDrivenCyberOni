@@ -2,10 +2,13 @@ import UserPersonaCard from "@/components/casestudies/UserPersonaCard";
 import { read } from "@/crud/casestudy";
 import Image from "next/image";
 import prisma from "@/lib/prisma";
-import {  Image as UserImage } from "@prisma/client";
+import { Image as UserImage } from "@prisma/client";
 import { Metadata, ResolvingMetadata } from "next";
 import { extractUUID, stripFileExtension } from "@/lib/utils";
 import { Article, WithContext } from "schema-dts";
+import { CreateCaseStudy } from "@/crud/DTOs";
+import { redirect } from "next/navigation";
+import ImageWithTextOverlay from "@/components/shared/ImageWithTextOverlay";
 
 
 type Props = {
@@ -20,34 +23,34 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
     // read route params
     const seoTitle = params.id
     const id = extractUUID(seoTitle)
-    const caseStudy = await read(id, prisma)
+    const caseStudy = await read(id, prisma) as unknown as CreateCaseStudy
 
     // optionally access and extend (rather than replace) parent metadata
     let metadata: Metadata = {};
-   if (caseStudy) {
-     metadata.title = caseStudy?.title as string
-     metadata.description = caseStudy?.preview
-     metadata.openGraph = {
-       type: 'article',
-       title: caseStudy?.title,
-       description: caseStudy?.preview,
-       images: [... caseStudy.images.map(image =>image.src), '/images/monster_5.jpg']
-     }
-     metadata.twitter = {
-       title: caseStudy?.title,
-       images: [... caseStudy.images.map(image =>image.src), '/images/monster_5.jpg'],
-       description: caseStudy?.preview,
-   
-     }
-     metadata.keywords = caseStudy?.title.split('')
-   }
+    if (caseStudy) {
+        metadata.title = caseStudy?.title as string
+        metadata.description = caseStudy?.preview
+        metadata.openGraph = {
+            type: 'article',
+            title: caseStudy?.title,
+            description: caseStudy?.preview,
+            images: [...caseStudy.images.map(image => image.src), '/images/monster_5.jpg']
+        }
+        metadata.twitter = {
+            title: caseStudy?.title,
+            images: [...caseStudy.images.map(image => image.src), '/images/monster_5.jpg'],
+            description: caseStudy?.preview,
+
+        }
+        metadata.keywords = caseStudy?.title.split('')
+    }
     return metadata
 }
 async function CaseStudy({ params }: { params: { id: string } }) {
     const seoTitle = params.id
     const id = extractUUID(seoTitle)
-    const caseStudy = await read(id, prisma)
-
+    const caseStudy = await read(id, prisma) as unknown as CreateCaseStudy
+    if (!caseStudy) redirect('/404')
 
     const jsonLd: WithContext<Article> = {
         "@context": 'https://schema.org',
@@ -57,7 +60,7 @@ async function CaseStudy({ params }: { params: { id: string } }) {
         name: caseStudy.title,
         image: {
             "@type": 'ImageObject',
-            url: caseStudy.images[0].src ?? ''
+            url: caseStudy.images && caseStudy.images.length > 0 ? caseStudy.images[0].src : ''
 
         }
     }
@@ -86,9 +89,10 @@ async function CaseStudy({ params }: { params: { id: string } }) {
 
                 </div>
                 <div className="flex justify-center items-center my-5 rounded-lg overflow-hidden">
-                    {caseStudy.images[0] ? <Image className=" rounded-lg object-contain" src={caseStudy.images[0].src} alt={'casestudy-preview'} height={500} width={500} /> :
-                        <Image className="rounded-lg object-contain" src={'/images/casestudy-1.png'} alt={'casestudy-1'} height={500} width={500} />
-                    }
+                    {caseStudy.images[0] ?
+                        <Image src={caseStudy.images[0].src} alt={caseStudy.title[0] ?? ""}  height={500} width={500} /> :
+                        <Image src={"/images/casestudy-1.png"} alt={'casestudy-main'} height={500} width={500} />
+                    } 
                 </div>
 
                 {/* Section 3: Project Goals */}
@@ -154,7 +158,7 @@ async function CaseStudy({ params }: { params: { id: string } }) {
                 </div>
 
                 <div className="flex justify-center items-center my-5 rounded-lg overflow-hidden">
-                    {caseStudy.images[1] ? <Image className=" rounded-lg object-contain" src={caseStudy.images[0].src} alt={'casestudy-image-2'} height={500} width={500} /> :
+                    {caseStudy.images[1] ? <Image className=" rounded-lg object-contain" src={caseStudy.images[1].src} alt={'casestudy-image-2'} height={500} width={500} /> :
                         <Image className="l rounded-lg object-contain" src={'/images/casestudy-2.png'} alt={'casestudy-2'} height={500} width={500} />
                     }
                 </div>

@@ -17,6 +17,11 @@ import ServiceFeatures from "@/components/services/ServiceFeatures";
 import { redirect } from "next/navigation";
 import { extractUUID, seoUrl } from "@/lib/utils";
 import { Service, WithContext } from "schema-dts";
+import { serviceReviews } from "@/data/testimonials";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/nextAuthAdapter";
+import CaseStudyCard from "@/components/services/CaseStudyCard";
+import { DisplaySubServiceDTO } from "@/crud/DTOs";
 type Props = {
   params: { id: string }
   searchParams: { [key: string]: string | string[] | undefined }
@@ -40,14 +45,14 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
       type: 'article',
       title: service?.title,
       description: service?.previewContent,
-      images:  [service.image?.src as string, '/images/monster_5.jpg']
+      images: [service.image?.src as string, '/images/monster_5.jpg']
 
     }
     metadata.twitter = {
       title: service?.title,
       images: [service.image?.src as string, '/images/monster_5.jpg'],
       description: service?.previewContent,
-  
+
     }
     metadata.category = service?.tags.join(" ")
     metadata.keywords = service?.tags?.map(tag => tag.name)
@@ -61,7 +66,6 @@ async function Services({ params }: { params: { id: string } }) {
   const services = await getAll(1, 10, prisma);
 
   if (!service) redirect('/404');
-  //console.log(service);
 
   const jsonLd: WithContext<Service> = {
     "@context": 'https://schema.org',
@@ -75,6 +79,9 @@ async function Services({ params }: { params: { id: string } }) {
 
     }
   }
+
+  const session = await getServerSession(authOptions)
+
   return (
     <div className="">
       <script
@@ -112,29 +119,15 @@ async function Services({ params }: { params: { id: string } }) {
           overcome challenges and succeed.
         </div>
         <ReviewCarousel
-          reviews={[
-            {
-              content:
-                "Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.",
-              image: "/images/prof1.png",
-              name: "Charlie rose",
-              position: "Ceo",
-            },
-            {
-              content:
-                "Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.",
-              image: "/images/prof2.png",
-              name: "Charlie rose",
-              position: "Ceo",
-            },
-          ]}
+          reviews={serviceReviews}
         />
       </section>
 
       {service.SubServices && service.SubServices.length > 0 && (
         <section className="my-5 font-nunito">
           <SubServiceCarousel
-            subservices={service.SubServices as SubService[]}
+            subServices={service.SubServices as DisplaySubServiceDTO[]}
+            session={session}
           />
         </section>
       )}
@@ -142,32 +135,14 @@ async function Services({ params }: { params: { id: string } }) {
         <section className="my-5 font-nunito">
           <div className="text-center text-4xl font-bold">Portfolio</div>
 
-          {service.CaseStudies?.map((caseStudy, index) => (
-            <div
-              key={index}
-              className="container mx-auto my-5 flex flex-wrap gap-2 lg:gap-5"
-            >
-              <Link
-                href={`/casestudies/${caseStudy.id}`}
-                className="relative w-1/2 flex-col items-center justify-center overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl lg:w-[170px]"
-              >
-                <Image
-                  className="aspect-square object-fill"
-                  height={170}
-                  width={170}
-                  alt="case image"
-                  src={
-                    caseStudy.images
-                      ? (caseStudy.images as CaseImage[])[0].src
-                      : "https://picsum.photos/200"
-                  }
-                />
-                <div className="absolute bottom-0 line-clamp-1 w-full bg-gradient-to-t from-black to-black/0 py-5  text-center text-white">
-                  {caseStudy.title}
-                </div>
-              </Link>
-            </div>
+          <div className="container mx-auto my-5 flex flex-wrap gap-2 lg:gap-5 px-5"
+          >            {service.CaseStudies?.map((caseStudy, index) => (
+            <CaseStudyCard key={index}
+              images={caseStudy.images as CaseImage[]}
+              id={caseStudy.id}
+              title={caseStudy.title} />
           ))}
+          </div>
         </section>
       ) : (
         <></>
@@ -183,7 +158,7 @@ async function Services({ params }: { params: { id: string } }) {
         <EmailLetter></EmailLetter>
       </section>
       <section className="flex items-center justify-center">
-        <PayLater value={service.valueBrought as string[]} />
+        <PayLater type="service" value={service.valueBrought as string[]} />
       </section>
     </div>
   );

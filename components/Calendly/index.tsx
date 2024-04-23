@@ -1,6 +1,7 @@
 'use client'
-import React, { useEffect, useState, ReactNode } from "react";
+import React, { useEffect, useState, ReactNode, useRef } from "react";
 import { PopupButton } from "react-calendly";
+import { LoadingDots } from "../shared/icons";
 
 interface CalendlyPopupProps {
   CTAText: string;
@@ -11,28 +12,23 @@ const CalendlyPopup: React.FC<CalendlyPopupProps> = ({
   CTAText,
   className,
 }) => {
-  const [rootElement, setRootElement] = useState<HTMLElement | null>(null);
+  const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const element = document.getElementById("__next");
-    if (element) {
-      setRootElement(element);
-    }
-  }, []);
+  const root = useRef<HTMLDivElement>(null)
+
 
   const buttonClass =
     className || "rounded-full bg-white p-3 hover:shadow-md dark:bg-black";
 
   return (
-    <div className="App">
-      {rootElement && (
-        <PopupButton
-          url="https://calendly.com/cyberoni/quick-zoom-meeting"
-          rootElement={rootElement}
-          text={CTAText}
-          className={buttonClass}
-        />
-      )}
+    <div ref={root} className="App">
+      <PopupButton
+        LoadingSpinner={() => <LoadingDots />}
+        url="https://calendly.com/cyberoni/quick-zoom-meeting"
+        rootElement={root.current as HTMLElement}
+        text={CTAText}
+        className={buttonClass}
+      />
     </div>
   );
 };

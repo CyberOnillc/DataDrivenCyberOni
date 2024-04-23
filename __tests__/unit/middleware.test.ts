@@ -1,35 +1,37 @@
 import { DisplayUserDTO } from "@/crud/DTOs";
-import { Role } from "@prisma/client";
+import { Role} from "@prisma/client";
 
 import { describe, expect, it, afterAll } from "@jest/globals";
 import { HttpMethod, verifyAccess } from "@/lib/middleware";
 
 describe('verifyAccess function', () => {
+  const CUID_1 = 'ck2n7jngh0000t2r11g1mvzv3';
+  const CUID_2 = 'ck2n7jngh0000t2r11g1mvzv5';
   const UUID_1 = '123e4567-e89b-12d3-a456-426614174001';
-  const UUID_2 = '123e4567-e89b-12d3-a456-426614174004'; 
+  const UUID_2 = '123e4567-e89b-12d3-a456-426614174004';  
   const user: DisplayUserDTO = {
     // Define a user object for testing
     // Adjust the properties based on your actual user structure
-    id: UUID_1,
+    id: CUID_1,
     role: Role.USER,
     email: 'user@example.com',
     emailVerified:undefined,
     // ... other properties ...
   };
   const superUser:DisplayUserDTO ={
-    id: UUID_1,
+    id: CUID_1,
     role: Role.SUPERUSER,
     email: 'user@example.com',
     emailVerified:undefined,
   }
   const adminUser:DisplayUserDTO ={
-    id: UUID_1,
+    id: CUID_1,
     role: Role.ADMIN,
     email: 'user@example.com',
     emailVerified:undefined,
   }
   const trustedUser:DisplayUserDTO ={
-    id: UUID_1,
+    id: CUID_1,
     role: Role.TRUSTED,
     email: 'user@example.com',
     emailVerified:undefined,
@@ -41,7 +43,7 @@ describe('verifyAccess function', () => {
       role: Role.SUPERUSER,
     };
 
-    const hasAccess = await verifyAccess(superUser, '/api/users/2173923012380213', 'GET');
+    const hasAccess = await verifyAccess(superUser, '/api/users/ck2n7jngh0000t2r11g1mvzv3', 'GET');
     expect(hasAccess).toBe(true);
   });
 
@@ -51,7 +53,7 @@ describe('verifyAccess function', () => {
       role: Role.ADMIN,
     };
 
-    const hasAccess = await verifyAccess(adminUser, '/api/users/41e4904a-9acc-11ee-816c-52a30caa17b1', 'GET');
+    const hasAccess = await verifyAccess(adminUser, '/api/users/ck2n7jngh0000t2r11g1mvzv3', 'GET');
     expect(hasAccess).toBe(true);
   });
 
@@ -77,22 +79,27 @@ describe('verifyAccess function', () => {
 
 
   it('allows access to specific paths for USER', async () => {
-    const userWithAccess = { ...user, role: Role.USER, id: `${UUID_1}` };
+    const userWithAccess = { ...user, role: Role.USER, id: `${CUID_1}` };
     const allowedPaths = [
       {path: `/api/products/${UUID_1}`, method: 'GET',},
       {path: `/api/products/all`, method: 'GET', },
       {path: `/api/services/${UUID_1}`, method: 'GET',},
       {path: `/api/products/${UUID_1}`, method: 'GET', },
-        {path: `/api/users/${UUID_1}`, method: 'GET'},
-        {path: `/api/users/${UUID_1}`, method: 'PUT'},
+        {path: `/api/users/${CUID_1}`, method: 'GET'},
+        {path: `/api/users/${CUID_1}`, method: 'PUT'},
+        {path: `/api/cart/services/${CUID_1}`, method: 'POST', },
+        {path: `/api/cart/services/${CUID_1}`, method: 'GET', },
+
 
 
     ];
     const protectedPaths = [
       {path:`/api/users/all`, method: 'GET'},
-      {path: `/api/users/${UUID_2}`, method: 'GET'},
+      {path: `/api/users/${CUID_2}`, method: 'GET'},
       {path: `/api/products/${UUID_1}`, method: 'PUT', },
       {path: `/api/products/${UUID_1}`, method: 'POST', },
+      {path: `/api/cart/services/${UUID_1}`, method: 'POST', },
+      {path: `/api/cart/services/${UUID_1}`, method: 'GET', },
     ]
 
     const accessPromises = allowedPaths.map((testCase) =>
@@ -117,12 +124,14 @@ describe('verifyAccess function', () => {
       {path: `/api/products/all`, method: 'GET', },
       {path: `/api/services/${UUID_1}`, method: 'GET',},
       {path: `/api/products/${UUID_1}`, method: 'GET', },
-      {path: `/api/users/${UUID_1}`, method: 'GET'},
-      {path: `/api/users/${UUID_1}`, method: 'PUT'},
+      {path: `/api/users/${CUID_1}`, method: 'GET'},
+      {path: `/api/users/${CUID_1}`, method: 'PUT'},
       {path:`/api/users/all`, method: 'GET'},
-      {path: `/api/users/${UUID_2}`, method: 'GET'},
+      {path: `/api/users/${CUID_2}`, method: 'GET'},
       {path: `/api/products/${UUID_1}`, method: 'PUT', },
       {path: `/api/products/${UUID_1}`, method: 'POST', },
+      {path: `/api/cart/services/${CUID_1}`, method: 'POST', },
+
     ];
 
     const accessPromises = allowedPaths.map((testCase) =>
@@ -139,12 +148,14 @@ describe('verifyAccess function', () => {
       {path: `/api/products/all`, method: 'GET', },
       {path: `/api/services/${UUID_1}`, method: 'GET',},
       {path: `/api/products/${UUID_1}`, method: 'GET', },
-      {path: `/api/users/${UUID_1}`, method: 'GET'},
-      {path: `/api/users/${UUID_1}`, method: 'PUT'},
+      {path: `/api/users/${CUID_1}`, method: 'GET'},
+      {path: `/api/users/${CUID_1}`, method: 'PUT'},
       {path:`/api/users/all`, method: 'GET'},
-      {path: `/api/users/${UUID_2}`, method: 'GET'},
+      {path: `/api/users/${CUID_2}`, method: 'GET'},
       {path: `/api/products/${UUID_1}`, method: 'PUT', },
-      {path: `/api/products/${UUID_1}`, method: 'POST', },
+      {path: `/api/cart/services/${CUID_1}`, method: 'POST', },
+      {path: `/api/cart/services/${CUID_1}`, method: 'POST', },
+
     ];
 
     const accessPromises = allowedPaths.map((testCase) =>

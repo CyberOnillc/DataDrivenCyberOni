@@ -19,11 +19,14 @@ describe('Testing blogs Api', () => {
         content: 'testcontent',
         description: 'test  description',
         date: new Date(),
-        featured:false,
+        featured: false,
         subTitle: 'preview',
+        
         author: {
             email: 'nehal.sk.99@gmail.com'
+
         },
+        publishDate: new Date(),
         tags: [
             { name: 'Tech' },
             { name: 'Mobile' },
