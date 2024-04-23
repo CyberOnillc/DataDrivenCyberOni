@@ -3,7 +3,6 @@ import slugify from "slugify";
 import seedRandom from 'seedrandom'
 import { Discount, ServiceCartItem } from "@prisma/client";
 import { DisplayServiceCartItemDTO } from "@/crud/DTOs";
-import { HTMLElement, parse } from 'node-html-parser';
 
 export interface HttpError extends Error {
   status: number;
@@ -250,25 +249,9 @@ export function calculateDiscountedPrice(total: number, discounts: Discount[]): 
 
 
 
-  // Fetch the HTML document
-  export const fetchHtml = async (url: string) => {
-    const response = await fetch(url);
-    return await response.text();
-  };
-
-// Parse HTML and extract pricing information
-export const extractPrices = (html: string) => {
-  const root = parse(html);
-  // table.inference-table:nth-child(1) > tbody:nth-child(2) > tr   // css query for table
-  const prices = root.querySelectorAll('table.inference-table:nth-child(1) > tbody:nth-child(2) > tr').map((tr: HTMLElement) => {
-    console.log(tr.textContent);
-    const cells = tr.querySelectorAll('td');
-    return {
-      provider: cells[0].innerText.trim(),
-      architecture: cells[1].innerText.trim(),
-      specs: {memory: cells[2].innerText.trim() , vCpu: cells[3].innerText.trim()},
-      price: {cost: cells[4].innerText.trim(), type: 'hourly'}
-    };
-  });
-  return prices;
+// Fetch the HTML document
+export const fetchHtml = async (url: string) => {
+  const response = await fetch(url);
+  return await response.text();
 };
+
