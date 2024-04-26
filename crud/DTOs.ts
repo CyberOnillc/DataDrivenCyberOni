@@ -15,7 +15,7 @@ import {
   SubService,
   Tag,
   User,
-} from "@prisma/client";
+} from "@prismaPricingModel/client";
 import { UserPersona } from "./casestudy";
 
 export type CreateBlogDTO = {
