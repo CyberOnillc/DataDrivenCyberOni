@@ -12,7 +12,7 @@ export async function fetchOpenAIPrices() {
 
 
         if (index === 1) {
-            const row = table.querySelectorAll('tr')[1].querySelectorAll('td')
+            const row = table.querySelectorAll('tr')[0].querySelectorAll('td')
             const rows = {
                 tool: 'Vision-gpt-4',
                 price: { input: `${row[1].innerText.trim()} /${row[0].innerText.trim()}`, type: 'per-token' }
@@ -70,11 +70,13 @@ export async function fetchOpenAIPrices() {
 
         }
         if (index === 8) {
+            let currentModel ="";
             const rows = table.querySelectorAll('tr').slice(1).map((tr: HTMLElement) => {
                 const cells = tr.querySelectorAll('td');
+                currentModel = cells[0].innerText? cells[0].innerText : currentModel
                 return {
                     type: "ImageModel",
-                    model: cells[0].innerText,
+                    model: cells[0].innerText? cells[0].innerText : currentModel,
                     price: { quality: cells[1].innerText.trim(), resolution: cells[2].innerText.trim(), usage: cells[3].innerText.trim(), type: 'per-image' }
                 };
             });
