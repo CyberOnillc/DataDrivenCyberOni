@@ -45,12 +45,12 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
       type: 'article',
       title: service?.title,
       description: service?.previewContent,
-      images: [service.image?.src as string, '/images/monster_5.jpg']
+      images: [service.image?.src as string]
 
     }
     metadata.twitter = {
       title: service?.title,
-      images: [service.image?.src as string, '/images/monster_5.jpg'],
+      images: [service.image?.src as string],
       description: service?.previewContent,
 
     }
@@ -138,7 +138,7 @@ async function Services({ params }: { params: { id: string } }) {
           <div className="container mx-auto my-5 flex flex-wrap gap-2 lg:gap-5 px-5"
           >            {service.CaseStudies?.map((caseStudy, index) => (
             <CaseStudyCard key={index}
-              images={caseStudy.images as CaseImage[]}
+              images={caseStudy.images  as unknown as CaseImage[]}
               id={caseStudy.id}
               title={caseStudy.title} />
           ))}

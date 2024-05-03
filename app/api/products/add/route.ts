@@ -1,7 +1,7 @@
-import { create, CreateProductDTO } from "@/crud/product";
+import { CreateProductDTO } from "@/crud/DTOs";
+import { create } from "@/crud/product";
 import apiHandler from "@/errorHandler";
 import prisma from "@/lib/prisma";
-import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 
 async function post(req: NextRequest) {

@@ -1,9 +1,10 @@
 import { Service, PrismaClient, Prisma, Image, Tag, SubService, ServiceDescription, FAQ, CaseStudy } from "@prisma/client";
 import { create as createTag, connectOrCreateObject as connectTags } from "./tags";
-import { CreateImageDTO, CreateTagDTO } from "./DTOs";
-import { create as createImage, connectOrCreateObject as connectImage } from "./images";
-import { CreateSubServiceDTO, create as createSubService, update as updateSubService } from "./subService";
+import { CreateImageDTO, CreateSubServiceDTO, CreateTagDTO } from "./DTOs";
+import { createObject as createImageObject } from "./images";
+import {  create as createSubService, update as updateSubService, updateSubServiceObject } from "./subService";
 import prisma from "@/lib/prisma";
+import { HttpError } from "@/lib/utils";
 
 
 export type CreateServiceDTO = {
@@ -56,7 +57,7 @@ async function create(service: CreateServiceDTO, prismaClient: PrismaClient) {
             skillsUsed: service.skillsUsed,
             htmlEmbed: service.htmlEmbed,
             image: service.image ? (service.image.id ? { connect: { id: service.image.id } } : { create: service.image }) : {},
-            tags: { connectOrCreate: connectTags(service.tags || []) },
+            tags:  connectTags(service.tags! , []) ,
             faqs: {
                 create: service.faqs ? service.faqs : []
             }
@@ -103,81 +104,74 @@ async function create(service: CreateServiceDTO, prismaClient: PrismaClient) {
 
 }
 
-async function update(serviceId: string, service: CreateServiceDTO, prismaClient: PrismaClient) {
+async function update(
+    serviceId: string,
+    service: CreateServiceDTO,
+    prismaClient: PrismaClient,
+  ) {
     const services = prismaClient.service;
-
+    const oldService = await services.findUnique({
+      where: { id: serviceId }, include: {
+        SubServices: true,
+        image: true,
+        ServiceDescription: {
+          include: {
+            image: true
+          }
+        },
+        faqs: true,
+        tags: true,
+  
+      }
+    })
+  
+    if (!oldService) throw HttpError(404, 'Service not found')
+    let image = await createImageObject(service.image);
+  
     // let currentService = await services.findUnique({ where: { id: serviceId } })
-    let updatedService = await services.update(
-        {
-            where: { id: serviceId },
-            data: {
-                title: service.title,
-                featured: service.featured,
-                previewContent: service.previewContent,
-                hourlyRate: service.hourlyRate,
-                valueBrought: service.valueBrought,
-                skillsUsed: service.skillsUsed,
-                htmlEmbed: service.htmlEmbed,
-                image: service.image ? { update: service.image } : {},
-                tags: { connectOrCreate: connectTags(service.tags || []) },
-
-
-            },
-            include: {
-                SubServices: {
-                    include: {
-                        image: true
-                    }
+    let updatedService = await services.update({
+      where: { id: serviceId },
+      data: {
+        title: service.title,
+        featured: service.featured,
+        previewContent: service.previewContent,
+        hourlyRate: service.hourlyRate,
+        valueBrought: service.valueBrought,
+        skillsUsed: service.skillsUsed,
+        htmlEmbed: service.htmlEmbed,
+        image:
+          image && image.id
+            ? {
+              update: {
+                where: {
+                  id: image.id,
                 },
-                image: true,
-                tags: true,
+                data: image,
+              },
             }
-        });
-    if (service.SubServices && service.SubServices?.length > 0) {
-
-        for (const subService of service.SubServices) {
-            if (subService.id) {
-                const newSubService = await updateSubService(subService.id, subService, updatedService.id, prismaClient);
-            }
-            else {
-                const newSubService = await createSubService(subService, updatedService.id, prismaClient);
-            }
-        }
-
-    }
-
-
-
-    if (service.ServiceDescription && service.ServiceDescription?.length > 0) {
-        for (let description of service.ServiceDescription) {
-
-            if (description.id) {
-
-
-            } else {
-                await prisma.serviceDescription.create(
-                    {
-                        data: {
-                            ...description,
-                            image: { connect: { id: description.image.id } },
-                            service: { connect: { id: updatedService.id } }
-                        }
-                    }
-
-                )
-
-            }
-
-
-
-        }
-    }
-
-
-    return updatedService
-
-
-}
+            : image && image?.id == null
+              ? { create: image }
+              : {},
+        tags: connectTags(service.tags || [], oldService.tags),
+        SubServices: await updateSubServiceObject(
+          service.SubServices as CreateSubServiceDTO[],
+          oldService?.SubServices as CreateSubServiceDTO[]
+        ),
+        ServiceDescription: await updateServiceDescriptionObject(
+          service.ServiceDescription,
+          oldService?.ServiceDescription as CreateServiceDescription[]
+        ),
+      },
+      include: {
+        SubServices: true,
+        image: true,
+        tags: true,
+        ServiceDescription: true,
+      },
+    });
+  
+    return updatedService;
+  }
 async function remove(serviceId: string, prismaClient: PrismaClient) {
     const services = prismaClient.service;
     const existingservice = await services.findUnique({ where: { id: serviceId } })
@@ -348,4 +342,76 @@ export async function getBySearchTerm(search: string, page: number, prisma: Pris
     return records;
 }
 
+async function updateServiceDescriptionObject(
+    descriptions: CreateServiceDescription[],
+    oldDescriptions: CreateServiceDescription[]
+  ) {
+    let createOrUpdateOrDelete: {
+      create: any[];
+      update: any[];
+      delete: any[];
+    } = {
+      create: [],
+      update: [],
+      delete: [],
+    };
+    for (const oldDescription of oldDescriptions) {
+      const toUpdate = descriptions.find(description => description.id === oldDescription.id);
+  
+      if (toUpdate) {
+        const image = await createImageObject(toUpdate.image);
+  
+        createOrUpdateOrDelete.update.push({
+          where: {
+            id: toUpdate.id,
+          },
+          data: {
+            title: toUpdate.title,
+            content: toUpdate.content,
+            imageOnLeft: toUpdate.imageOnLeft,
+            image:
+              image && image.id
+                ? {
+                  update: {
+                    where: {
+                      id: image.id,
+                    },
+                    data: image,
+                  },
+                }
+                : image && image?.id == null
+                  ? { create: image }
+                  : {},
+          },
+        });
+  
+  
+      } else {
+        createOrUpdateOrDelete.delete.push({ id: oldDescription.id })
+  
+      }
+  
+  
+  
+  
+    }
+  
+  
+    for (const description of descriptions) {
+  
+      if (!description.id) {
+        const image = await createImageObject(description.image);
+  
+        createOrUpdateOrDelete.create.push({
+          title: description.title,
+          content: description.content,
+          imageOnLeft: description.imageOnLeft,
+          image: image ? { create: image } : {},
+        });
+      }
+    }
+  
+    return createOrUpdateOrDelete;
+  }
+  
 export { create, update, remove, read, getAll }

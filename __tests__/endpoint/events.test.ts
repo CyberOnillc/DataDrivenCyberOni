@@ -21,7 +21,10 @@ describe('Testing events Api', () => {
         isVirtual: false,
         location: 'SF, CA',
         status:"UPCOMING",
-        image: {src: 'https://picsum.photos/200',name:'test image'},
+        image:[ {src: 'https://picsum.photos/200',name:'test image' }],
+        tags: [
+            
+        ]
        
     };
 

@@ -4,12 +4,14 @@ import { AlertCircle, Mail, X } from "lucide-react";
 import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import { LoadingCircle } from "../shared/icons";
 import Balancer from "react-wrap-balancer";
+import { useRouter, } from "next/navigation";
 
 function LeadForm() {
 
     const [display, setDisplay] = useState(false);
     const modal = useRef<HTMLDivElement>(null);
-
+    const router = useRouter();
+    const [loading, setLoading] = useState(false);
     const [showThanks, setShowThanks] = useState(false);
     const [showError, setShowError] = useState(false);
     const [showForm, setShowForm] = useState(true);
@@ -20,7 +22,14 @@ function LeadForm() {
 
     useEffect(() => {
         setIsClient(true)
-        window.localStorage.setItem('leadFormShown', 'false')
+        const today = new Date();
+        const seen = new Date(window.localStorage.getItem('leadFormDate') ?? "");
+        const filled = window.localStorage.getItem('leadFormFilled') === 'true' ? true : false
+
+        if ((today.getTime() - seen.getTime()) > (24 * 60 * 60 * 1000) && !filled) { // 24 hours * 60 minutes * 60 seconds * 1000 milliseconds
+            window.localStorage.setItem('leadFormShown', 'false');
+        }
+
 
     }, [])
 
@@ -50,12 +59,18 @@ function LeadForm() {
     }
 
     useEffect(() => {
+
+    }, [router]);
+
+    useEffect(() => {
         const shown = window.localStorage.getItem('leadFormShown') === 'true' ? true : false
+        const date = new Date(window.localStorage.getItem('leadFormDate') ?? "")
         const filled = window.localStorage.getItem('leadFormFilled') === 'true' ? true : false
 
         if (handleVisible?.isIntersecting && !shown && !filled) {
             setDisplay(true)
             window.localStorage.setItem('leadFormShown', 'true')
+            window.localStorage.setItem('leadFormDate', new Date().toString())
 
         }
 

@@ -1,23 +1,33 @@
 import {
   Blog,
+  BlogCategory,
   BlogComment,
   BlogLike,
   CaseStudy,
   Discount,
   EventStatus,
+  GptPrompt,
   Image,
   PricingModel,
+  ProductStatus,
+  Review,
   Role,
   Service,
   ServiceCart,
   ServiceCartItem,
   ServiceDescription,
   SubService,
+  Supplier,
   Tag,
   User,
 } from "@prisma/client";
 import { UserPersona } from "./casestudy";
 
+export type CreateCategory = {
+  id?: string;
+  name: string;  
+  children: {name:string, id?:string} []
+}
 export type CreateBlogDTO = {
   title: string;
   subTitle: string;
@@ -38,6 +48,7 @@ export type DisplayBlogDTO = Blog & {
   images: Image[];
   Comments: DisplayCommentDTO[];
   Likes: BlogLike[];
+  category?: BlogCategory
   _count: {
     Likes: number;
   };
@@ -145,12 +156,14 @@ export type CredentialAuthDTO = {
   email: string;
   password: string;
 };
+
 export type CreateEventDTO = {
   name: string;
   date: Date;
   location: string;
   description: string;
-  image?: CreateImageDTO;
+  image: CreateImageDTO[];
+  tags: CreateTagDTO[];
   eventLink: string;
   status: EventStatus;
   isVirtual: boolean;
@@ -237,4 +250,147 @@ export type CreateDiscountDTO = {
   name: string;
   value: number;
   expires?: Date;
+};
+
+
+export type CreateProductDTO = {
+  sku: string;
+  name: string;
+  status: ProductStatus;
+  ratings?: number | null;
+  inventory: number;
+  productBreakdown?: string | null;
+  shippingReturnPolicy: string;
+  description: string;
+  price: number;
+  profitMargin: number;
+  displayPrice: number;
+  category?: ProductCategory;
+  subcategory?: string;
+  tags: CreateTagDTO[];
+  images: CreateImageDTO[];
+  suppliers?: CreateSupplierDTO[] | Supplier[];
+  amazonProductId?: string;
+  aliExpressId?: string;
+};
+
+export type DisplayProductDTO = {
+  id: string;
+  sku: string;
+  name: string;
+  status: string;
+  ratings: number | null;
+  inventory: number;
+  productBreakdown: string | null;
+  shippingReturnPolicy: string;
+  description: string;
+  price: number;
+  profitMargin: number;
+  displayPrice: number;
+  category?: ProductCategory;
+  subcategory: string | null;
+  amazonProductId?: string;
+  cjDropShippingId?: string;
+};
+
+export type ProductCategory = {
+  id: string;
+  name: string;
+  children?: ProductCategory[];
+  parent? : ProductCategory | null;
+  parentId?: string | null;
+
+}
+
+
+
+export type CreateGptPromptDTO = {
+  id?: string;
+  description: string;
+  title: string;
+  prompt: string | null;
+  model: string | null;
+  category?: GptCategory;
+  temperature: number;
+  max_tokens: number;
+  top_p: number;
+  best_of: number;
+  frequency_penalty: number;
+  presence_penalty: number;
+  stop: string[]; // comma separaetd sequences
+  timesUsed: number;
+  timesIntegrated: number;
+  costPerToken: number;
+  profitMargin: number;
+  tags: CreateTagDTO[];
+  image: CreateImageDTO [];
+  botUrl?: string;
+  conversationStarters: GptConvoStarters[] | [],
+  seed: number,
+  startPhrase: string
+  sysCommands: GptSysCommands | {}
+  steps: GptSteps[] | [],
+  stream: boolean
+  toolChoice: string,
+  tools: {}
+  variables: {
+    title: string,
+    description: string
+  }[]
+
+};
+export type GptCategory = {
+  id?: string
+  name: string;
+  children?: GptCategory[],
+  parent?: {
+    id: string;
+  } | null;
+  parentId?: string
+}
+export type GptSteps = {
+  index: number,
+  command: string,
+  callTo: "@LLM" | number
+  priority: 'HIGH' | 'MEDIUM' | 'LOW',
+  context: string
+  goal: string,
+}
+
+export type CreateSupplierDTO = {
+  baseShippingPrice: number;
+  height: number;
+  width: number;
+  length: number;
+  weight: number;
+  supplierName: string;
+  supplierStatus?: string;
+  shippingWeight?: number;
+  listPrice?: number;
+  salePrice?: number;
+  availability?: string;
+  supplierWrittenComments?: string;
+  supplierUrl: string;
+  supplierEmail?: string;
+  supplierWhatsApp?: string;
+};
+
+export type GptConvoStarters = {
+  title: string;
+  description: string
+}
+
+export type GptSysCommands = {
+  [x: string]: {
+    priority: 'HIGH' | 'MEDIUM' | 'LOW',
+    context: string,
+    example: string
+  }
+}
+export type DisplayPrompt = GptPrompt & {
+  stop: string[];
+  reviews?: Review[];
+  image?: Image;
+  tags: Tag[];
+  tools: {}
 };

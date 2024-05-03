@@ -26,9 +26,6 @@ function BlogShare({href}: {href:string}) {
                     <Link href={`${urls.twitter}${href}`}>
                         <Twitter />
                     </Link>
-                    <Link href={`${urls.instagram}${href}`}>
-                        <Instagram />
-                    </Link>
                     <Link href={`${urls.linkedin}${href}`}>
                         <Linkedin />
                     </Link>
