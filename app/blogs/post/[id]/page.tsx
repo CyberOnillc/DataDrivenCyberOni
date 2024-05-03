@@ -1,6 +1,6 @@
 import { addView, getAll, read } from "@/crud/blog";
-import React, { ReactEventHandler, Suspense, useRef } from 'react'
-import parse from 'html-react-parser';
+import React, { ReactEventHandler, Suspense, useRef } from "react";
+import parse from "html-react-parser";
 import Image from "next/image";
 import prisma from "@/lib/prisma";
 import Link from "next/link";
@@ -18,136 +18,176 @@ import { Blog, BlogPosting, WithContext } from "schema-dts";
 import Script from "next/script";
 import { ImageResponse } from "next/server";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 type Props = {
-    params: { id: string }
-    searchParams: { [key: string]: string | string[] | undefined }
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  // read route params
+  const seoTitle = params.id;
+  const id = extractUUID(seoTitle);
+  const blog = (await read(id, prisma)) as DisplayBlogDTO;
+
+  // optionally access and extend (rather than replace) parent metadata
+  let metadata: Metadata = {};
+  let description = blog.description.slice(0, 250);
+  //console.log(blog);
+  if (blog) {
+    metadata.title = blog.title as string;
+    metadata.description = description;
+    metadata.openGraph = {
+      type: "article",
+      title: blog.title,
+      description: description,
+      images: [...blog.images.map((image) => image.src)],
+    };
+    metadata.twitter = {
+      title: blog.title,
+      description: description,
+      images: [...blog.images.map((image) => image.src)],
+    };
+    metadata.category = blog.tags.join(" ");
+    metadata.keywords = blog.tags?.map((tag) => tag.name);
+  }
+
+  return metadata;
 }
-
-
-
-export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-    // read route params
-    const seoTitle = params.id
-    const id = extractUUID(seoTitle)
-    const blog = await read(id, prisma) as DisplayBlogDTO;
-
-    // optionally access and extend (rather than replace) parent metadata
-    let metadata: Metadata = {};
-    let description = blog.description.slice(0, 250)
-    //console.log(blog);
-    if (blog) {
-        metadata.title = blog.title as string
-        metadata.description = description
-        metadata.openGraph = {
-            type: 'article',
-            title: blog.title,
-            description: description,
-            images: [... blog.images.map(image =>image.src), '/images/monster_5.jpg']
-
-        }
-        metadata.twitter = {
-            title: blog.title,
-            description: description,
-            images: [... blog.images.map(image =>image.src), '/images/monster_5.jpg']
-
-        }
-        metadata.category = blog.tags.join(" ")
-        metadata.keywords = blog.tags?.map(tag => tag.name)
-
-    }
-
-    return metadata
-}
-
 
 async function BlogPost({ params }: { params: { id: string } }) {
-    const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
 
-    const seoTitle = params.id
-    const id = extractUUID(seoTitle)
-    const blog = await getData(id, session?.user?.email ?? "");
+  const seoTitle = params.id;
+  const id = extractUUID(seoTitle);
+  const blog = await getData(id, session?.user?.email ?? "");
 
-    // console.log("Currect url", seoTitle, encodeURIComponent(seoUrl(blog.title, blog.id)));
-    if (!blog) redirect('/404');
+  // console.log("Currect url", seoTitle, encodeURIComponent(seoUrl(blog.title, blog.id)));
+  if (!blog) redirect("/404");
 
-    if (seoTitle !== seoUrl(blog.title, blog.id)) redirect('/404'); //redirec if link in not matching
+  if (seoTitle !== seoUrl(blog.title, blog.id)) redirect("/404"); //redirec if link in not matching
 
+  const cookieStore = cookies();
+  const theme =
+    (cookieStore.get("theme")?.value as string) === "dark" ? "dark" : "light";
 
-    const cookieStore = cookies();
-    const theme = cookieStore.get("theme")?.value as string === 'dark' ? 'dark' : "light";
-
-    const jsonLd: WithContext<BlogPosting> = {
-        "@context": 'https://schema.org',
-        "@type": 'BlogPosting',
-        "@id": id,
-        description: blog.description,
-        author: {
-            "@type": 'Person',
-            "@id": '',
-            name: blog.author.firstName ?? ''
-        },
-        name: blog.title,
-        image: {
-            "@type": 'ImageObject',
-            url: blog.images.length > 0 ? blog.images[0].src : ""
-
-        }
-    }
-    return (
-        <div className="realtive w-full dark:text-white h-full pb-10">
-            <Script
-                type="application/ld+json"
-                id='json-ld'
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
-            <div className="w-full ">
-                <div className="w-full bg-white dark:bg-gray-900 py-5">
-                    <div className="container mx-auto whitespace-pre-line break-words">
-                        <div className="m-4  text-xl lg:text-2xl font-bold">{blog.title}</div>
-                        <div className="flex flex-wrap container gap-1 m-4">
-                            {blog.tags.map((tag, index) => (<span key={index} className="p-1 px-2">#{tag.name}</span>))}
-                        </div>
-                        <div className="m-4 font-semibold text-sm">{blog.description}</div>
-                        <div className="m-4">by. {blog.author.firstName} {blog.author.lastName} </div>
-                    </div>
-                </div>
-                <div className="relative mx-auto flex flex-col  items-center my-10 xl:py-10  xl:px-10 px-1 py-5 min-h-screen container">
-                    <div className="max-w-full flex justify-center items-center">{blog.images[0] ? <Image priority={true} className="object-contain m-2 w-full h-[40vh] rounded-lg" src={blog.images[0].src} alt={stripFileExtension(blog.images[0].name || 'blog_image')} width={500} height={300}></Image> : <></>}</div>
-                    {<BlogContent href={`${process.env.NEXTAUTH_URL}/blogs/post/${seoTitle}`} content={blog.content} theme={theme} />}
-                    <BlogContainer href={`${process.env.NEXTAUTH_URL}/blogs/post/${seoTitle}`} liked={blog.Likes ? blog.Likes.length > 0 : false} blog={blog} session={session} />
-
-                </div>
-
-
-                <div className="w-full flex flex-col items-center justify-center gap-5">
-                    <Link href={`/blogs/author/${blog.author.id}?page=1`} className="flex justify-center items-center" >
-                        <div className="w-20 h-20 rounded-full overflow-hidden">
-                            {blog.author.image ? <Image src={blog.author.image.src} alt="Author Dp" height={50} width={50} className="object-fill h-full w-full" />
-                                :
-                                <div className="w-full h-full bg-orange-500 flex items-center justify-center text-center text-xl">{blog.author.firstName ? blog.author.firstName[0] : 'A'}</div>
-                            }
-                        </div>
-                    </Link>
-                    <div className="text-xl">
-                        {blog.author.firstName || blog.author.email}
-                    </div>
-                </div>
-                <CommentForm email={session?.user?.email as string} href={`${process.env.NEXTAUTH_URL}/blogs/post/${seoTitle}`} id={id} comments={blog.Comments} />
+  const jsonLd: WithContext<BlogPosting> = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": id,
+    description: blog.description,
+    author: {
+      "@type": "Person",
+      "@id": "",
+      name: blog.author.firstName ?? "",
+    },
+    name: blog.title,
+    image: {
+      "@type": "ImageObject",
+      url: blog.images.length > 0 ? blog.images[0].src : "",
+    },
+  };
+  return (
+    <div className="realtive h-full w-full pb-10 dark:text-white">
+      <Script
+        type="application/ld+json"
+        id="json-ld"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="w-full ">
+        <div className="w-full bg-white py-5 dark:bg-gray-900">
+          <div className="container mx-auto whitespace-pre-line break-words">
+            <div className="m-4  text-xl font-bold lg:text-2xl">
+              {blog.title}
             </div>
+            <div className="container m-4 flex flex-wrap gap-1">
+              {blog.tags.map((tag, index) => (
+                <span key={index} className="p-1 px-2">
+                  #{tag.name}
+                </span>
+              ))}
+            </div>
+            <div className="m-4 text-sm font-semibold">{blog.description}</div>
+            <div className="m-4">
+              by. {blog.author.firstName} {blog.author.lastName}{" "}
+            </div>
+          </div>
+        </div>
+        <div className="container relative mx-auto my-10  flex min-h-screen flex-col  items-center px-1 py-5  xl:px-10   xl:py-10">
+          <div className="flex w-full items-center justify-center px-[5rem]">
+            {blog.images[0] ? (
+              <Image
+                priority={true}
+                className="m-2  rounded-lg object-cover w-full h-auto max-h-[500px] xl:max-h-[600px] 2xl:max-h-[700px] 3xl:max-h-[800px]"
+                src={blog.images[0].src}
+                alt={stripFileExtension(blog.images[0].name || "blog_image")}
+                width={500}
+                height={300}
+              ></Image>
+            ) : (
+              <></>
+            )}
+          </div>
+          {
+            <BlogContent
+              href={`${process.env.NEXTAUTH_URL}/blogs/post/${seoTitle}`}
+              content={blog.content}
+              theme={theme}
+            />
+          }
+          <BlogContainer
+            href={`${process.env.NEXTAUTH_URL}/blogs/post/${seoTitle}`}
+            liked={blog.Likes ? blog.Likes.length > 0 : false}
+            blog={blog}
+            session={session}
+          />
         </div>
 
-    )
+        <div className="flex w-full flex-col items-center justify-center gap-5">
+          <Link
+            href={`/blogs/author/${blog.author.id}?page=1`}
+            className="flex items-center justify-center"
+          >
+            <div className="h-20 w-20 overflow-hidden rounded-full">
+              {blog.author.image ? (
+                <Image
+                  src={blog.author.image.src}
+                  alt="Author Dp"
+                  height={50}
+                  width={50}
+                  className="h-full w-full object-fill"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center bg-orange-500 text-center text-xl">
+                  {blog.author.firstName ? blog.author.firstName[0] : "A"}
+                </div>
+              )}
+            </div>
+          </Link>
+          <div className="text-xl">
+            {blog.author.firstName || blog.author.email}
+          </div>
+        </div>
+        <CommentForm
+          email={session?.user?.email as string}
+          href={`${process.env.NEXTAUTH_URL}/blogs/post/${seoTitle}`}
+          id={id}
+          comments={blog.Comments}
+        />
+      </div>
+    </div>
+  );
 }
-
 
 async function getData(id: string, userEmail?: string) {
-    const blog = await addView({ id, userEmail }, prisma)
-    // console.log(blog.title);
-    if (blog) return blog as DisplayBlogDTO
-    else redirect('/404')
-
+  const blog = await addView({ id, userEmail }, prisma);
+  // console.log(blog.title);
+  if (blog) return blog as DisplayBlogDTO;
+  else redirect("/404");
 }
 
-export default BlogPost
+export default BlogPost;

@@ -154,8 +154,8 @@ function PortfolioCarousel({ services }: { services: DisplayServiceDTO[] }) {
                                                         : caseStudy.title
                                                 }
                                                 image={`${caseStudy.images &&
-                                                    (caseStudy.images as CaseImage[])[0]
-                                                    ? (caseStudy.images as CaseImage[])[0].src
+                                                    (caseStudy.images as unknown  as CaseImage[])[0]
+                                                    ? (caseStudy.images as unknown as CaseImage[])[0].src
                                                     : `https://picsum.photos/200?random=1`
                                                     }`}
                                                 width={400}

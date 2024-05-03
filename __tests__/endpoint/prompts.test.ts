@@ -6,15 +6,25 @@ import {GET, DELETE, PUT} from '@/app/api/prompts/[id]/route'
 import {POST as addPromptHandler} from '@/app/api/prompts/add/route'
 import { createMocks } from 'node-mocks-http'
 import { describe, expect, test, it, beforeAll } from '@jest/globals';
-import { CreateImageDTO, CreateTagDTO } from "@/crud/DTOs";
-import { createGptPromptDTO } from "@/crud/prompt";
+import { CreateGptPromptDTO, CreateImageDTO, CreateTagDTO } from "@/crud/DTOs";
 import { GptPrompt } from "@prisma/client";
 import { NextRequest } from "next/server";
 
 
 describe('Testing Prompts Api', () => {
-    const mockPrompt: createGptPromptDTO = {
+    const mockPrompt: CreateGptPromptDTO = {
         description: 'Sample prompt for GPT',
+        title: 'Creative Prompt',
+        model: 'gpt-3.5-turbo',
+        seed: 1,
+        conversationStarters: [],
+        startPhrase: "start phrsase",
+        steps: [],
+        stream: false,
+        sysCommands: {},
+        toolChoice: '',
+        tools: [],
+        variables: [],        
         prompt: 'Generate creative text using GPT-3.5!',
         temperature: 0.7,
         max_tokens: 100,
@@ -22,12 +32,12 @@ describe('Testing Prompts Api', () => {
         best_of: 3,
         frequency_penalty: 0.5,
         presence_penalty: 0.3,
-        stop: 'stopword1,stopword2,stopword3',
+        stop: ['stopword1','stopword2','stopword3'],
         timesUsed: 5,
         timesIntegrated: 2,
         costPerToken: 0.01,
         profitMargin: 0.2, // 20%
-        image: { name: 'Prompt Image', src: 'https://picsum.photos/200' } as CreateImageDTO,
+        image: [{ name: 'Prompt Image', src: 'https://picsum.photos/200' }] ,
         tags: [
             { name: 'Tech' },
             { name: 'Mobile' },

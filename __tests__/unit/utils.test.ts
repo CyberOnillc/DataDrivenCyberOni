@@ -9,10 +9,10 @@ import { Discount, ServiceCartItem } from "@prisma/client";
 
 describe('CJshipping api tests', () => {
     const discounts: Discount[] = [
-        {expires: null , id: "discount-1",name: "test20", value: 23},
-        {expires: null , id: "discount-1",name: "test30", value: 33},
+        {expires: null , id: "discount-1",name: "test20", value: 23, updatedAt: new Date(), createdAt: new Date()},
+        {expires: null , id: "discount-1",name: "test30", value: 33, updatedAt: new Date(), createdAt: new Date()},
 
-        {expires: null , id: "discount-1",name: "test10", value: 10}
+        {expires: null , id: "discount-1",name: "test10", value: 10, updatedAt: new Date(), createdAt: new Date()}
 
     ]
     const mockSubServices:DisplaySubServiceDTO[]  = [ {
@@ -28,10 +28,12 @@ describe('CJshipping api tests', () => {
         overheadCost: 1000,
         complexity: 3,
         skillLevel: 'Advanced',
-        image: {id: "image-2", name: 'Subservice Image', src: 'https://picsum.photos/200' },
+        image: {id: "image-2", name: 'Subservice Image', src: 'https://picsum.photos/200' , createdAt: new Date(), updatedAt: new Date() },
         serviceId: "test-id",
         imageId: "image-2",
-        CaseStudies: []
+        CaseStudies: [],
+        updatedAt: new Date(),
+        
     } ,
     {
         id: '2',
@@ -46,10 +48,11 @@ describe('CJshipping api tests', () => {
         overheadCost: 1000,
         complexity: 3,
         skillLevel: 'Advanced',
-        image: {id: "image-2", name: 'Subservice Image', src: 'https://picsum.photos/200' },
+        image: {id: "image-2", name: 'Subservice Image', src: 'https://picsum.photos/200', createdAt: new Date(), updatedAt: new Date() },
         serviceId: "test-id",
         imageId: "image-2",
-        CaseStudies: []
+        CaseStudies: [],
+        updatedAt: new Date(),
     } ,
 
 
@@ -67,7 +70,7 @@ describe('CJshipping api tests', () => {
                 content: 'Our web development service includes...',
                 imageOnLeft: true,
                 serviceId: "test-id",
-                image: { id: "test", src: "https://test.com", name: "test-image" },
+                image: { id: "test", src: "https://test.com", name: "test-image", createdAt: new Date(), updatedAt: new Date() },
                 imageId: "image-1"
             },
         ],
@@ -75,7 +78,7 @@ describe('CJshipping api tests', () => {
         valueBrought: ['Responsive Design', 'User-Friendly Interfaces'],
         skillsUsed: ['HTML', 'CSS', 'JavaScript', 'React'],
         htmlEmbed: '<iframe src="https://example.com"></iframe>',
-        image: {id: "image-3", name: 'Service Cover Image', src: 'https://picsum.photos/200' },
+        image: {id: "image-3", name: 'Service Cover Image', src: 'https://picsum.photos/200' , createdAt: new Date(), updatedAt: new Date() },
         SubServices: mockSubServices,
         tags: [
             {id: "tag-1", name: 'Web Development' },
@@ -96,8 +99,9 @@ describe('CJshipping api tests', () => {
             service: mockService,
             id:"item-1",
             serviceCartId: "cart-1",
-            serviceId: "service-1"
-
+            serviceId: "service-1",
+            createdAt: new Date(),
+            updatedAt: new Date(),
         },
 
     ]

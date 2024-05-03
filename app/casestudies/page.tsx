@@ -22,7 +22,7 @@ async function CasestudyList() {
                 <div key={index} className={`w-full p-5 lg:h-96  lg:w-1/2`}>
                   <CaseStudyCard
                     id={casestudy.id}
-                    image={casestudy.images ? (casestudy.images as Image[])[0] : null}
+                    image={casestudy.images ? (casestudy.images as unknown as Image[])[0] : null}
                     previewContent={casestudy.preview}
                     title={casestudy.title}
                   />

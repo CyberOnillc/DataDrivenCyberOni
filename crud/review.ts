@@ -24,7 +24,7 @@ async function create(review: createReviewDTO, prismaClient: PrismaClient) {
         data: {
             name: review.name,
             image: { create: review.image },
-            tags: { connectOrCreate: connectOrCreateObject(review.tags || []) },
+            tags: connectOrCreateObject(review.tags!,[]),
             title: review.title,
             content: review.content,
             link: review.link,

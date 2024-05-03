@@ -73,7 +73,7 @@ async function Blogs() {
                     <div className="flex flex-wrap lg:w-1/2 lg:h-96 gap-3">
                         {data.popular.slice(1, 4).map((blog, index) => {
                             return <div key={index} className="p-4 lg:w-[45%] lg:h-1/2">
-                                <BlogCard id={blog.id} category={blog.tags[0] ? blog.tags[0].name : 'Uncategorised'} title={blog.title} key={index}></BlogCard>
+                                <BlogCard id={blog.id} category={blog.category ? blog.category.name : 'Uncategorised'} title={blog.title} key={index}></BlogCard>
                             </div>
                         })}
                     </div>
@@ -95,7 +95,7 @@ async function Blogs() {
                     <div className="flex flex-wrap h-full lg:w-1/2   lg:h-96">
                         {data.essential.slice(1, 4).map((blog, index) => {
                             return <div key={index} className="w-[45%] p-4 h-1/2">
-                                <BlogCard id={blog.id} category={blog.tags[0] ? blog.tags[0].name : 'Uncategorised'} title={blog.title} key={index}></BlogCard>
+                                <BlogCard id={blog.id} category={blog.category ? blog.category.name : 'Uncategorised'} title={blog.title} key={index}></BlogCard>
                             </div>
                         })}
                     </div>

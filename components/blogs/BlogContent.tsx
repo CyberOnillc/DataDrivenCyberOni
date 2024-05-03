@@ -1,24 +1,41 @@
-'use client'
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 
-import { getCookie, } from 'cookies-next';
+import { getCookie } from "cookies-next";
 import TextLoaders from "../loaders/TextLoaders";
 import { generateRandomArray, getRandomFromArray } from "@/lib/utils";
 
-import xss from "xss";
+function BlogContent({
+  content,
+  theme,
+  href,
+}: {
+  content: string;
+  theme: "dark" | "light";
+  href: string;
+}) {
+  const [loaded, setLoaded] = useState(false);
 
-function BlogContent({ content, theme, href }: { content: string, theme: 'dark' | 'light', href: string }) {
-
-    const [loaded, setLoaded] = useState(false);
-
-    const iframe = useRef<HTMLIFrameElement>(null)
-    const resizeScript = `<script id="resizeScript" >
+  const iframe = useRef<HTMLIFrameElement>(null);
+  const resizeScript = `<script id="resizeScript" >
+    document.documentElement.style.overflow= "hidden"
     const body= document.querySelector('body')
-    window.addEventListener('resize',()=> {
-        console.log("html resizeing");
-        window.parent.postMessage({ type:"resize",size: window.document.getElementsByTagName('html')[0].scrollHeight,src:'resize'});
-    })
+    const html = document.getElementsByTagName('html')[0];
+    let size = html.scrollHeight;
+    var observer = new  ResizeObserver(function(mutations) {
+        console.log('size changed!' , size , html.scrollHeight);
+        window.parent.postMessage({ type:"resize", size: html.scrollHeight, src:'resize'});
+        
+    });
+    observer.observe(html);
+
+
+
+    // window.addEventListener('resize',()=> {
+    //     console.log("html resizeing: " , window);
+    //     window.parent.postMessage({ type:"resize",size: window.document.getElementsByTagName('html')[0].scrollHeight,src:'resize'});
+    // })
     window.parent.postMessage({ type:"resize", size: window.document.getElementsByTagName('html')[0].scrollHeight, src:'initial'});
 
     console.log("iframe-origin" ,window.orgin, "sent m,essage");
@@ -40,11 +57,12 @@ function BlogContent({ content, theme, href }: { content: string, theme: 'dark' 
         } 
 
       })
+      
 
-      ${theme == 'dark' ? ' body.classList.add(\'dark\');' : ''}
+      ${theme == "dark" ? " body.classList.add('dark');" : ""}
 
-    </script>`
-    const fontScript = ` 
+    </script>`;
+  const fontScript = ` 
     <script id="FontScript" >
         const fonts = document.createElement('link');
         fonts.rel="stylesheet"
@@ -56,18 +74,22 @@ function BlogContent({ content, theme, href }: { content: string, theme: 'dark' 
             font-family: "Inter", sans-serif;
         }
         a {
-            color: pink;
-        }\`
+            color: #3b82f6;
+        }
+        a:visited { 
+            color: #4a044e;
+        }
+        \`
         document.head.appendChild(styles);
     </script>
-`
+`;
 
-
-    const themeScript = `
+  const themeScript = `
 
     <script id="themeScript" >
     const themeStyles = document.createElement('style');
     themeStyles.textContent=\`
+
     body {
         font-family: "Inter", sans-serif;
         color: black;
@@ -81,15 +103,18 @@ function BlogContent({ content, theme, href }: { content: string, theme: 'dark' 
     document.head.appendChild(themeStyles);
 
     </script>
-    `
-    const container = `
+    `;
+  const container = `
     
     <!DOCTYPE html>
         <html>
         <head>
-        <base href="${typeof window !== 'undefined' ? window.location.href : href}">      
+        <base href="${
+          typeof window !== "undefined" ? window.location.href : href
+        }">      
         ${themeScript}
         ${fontScript}
+        <script src=" https://cdn.jsdelivr.net/npm/resize-observer-polyfill@1.5.1/dist/ResizeObserver.min.js "></script>
         </head>
         <body id="tinymce" class="mce-content-body ">
         ${content}
@@ -98,48 +123,67 @@ function BlogContent({ content, theme, href }: { content: string, theme: 'dark' 
 
         </html>
 
-    `
-    useEffect(() => {
+    `;
+  useEffect(() => {
+    window.addEventListener("message", (event) => {
+      //console.log("iframe-message-recieved", window.origin, event.origin);
+      if (
+        iframe.current &&
+        event.data.type === "resize" &&
+        event.origin === window.origin
+      ) {
+        console.log("revievev resizer", event.data);
+        iframe.current.style.height = event.data.size.toString() + "px";
+        setLoaded(true);
+      }
+    });
+  }, []);
 
-        window.addEventListener("message", (event) => {
-            console.log("iframe-message-recieved", event.origin);
-            if (iframe.current && event.data.type === "resize" && event.origin ===window.origin) {
-                iframe.current.style.height = (event.data.size).toString() + "px";
-                if(event.data.src === 'resize') setLoaded(true)
-            }
-        });
-
-    }, []);
-
-    useEffect(() => {
-        iframe.current?.contentWindow?.location.reload();
-    }, []);
-
-    useEffect(() => {
-        window.addEventListener('theme', (event: CustomEventInit) => {
-            if (event.detail.theme === 'dark') {
-                // console.log("sending message to dark theme");
-                iframe.current?.contentWindow?.postMessage({ theme: 'dark', type: 'theme' }, window.origin)
-            }
-            else {
-                iframe.current?.contentWindow?.postMessage({ theme: 'light', type: 'theme' }, window.origin)
-
-            }
-        });
-    }, []);
-    return (<>
-        {<iframe ref={iframe} className={`w-full h-fit overflow-y-auto z-50  ${loaded ? 'opacity-100' : 'opacity-0'}`} sandbox="allow-scripts allow-same-origin" srcDoc={container}></iframe>}
-        {!loaded && <div className="w-fu h-full z-50  flex flex-wrap ">
-            {generateRandomArray(['w-64', 'w-80', 'w-96', 'w-72', 'w-52', 'w-full'], 30, content.slice(0, 30)).map((value, index) => {
-
-                return (
-                    <div key={index} className={`${value}`}>
-                        <TextLoaders></TextLoaders>
-                    </div>
-                )
-            })}
-        </div>}
-    </>);
+  useEffect(() => {
+    window.addEventListener("theme", (event: CustomEventInit) => {
+      if (event.detail.theme === "dark") {
+        // console.log("sending message to dark theme");
+        iframe.current?.contentWindow?.postMessage(
+          { theme: "dark", type: "theme" },
+          window.origin,
+        );
+      } else {
+        iframe.current?.contentWindow?.postMessage(
+          { theme: "light", type: "theme" },
+          window.origin,
+        );
+      }
+    });
+  }, []);
+  return (
+    <>
+      {
+        <iframe
+          ref={iframe}
+          className={`relative z-50 h-max min-h-max w-full lg:w-[48rem] overflow-hidden scrollbar-none lg:mx-auto  ${
+            loaded ? "opacity-100" : "opacity-0"
+          } lg:px-[2rem]`}
+          sandbox="allow-scripts allow-same-origin allow-top-navigation allow-top-navigation-by-user-activation"
+          srcDoc={container}
+        ></iframe>
+      }
+      {!loaded && (
+        <div className="z-50 flex h-full  w-full flex-wrap ">
+          {generateRandomArray(
+            ["w-64", "w-80", "w-96", "w-72", "w-52", "w-full"],
+            30,
+            content.slice(0, 30),
+          ).map((value, index) => {
+            return (
+              <div key={index} className={`${value}`}>
+                <TextLoaders></TextLoaders>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </>
+  );
 }
 
 export default BlogContent;

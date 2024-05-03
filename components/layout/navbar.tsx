@@ -35,7 +35,7 @@ export default function NavBar({ session, darkMode }: { session: Session | null,
         <div className=" flex items-center justify-between w-full text-black dark:text-white mx-5">
 
           <div className="relative">
-            <Link href="/" className="flex items-center font-display text-2xl w-fit peer/logo">
+            <Link onClick={() => setMobileMenuOpen(false)} href="/" className="flex items-center font-display text-2xl w-fit peer/logo">
               <Image
                 src="/images/logo.png"
                 alt="Precedent logo"

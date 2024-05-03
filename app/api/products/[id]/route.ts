@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
-import { CreateProductDTO, read, remove as removeProduct, update } from "@/crud/product";
+import {  read, remove as removeProduct, update } from "@/crud/product";
 import { NextRequest, NextResponse } from 'next/server'
 import apiHandler from "@/errorHandler";
+import { CreateProductDTO } from "@/crud/DTOs";
 
 
 export const { POST, DELETE, GET, PATCH, PUT } = apiHandler({ GET: get, PUT: put, DELETE: remove });

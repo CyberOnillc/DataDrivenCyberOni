@@ -28,7 +28,7 @@ const FloatingImageSection: React.FC<FloatingImageSectionProps> = ({
         section.imageOnLeft ? "lg:flex-row" : "lg:flex-row-reverse"
       }`}
     >
-      <div className="flex flex-1 items-center justify-center lg:w-1/3">
+      <div className="flex flex-1 items-center justify-center lg:w-1/3 gap-3">
         <div className="animate-float">
           <Image
           className="rounded-lg"

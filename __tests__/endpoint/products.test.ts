@@ -6,8 +6,7 @@ import {GET, DELETE, PUT} from '@/app/api/products/[id]/route'
 import {POST as addProductHandler} from '@/app/api/products/add/route'
 import { createMocks } from 'node-mocks-http'
 import { describe, expect, test, it, beforeAll } from '@jest/globals';
-import { CreateTagDTO } from "@/crud/DTOs";
-import { CreateProductDTO } from "@/crud/product";
+import { CreateProductDTO, CreateTagDTO } from "@/crud/DTOs";
 import { Product, ProductStatus } from "@prisma/client";
 import { CreateImageDTO } from "@/crud/DTOs";
 import { NextRequest } from 'next/server';
@@ -25,7 +24,6 @@ describe('Testing Products Api', () => {
         price: 49.99,
         profitMargin: 0.2, // 20%
         displayPrice: 59.99,
-        category: 'Electronics',
         subcategory: 'Smartphones',
         suppliers:[],
         tags: [

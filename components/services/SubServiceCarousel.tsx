@@ -244,7 +244,7 @@ function SubServiceCarousel({ subServices, session }: { subServices: DisplaySubS
                                             key={caseStudy.id}
                                             id={caseStudy.id}
                                             title={caseStudy.title}
-                                            images={caseStudy.images as CaseImage[]} />
+                                            images={caseStudy.images as unknown as CaseImage[]} />
                                     ))}
                                 </div>
                             </>
