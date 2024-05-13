@@ -18,6 +18,7 @@ import { WebVitals } from "@/components/WebVitals";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import LeadForm from "@/components/LeadForm";
 import FacebookPixel from "@/components/FbPixel";
+import { GOOGLE_TAG_MANAGER } from "@/lib/gtag";
 
 export const metadata: Metadata = {
   title: Owner.seo.metaTitle,
@@ -65,7 +66,7 @@ export default async function RootLayout({
 
       <Script
         strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TAG_MANAGER}`}
         async
       />
       <Script strategy="afterInteractive" id="google-tag-manager">
@@ -73,7 +74,7 @@ export default async function RootLayout({
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER}', {
+          gtag('config', '${GOOGLE_TAG_MANAGER}', {
             page_path: window.location.pathname,
           });
   `}
