@@ -16,6 +16,8 @@ import {
   ServiceCart,
   ServiceCartItem,
   ServiceDescription,
+  SoftwarePricing,
+  SoftwareProductStatus,
   SubService,
   Supplier,
   Tag,
@@ -394,3 +396,43 @@ export type DisplayPrompt = GptPrompt & {
   tags: Tag[];
   tools: {}
 };
+
+
+export type CreateSoftwareProductDTO = {
+  id?: string;
+  title: string;
+  subTitle: string;
+  description?: string;
+  images: CreateImageDTO[];
+  tags: CreateTagDTO[];
+  pricing: SoftwarePricing;
+  link?: string;
+  githubLink?: string;
+  blog?: { id: string, title:string };
+  status: SoftwareProductStatus;
+  category?: SoftwareProductCategory
+
+};
+
+export type SoftwareProductCategory = {
+  id: string;
+  name: string;
+  children?: SoftwareProductCategory[];
+  parent?: SoftwareProductCategory | null;
+  parentId?: string | null;
+}
+
+export type DisplaySoftwareProductDTO = {
+  id: string;
+  title: string;
+  subTitle: string;
+  description: string| null;
+  images: CreateImageDTO[];
+  tags: CreateTagDTO[];
+  pricing: SoftwarePricing;
+  link?: string | null;
+  githubLink?: string | null;
+  status: SoftwareProductStatus;
+  category?: SoftwareProductCategory | null;
+  blog?: { id: string }
+}

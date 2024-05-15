@@ -108,7 +108,7 @@ describe('CJshipping api tests', () => {
 
     it('should calculate total price of given cart based on pricing model', async () => {
         const price = calculateServiceCartTotal(cartItems, []);
-        console.log(price);
+        //console.log(price);
         expect(price).toBeGreaterThanOrEqual(0);
         // expect(price).toBe(8000)
 
@@ -116,7 +116,7 @@ describe('CJshipping api tests', () => {
 
     it('should calculate total price of given cart with discounts', async () => {
         const price = calculateServiceCartTotal(cartItems, [discounts[1]])
-        console.log(price);
+        //console.log(price);
         expect(price).toBeGreaterThanOrEqual(0);
         //expect(price).toBe(7200)
 

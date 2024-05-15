@@ -5,23 +5,39 @@ export const sfPro = localFont({
   src: "./SF-Pro-Display-Medium.otf",
   variable: "--font-sf",
 });
-
-export const inter = Inter({
+export const inter = localFont({
+  src: [
+    {
+      path: "./Inter/Inter-VariableFont_slnt,wght.ttf",
+    }
+  ],
   variable: "--font-inter",
-  subsets: ["latin"],
+});
+export const abel = localFont({
+  src: [{
+    path: "./Abel/Abel-Regular.ttf",
+  }],
+  variable: "--font-abel",
+});
+
+export const nunito = localFont({
+  src: [
+    {
+      path: "./Nunito/Nunito-VariableFont_wght.ttf",
+    }
+
+  ],
+  variable: "--font-nunito",
+});
+export const kyiv = localFont({
+  src: [
+    {
+      path: "./KyivTypeSans-VarGX.ttf",
+    }
+
+  ],
+  variable: "--font-kyiv",
 });
 
 
-export const abel = Abel({
-  variable: '--font-abel',
-  subsets: ['latin'],
-  style: ["normal"],
-  weight: ["400"]
-})
 
-export const nunito = Nunito({
-  variable: '--font-nunito',
-  weight: ["400"],
-  style: ["normal", 'italic'],
-  subsets: ['latin']
-})

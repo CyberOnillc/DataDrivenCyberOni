@@ -38,12 +38,12 @@ const ReviewForm = ({ category, name, contact }: { category: 'Product' | 'Servic
   const handleSubmit = async () => {
     if (feedback.rating < 4) {
       // Show comment box if rating is less than 4
-      console.log("submit");
+      // console.log("submit");
       const state = await submitReview(feedback)
       setFeedback(state)
     } else {
       // Submit the feedback here
-      console.log("Feedback submitted:", feedback);
+     // console.log("Feedback submitted:", feedback);
       // If you need to redirect to Google after submission
       window.location.href = "https://www.cybershoptech.com/leave_a_review";
     }

@@ -77,10 +77,7 @@ function ContactUs({ searchParams }: { searchParams: { name: string, email: stri
   const { executeRecaptcha, loaded } = useReCaptcha();
 
   const handleValueChange = (newValue: DateValueType) => {
-    console.log(
-      new Date(newValue?.startDate as string).toLocaleDateString(),
-      newValue?.startDate,
-    );
+   
     let date = newValue?.startDate
       ? new Date(newValue?.startDate as string).toLocaleDateString()
       : "";
@@ -141,14 +138,14 @@ function ContactUs({ searchParams }: { searchParams: { name: string, email: stri
     const { name, value } = event.target;
     if (name === "terms") {
       const { checked } = event.target as HTMLInputElement;
-      console.log(name, checked);
+      // console.log(name, checked);
 
       setFormData((prev) => ({ ...prev, terms: checked }));
     } else setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
   async function handleSubmit(formData: FormData) {
-    console.log("submitting");
+    // console.log("submitting");
     setLoading(true);
     const token = await executeRecaptcha("Contact_Submit");
 
@@ -191,16 +188,16 @@ function ContactUs({ searchParams }: { searchParams: { name: string, email: stri
     event.preventDefault();
     setValidation(true);
     form.current?.checkValidity();
-    console.log(inputValid);
+    // console.log(inputValid);
     if (inputValid) {
       setLoading(true);
-      console.log("valid input");
+      // console.log("valid input");
       form.current?.requestSubmit();
     }
   }
 
   useEffect(() => {
-    console.log("formsdata", formData.terms);
+    // console.log("formsdata", formData.terms);
     if (
       formData.companySize.match(/\d{1,}/) &&
       formData.companyName.match(/^[a-zA-Z\-0-9 ]{1,50}$/) &&

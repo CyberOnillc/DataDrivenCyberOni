@@ -49,7 +49,7 @@ export default function NavBar({ session, darkMode }: { session: Session | null,
           </div>
 
 
-          <div className={` ${!mobileMenuOpen ? 'hidden' : 'flex absolute right-0 top-full h-screen w-screen max-h-screen overflow-y-auto pt-10 animate-slide-left-fade text-center z-[100] bg-white dark:bg-black py-10'}   gap-10   h-screen w-full flex-col items-center justify-start xl:pt-0 xl:static xl:flex xl:flex-row xl:gap-5 xl:justify-center xl:h-full xl:bg-inherit xl:w-fit group`}>
+          <div className={` ${!mobileMenuOpen ? 'hidden' : 'flex absolute right-0 top-full h-screen w-screen max-h-screen overflow-y-auto pt-10 animate-slide-left-fade text-center z-[100] bg-white dark:bg-black py-10'}   gap-3   h-screen w-full flex-col items-center justify-start xl:pt-0 xl:static xl:flex xl:flex-row xl:gap-5 xl:justify-center xl:h-full xl:bg-inherit xl:w-fit group`}>
             <NavbarItem setMenuOpen={setMobileMenuOpen} menuOpen={!mobileMenuOpen} itemName="Solutions" menuOptions={menuData.solutionMenu} />
             <NavbarItem setMenuOpen={setMobileMenuOpen} menuOpen={!mobileMenuOpen} itemName="Products" menuOptions={menuData.productMenu} />
             <NavbarItem setMenuOpen={setMobileMenuOpen} menuOpen={!mobileMenuOpen} itemName="Resources" menuOptions={menuData.enterpriseMenu} />

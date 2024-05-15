@@ -18,7 +18,7 @@ export default function Footer() {
       <div className="grid grid-cols-1 grid-rows-[1fr_1] gap-3 p-4  lg:grid-cols-2 lg:grid-rows-1">
         <div className="flex flex-col justify-center items-center ">
           <div className="text-lg font-bold">Quick Links</div>
-          <Link className="hover:underline h-12 lg:h-auto" href={"/home"}>
+          <Link className="hover:underline h-12 lg:h-auto" href={"#"}>
             Home
           </Link>
           <Link className="hover:underline h-12 lg:h-auto" href={"/services"}>

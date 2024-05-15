@@ -14,6 +14,7 @@
       "@/components/*": [
         "components/*"
       ],
+      "@/ui/*" : ["components/ui/*"],
       "@/pages/*": [
         "pages/*"
       ],
@@ -51,7 +52,7 @@
     "global.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
+    ".next/types/**/*.ts", "next.config.js",
   ],
   "exclude": [
     "node_modules"

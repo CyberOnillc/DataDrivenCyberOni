@@ -25,7 +25,7 @@ const TermsModal: React.FC<TermsModalProps> = ({
   const handleToggle = () => {
     setOpen(!open);
     setTimeout(() => {
-      console.log(open);
+      // console.log(open);
     }, 300);
   };
 

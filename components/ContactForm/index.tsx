@@ -8,6 +8,8 @@ import GoogleCaptchaWrapper from "../GoogleCaptchaWrapper";
 import { useReCaptcha } from "next-recaptcha-v3";
 import Link from "next/link";
 import xss from "xss";
+import FloatingLabelInput from "../shared/FloatingLabelInput";
+import FloatingLabelTextArea from "../shared/FloatingLabelTextArea";
 
 function ContactForm(props: { onModal?: boolean, showModal?: boolean, setShowModal?: Dispatch<SetStateAction<boolean>> }) {
   return <>
@@ -57,7 +59,7 @@ function ContactFormLOC(props: { onModal?: boolean, showModal?: boolean, setShow
 
         return
       }
-      let res = await fetch(`/api/marketing/contact`, { method: "POST", body: JSON.stringify({ name, email, subject: selectedInterest, message, referral }) , credentials: 'include'})
+      let res = await fetch(`/api/marketing/contact`, { method: "POST", body: JSON.stringify({ name, email, subject: selectedInterest, message, referral }), credentials: 'include' })
       setShowForm(false)
       if (res.status === 200) {
         setShowThanks(true)
@@ -76,37 +78,29 @@ function ContactFormLOC(props: { onModal?: boolean, showModal?: boolean, setShow
   }
 
   return (
-    <div className="relative mx-auto h-full min-h-fit w-full rounded-lg bg-[#5001EAAD] p-6 shadow-lg">
-      {props.setShowModal && <button className="absolute top-4 right-4 hover:text-red-500 cursor-pointer" onClick={()=>props.setShowModal? props.setShowModal(false):{}}><X /></button>}
+    <div className="relative mx-auto h-full max-h-full overflow-hidden w-full rounded-lg dark:bg-[#4f01ea] p-6 shadow-lg">
+      {props.setShowModal && <button className="absolute top-4 right-4 hover:text-red-500 cursor-pointer" onClick={() => props.setShowModal ? props.setShowModal(false) : {}}><X /></button>}
       {showForm && (
         <form className="h-full w-full lg:p-6 " onSubmit={handleSubmit}>
           <h1 className="my-2 text-4xl">Contact us</h1>
           <div className="mb-4 w-full">
-            <label
-              htmlFor="name"
-              className="text-sm text-white transition-all duration-300 ease-in-out"
-            >
-              Name :
-            </label>
-            <input
+            <FloatingLabelInput
+              name="name"
               type="text"
+              placeholder="Name"
               id="name"
-              className="autofill-neutral w-full border-0  border-b-2 bg-transparent p-2 placeholder-white outline-none  ring-0 focus:border-[#A91079] focus:border-transparent focus:outline-none"
-              placeholder="Your Name"
+              className=""
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
           <div className="mb-4 w-full lg:w-auto">
-            <label htmlFor="email" className="mb-2 block">
-              Your Email:
-            </label>
-            <ClientInput
+            <FloatingLabelInput
               type="email"
               id="email"
-              className="autofill-neutral w-full  border-0 border-b-2 bg-transparent p-2 placeholder-white ring-0  focus:border-[#A91079] focus:border-transparent focus:outline-none"
-              placeholder="example@email.com"
+              className=""
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -131,26 +125,23 @@ function ContactFormLOC(props: { onModal?: boolean, showModal?: boolean, setShow
             </select>
           </div>
           <div className="mb-4 w-full lg:w-auto">
-            <label htmlFor="message" className="mb-2 block">
-              Message:
-            </label>
-            <textarea
+            <FloatingLabelTextArea
               id="message"
               rows={4}
-              className="foucs:ring-0 autofill-neutral  w-full border-0 border-b-2 bg-transparent p-2 placeholder-white focus:border-b-2 focus:border-none focus:border-[#A91079] focus:outline-none"
+              className=""
               placeholder="Your Message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
-            ></textarea>
+             />
           </div>
-          <div className="flex justify-center lg:justify-start gap-5 p-3">
+          <div className="flex justify-center lg:justify-start gap-2 p-2">
             <button
               type="submit"
-              className="flex items-center justify-center rounded-lg bg-[#A91079] px-8 py-4 text-white hover:bg-blue-900"
+              className="flex items-center gap-2 justify-center rounded-lg bg-[#A91079] px-2  text-white hover:bg-blue-900 text-base"
             >
-              <Send color="white" className="mx-2" />
-              <span className="mx-2">Send Message</span>
+              <Send color="white" className="h-6 w-6" />
+              <span className="">Send Message</span>
             </button>
             <Link onClick={hideModal} href={`/contact?name=${xss(name)}&email=${xss(email)}&message=${xss(message)}`} className="bg-gradient-to-b from-orange-400 to-orange-500 text-center text-white p-4 rounded-lg">
               Enterprise Contact

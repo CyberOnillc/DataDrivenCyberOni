@@ -34,7 +34,7 @@ function LikeButtonLOC({ email, blogId, likes, liked }: { email?: string, blogId
             setShowSignin(true);
             const searchParams = new URLSearchParams();
             if (typeof window !== 'undefined') searchParams.set('callbackUrl', window.location.href + '/')
-            console.log(searchParams.toString());
+            // console.log(searchParams.toString());
             router.push(`/api/auth/signin?${searchParams.toString()}`)
             return;
         }
@@ -48,7 +48,7 @@ function LikeButtonLOC({ email, blogId, likes, liked }: { email?: string, blogId
 
             ));
             const newState = await submitLike({ blogId: blogId, email: email, token: token, liked: state.liked, likes: state.likes });
-            console.log(newState);
+            // console.log(newState);
             setState(newState)
 
         }

@@ -3,6 +3,7 @@ import slugify from "slugify";
 import seedRandom from 'seedrandom'
 import { Discount, ServiceCartItem } from "@prisma/client";
 import { DisplayServiceCartItemDTO } from "@/crud/DTOs";
+
 export interface HttpError extends Error {
   status: number;
   message: string;

@@ -20,15 +20,19 @@ const CalendlyPopup: React.FC<CalendlyPopupProps> = ({
   const buttonClass =
     className || "rounded-full bg-white p-3 hover:shadow-md dark:bg-black";
 
+    useEffect(() => {
+      setRootElement(root.current);
+    }, []);
+
   return (
-    <div ref={root} className="App">
-      <PopupButton
+    <div ref={root} id="__next">
+      {root.current && <PopupButton
         LoadingSpinner={() => <LoadingDots />}
         url="https://calendly.com/cyberoni/quick-zoom-meeting"
-        rootElement={root.current as HTMLElement}
+        rootElement={rootElement as HTMLElement}
         text={CTAText}
         className={buttonClass}
-      />
+      />}
     </div>
   );
 };

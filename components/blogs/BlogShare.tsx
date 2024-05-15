@@ -2,9 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
-import xss from "xss";
 function BlogShare({href}: {href:string}) {
-    const [isClient, setisClient] = useState(false);
+    const [isClient, setIsClient] = useState(false);
     const urls = {
         facebook: 'https://www.facebook.com/sharer.php?u=',
         twitter: 'https://twitter.com/intent/tweet?url=',
@@ -12,13 +11,13 @@ function BlogShare({href}: {href:string}) {
         instagram: 'https://www.facebook.com/sharer.php?u=',
     }
 
-    useEffect(()=> {
+    // useEffect(()=> {
 
-       if ( typeof window !== "undefined" ) setisClient(true)
-    }, [])
+    //    // if ( typeof window !== "undefined" ) setIsClient(true)
+    // }, [])
     return (
         <>
-            {isClient?
+            {
                 <>
                     <Link href={`${urls.facebook}${href}`}>
                         <Facebook />
@@ -30,8 +29,7 @@ function BlogShare({href}: {href:string}) {
                         <Linkedin />
                     </Link>
                 </>
-                :
-                <></>
+               
             }
 
         </>);

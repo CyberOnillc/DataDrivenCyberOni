@@ -8,7 +8,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ImageResponse } from "next/server";
+import { ImageResponse } from "next/og";
 type Props = {
   params: { id: string };
   searchParams: { [key: string]: string | string[] | undefined };

@@ -1,4 +1,4 @@
-import { addView, getAll, read } from "@/crud/blog";
+import { addView, getAll, getSimilar, read } from "@/crud/blog";
 import React, { ReactEventHandler, Suspense, useRef } from "react";
 import parse from "html-react-parser";
 import Image from "next/image";
@@ -16,7 +16,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/nextAuthAdapter";
 import { Blog, BlogPosting, WithContext } from "schema-dts";
 import Script from "next/script";
-import { ImageResponse } from "next/server";
+import { ImageResponse } from "next/og";
+import SimilarBlogs from "@/components/blogs/SimilarBlogs";
 
 export const dynamic = "force-dynamic";
 
@@ -64,7 +65,7 @@ async function BlogPost({ params }: { params: { id: string } }) {
 
   const seoTitle = params.id;
   const id = extractUUID(seoTitle);
-  const blog = await getData(id, session?.user?.email ?? "");
+  const {blog, similar} = await getData(id, session?.user?.email ?? "");
 
   // console.log("Currect url", seoTitle, encodeURIComponent(seoUrl(blog.title, blog.id)));
   if (!blog) redirect("/404");
@@ -147,6 +148,10 @@ async function BlogPost({ params }: { params: { id: string } }) {
           />
         </div>
 
+        <section>
+          <SimilarBlogs blogs={similar} viewAllLink={`/blogs/similar?id=${id}`} />
+        </section>
+
         <div className="flex w-full flex-col items-center justify-center gap-5">
           <Link
             href={`/blogs/author/${blog.author.id}?page=1`}
@@ -184,9 +189,10 @@ async function BlogPost({ params }: { params: { id: string } }) {
 }
 
 async function getData(id: string, userEmail?: string) {
-  const blog = await addView({ id, userEmail }, prisma);
+  const blog = await addView({ id, userEmail }, prisma) as DisplayBlogDTO;
+  const similar = await getSimilar(id, prisma);
   // console.log(blog.title);
-  if (blog) return blog as DisplayBlogDTO;
+  if (blog) return { blog, similar };
   else redirect("/404");
 }
 

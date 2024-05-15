@@ -21,8 +21,8 @@ function Slide({ image, name, content, designation }: SlideProps) {
           ></Image>
         )}
       </div>
-      <div className="mx-10 flex flex-1 flex-col justify-center lg:h-60">
-        <div className="my-2 whitespace-pre-line text-center text-lg lg:text-left">
+      <div className="lg:mx-10 flex flex-1 flex-col justify-center lg:h-60">
+        <div className="my-2 whitespace-pre-line text-center lg:text-lg lg:text-left">
           {content}
         </div>
         <div className="my-2 text-center lg:text-left">{name}</div>

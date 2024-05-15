@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import Section, { SectionProps } from "@/components/home/HomeSection";
 import CompanyCarousel, { Company } from "@/components/home/CompanyCarousel";
@@ -7,43 +6,64 @@ import Slide from "@/components/home/Slide";
 import ContactForm from "@/components/ContactForm";
 import EmailLetter from "@/components/home/EmailLetter";
 import CalendlyPopup from "@/components/Calendly";
-import { companies, homeSections, sildes } from "@/data/homeData";
+import {
+  companies,
+  homeSections,
+  mainHero,
+  sildes,
+  softwareCategories,
+  softwareProducts,
+} from "@/data/homeData";
 import Link from "next/link";
-export default async function Home() {
+import HeroAnimation from "@/components/home/HeroAnimation";
+import { Suspense } from "react";
+import SoftwareCarousel from "@/components/SoftwareProducts/SoftwareCarousel";
+import { getAll } from "@/crud/softwareProduct";
+import prisma from "@/lib/prisma";
+import SoftwareSection from "@/components/home/SoftwareSection";
+import LoadingCarousel from "@/components/SoftwareProducts/LoadingCarousel";
+import CategoryChip from "@/components/SoftwareProducts/CategroryChip";
+export default function Home() {
   return (
     <>
       <div className="z-30 w-full dark:text-white lg:px-10">
-        <section className="container mx-auto flex flex-col text-center lg:text-left">
+        <section className="container relative mx-auto flex flex-col text-center lg:text-left">
           <div className="flex flex-col-reverse items-center justify-center lg:flex-row">
             <div className="flex flex-col items-center justify-center lg:items-start lg:justify-start ">
-              <div className="sm:text-3l m-3 w-fit bg-gradient-to-r from-[#00F0FF] via-[#5200FF]  to-[#FF2DF7] bg-clip-text text-5xl font-bold text-transparent">
-                With Ai
+              <div className="sm:text-3l m-3 w-fit bg-gradient-to-r from-[#00F0FF] via-[#5200FF]  to-[#FF2DF7] bg-clip-text text-5xl font-bold text-transparent ">
+                {mainHero.title}
               </div>
-              <div className="m-3 text-4xl font-bold">
-                Revolutionize Your Business with Data-Driven Mastery: Transform,
-                Automate, Personalize{" "}
-              </div>
-              <div className="m-3">
-                Embark on an Data-Infused Journey to Redefine Your Businesses
-                Success
-              </div>
-              <div className="mx-3 h-[1px] bg-gradient-purple w-full" />
+              <div className="m-3 text-4xl font-bold">{mainHero.subTitle}</div>
+              <div className="m-3 ">{mainHero.content}</div>
+              <div className="mx-3 h-[1px] w-full bg-gradient-purple" />
               <div className="flex justify-center lg:justify-start">
-                <div id="__next" className="m-3 bg-gradient-purple w-fit rounded-full py-[0.1rem] px-[0.1rem]">
-                  <CalendlyPopup CTAText="Schedule a consultation" className="bg-white dark:bg-gray-900 p-[0.4rem] rounded-full" />
+                <div className="m-3 w-fit rounded-full bg-gradient-purple px-[0.1rem] py-[0.1rem]"
+                >
+                  <CalendlyPopup
+                    CTAText="Schedule a consultation"
+                    className="rounded-full bg-white p-[0.4rem] dark:bg-gray-900"
+                  />
                 </div>
               </div>
             </div>
-            <Image
-              src={"/images/hero-1.png"}
-              alt={"hero-1"}
-              height={500}
-              width={500}
-              priority={true}
-              fetchPriority="high"
-            ></Image>
-          </div>
 
+            <HeroAnimation />
+          </div>
+          <section>
+            <div className="my-10 flex flex-col items-center justify-center gap-5 lg:flex-row">
+              <h2 className="font-kyiv text-3xl font-bold lg:w-[12em] lg:text-5xl">
+                Choose from over 10+ cutting—edge products
+              </h2>
+              <div className="flex flex-wrap gap-2 px-2">
+                {softwareCategories.map((category, index) => (
+                  <CategoryChip key={index} name={category.name}></CategoryChip>
+                ))}
+              </div>
+            </div>
+            <Suspense fallback={<LoadingCarousel />}>
+              <SoftwareSection />
+            </Suspense>
+          </section>
           <div className="container my-4">
             <CompanyCarousel cards={companies}></CompanyCarousel>
           </div>
@@ -65,7 +85,7 @@ export default async function Home() {
           );
         })}
 
-        <section className="container mx-auto text-center">
+        <section className="container mx-auto text-center text-white">
           <h2 className="  m-3 w-fit bg-gradient-purple bg-clip-text text-3xl font-bold text-transparent">
             Customer Reviews and Feedback
           </h2>
@@ -106,6 +126,7 @@ export default async function Home() {
             </Link>
           </div>
         </section>
+
         {homeSections.slice(2, 5).map((item, index) => {
           return (
             <div key={index}>
@@ -126,24 +147,19 @@ export default async function Home() {
           <EmailLetter></EmailLetter>
         </section>
 
-        <section className="conatiner flex flex-col-reverse lg:flex-row lg:px-10 justify-center items-center">
-          <div className="lg:w-1/2">
+        <section className="conatiner flex flex-col-reverse items-center justify-center xl:flex-row xl:px-10">
+          <div className="container w-full  xl:h-[35em] xl:w-1/2">
             <ContactForm></ContactForm>
           </div>
-          <div className="lg:w-1/2 h-[35rem] flex justify-center items-center">
-            <Image
-              className="flex-1 w-full h-full object-scale-down"
-              src={"/images/contact-form.png"}
-              alt="contact"
-              height={1280}
-              width={1200}
-            ></Image>
-          </div>
+          <Image
+            className="container flex  h-[20em] w-full items-center justify-center rounded-t-lg  object-cover md:h-[25em] xl:h-[32em] xl:w-1/2 xl:rounded-r-lg"
+            src={"/images/contact-forms/contact-image-1.png"}
+            alt="contact"
+            height={650}
+            width={450}
+          ></Image>
         </section>
       </div>
     </>
   );
 }
-
-
-

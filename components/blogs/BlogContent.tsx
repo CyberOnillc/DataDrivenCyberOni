@@ -33,33 +33,48 @@ function BlogContent({
 
 
     // window.addEventListener('resize',()=> {
-    //     console.log("html resizeing: " , window);
+    //     console.log("html resizing: " , window);
     //     window.parent.postMessage({ type:"resize",size: window.document.getElementsByTagName('html')[0].scrollHeight,src:'resize'});
     // })
     window.parent.postMessage({ type:"resize", size: window.document.getElementsByTagName('html')[0].scrollHeight, src:'initial'});
 
-    console.log("iframe-origin" ,window.orgin, "sent m,essage");
+    console.log("iframe-origin" ,window.origin, "sent message");
 
     const links = document.getElementsByTagName('a');
-      for (let link of links) {
-        link.target= "_top"
-      }
+    for (let link of links) {
+      link.target= "_top"
+    }
 
-      window.addEventListener('message', (event)=> {
+    const frames = document.getElementsByTagName('iframe');
+    for (let frame of frames) {
+      frame.style= ""
+    }
 
-        if(event.data.type === 'theme' && event.data.theme==='dark') {
-            body.classList.add('dark');
-        
-        } 
-        if(event.data.type === 'theme' && event.data.theme==='light') {
-            body.classList.remove('dark');
-        
-        } 
+    window.addEventListener('message', (event)=> {
 
-      })
+      if(event.data.type === 'theme' && event.data.theme==='dark') {
+          body.classList.add('dark');
       
+      } 
+      if(event.data.type === 'theme' && event.data.theme==='light') {
+          body.classList.remove('dark');
+      
+      } 
 
-      ${theme == "dark" ? " body.classList.add('dark');" : ""}
+    })
+
+    window.addEventListener('message', (event)=> {
+
+      if(event.data.type === 'size-query' ) {
+        window.parent.postMessage({ type:"resize", size: html.scrollHeight, src:'initial'});
+
+      
+      } 
+    
+
+    })      
+
+    ${theme == "dark" ? " body.classList.add('dark');" : ""}
 
     </script>`;
   const fontScript = ` 
@@ -99,6 +114,25 @@ function BlogContent({
         font-family: "Inter", sans-serif;
         color: white;
       }
+      img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    iframe {
+        max-width: 100%;
+        height: auto;
+        border-width: 0px;
+        border-radius: 5px;
+        aspect-ratio: 16 / 9;
+    }
+
+    @media (max-width: 768pxpx) {
+      iframe {
+          width: 95%; /* Slightly smaller width for very small devices */
+          padding: 0 2.5%; /* Adds some padding */
+      }
+  }
     \`
     document.head.appendChild(themeStyles);
 
@@ -109,12 +143,11 @@ function BlogContent({
     <!DOCTYPE html>
         <html>
         <head>
-        <base href="${
-          typeof window !== "undefined" ? window.location.href : href
-        }">      
+        <base href="${typeof window !== "undefined" ? window.location.href : href
+    }">      
         ${themeScript}
         ${fontScript}
-        <script src=" https://cdn.jsdelivr.net/npm/resize-observer-polyfill@1.5.1/dist/ResizeObserver.min.js "></script>
+        <script src="https://cdn.jsdelivr.net/npm/resize-observer-polyfill@1.5.1/dist/ResizeObserver.min.js"></script>
         </head>
         <body id="tinymce" class="mce-content-body ">
         ${content}
@@ -132,14 +165,11 @@ function BlogContent({
         event.data.type === "resize" &&
         event.origin === window.origin
       ) {
-        console.log("revievev resizer", event.data);
-        iframe.current.style.height = event.data.size.toString() + "px";
+        console.log("event resizer", event.data);
+        iframe.current.style.height = `${event.data.size.toString()}px`;
         setLoaded(true);
       }
     });
-  }, []);
-
-  useEffect(() => {
     window.addEventListener("theme", (event: CustomEventInit) => {
       if (event.detail.theme === "dark") {
         // console.log("sending message to dark theme");
@@ -154,21 +184,30 @@ function BlogContent({
         );
       }
     });
+
+
+    if (iframe.current) iframe.current?.contentWindow?.postMessage(
+      { type: "size-query" },
+      window.origin,
+    );
+
+
   }, []);
+
+
   return (
     <>
       {
         <iframe
           ref={iframe}
-          className={`relative z-50 h-max min-h-max w-full lg:w-[48rem] overflow-hidden scrollbar-none lg:mx-auto  ${
-            loaded ? "opacity-100" : "opacity-0"
-          } lg:px-[2rem]`}
+          className={`relative z-50 h-max min-h-max w-full lg:w-[48rem] overflow-hidden scrollbar-none lg:mx-auto  ${loaded ? "opacity-100" : "opacity-0"
+            } lg:px-[2rem]`}
           sandbox="allow-scripts allow-same-origin allow-top-navigation allow-top-navigation-by-user-activation"
           srcDoc={container}
         ></iframe>
       }
       {!loaded && (
-        <div className="z-50 flex h-full  w-full flex-wrap ">
+        <div className="z-50 flex h-full  w-full lg:w-[48rem] flex-wrap ">
           {generateRandomArray(
             ["w-64", "w-80", "w-96", "w-72", "w-52", "w-full"],
             30,
