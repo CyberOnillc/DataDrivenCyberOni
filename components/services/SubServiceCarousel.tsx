@@ -35,6 +35,7 @@ import Loading from "../Loading";
 import Link from "next/link";
 import CaseStudyCard from "./CaseStudyCard";
 import { LoadingDots } from "../shared/icons";
+import { googleEvent } from "@/lib/gtag";
 
 export type SubServiceProps = {
   title: string;
@@ -133,6 +134,7 @@ function SubServiceCarousel({
       if (existing) {
         updateCart(current);
       } else {
+        googleEvent("add_to_cart", {test: "test"});
         addItemtoCart(current);
       }
     } else {
