@@ -134,9 +134,11 @@ function SubServiceCarousel({
       if (existing) {
         updateCart(current);
       } else {
-        googleEvent("add_to_cart", {test: "test"});
         addItemtoCart(current);
       }
+
+      googleEvent("add_to_cart", {test: "test"});
+
     } else {
       const searchParams = new URLSearchParams();
       if (typeof window !== "undefined")
