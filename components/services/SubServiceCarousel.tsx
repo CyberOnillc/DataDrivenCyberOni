@@ -126,8 +126,12 @@ function SubServiceCarousel({
       let current = [];
       if (!checkSubserviceAdded(subService)) {
         current = [...currentItems, subService];
+        googleEvent("add_to_cart", {test: "test"});
+
       } else {
         current = currentItems.filter((item) => item.id !== subService.id);
+        googleEvent("remove_from_cart", {test: "test"});
+
       }
       setCurrentItems(current);
 
@@ -135,9 +139,9 @@ function SubServiceCarousel({
         updateCart(current);
       } else {
         addItemtoCart(current);
+
       }
 
-      googleEvent("add_to_cart", {test: "test"});
 
     } else {
       const searchParams = new URLSearchParams();
