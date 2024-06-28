@@ -13,3 +13,4 @@ async function get(req: NextRequest, { params }: { params: { name: string } }) {
     else return NextResponse.json({ message: "not found" }, { status: 404 });
 
 }
+

@@ -15,3 +15,26 @@ async function post(req: Request) {
 }
 
 export const { POST, DELETE, GET, PATCH, PUT } = apiHandler({ POST: post });
+
+
+
+/**
+ * @swagger
+ *
+ * /api/softwares/add:
+ *   post:
+ *     summary: Create a new software product
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CreateSoftwareProductDTO'
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/CreateSoftwareProductDTO'
+ */

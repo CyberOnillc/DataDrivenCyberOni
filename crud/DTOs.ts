@@ -10,6 +10,8 @@ import {
   Image,
   PricingModel,
   ProductStatus,
+  ReferralPriority,
+  ReferralType,
   Review,
   Role,
   Service,
@@ -23,7 +25,6 @@ import {
   Tag,
   User,
 } from "@prisma/client";
-import { UserPersona } from "./casestudy";
 
 export type CreateCategory = {
   id?: string;
@@ -233,7 +234,7 @@ export type DisplayServiceCartItemDTO = ServiceCartItem & {
     | null;
   addons: DisplaySubServiceDTO[];
 };
-export type CreateCaseStudy = {
+export type CreateCaseStudyDTO = {
   id?: string;
   title: string;
   serviceId?: string | null;
@@ -430,17 +431,39 @@ export type SoftwareProductCategory = {
   parentId?: string | null;
 }
 
-export type DisplaySoftwareProductDTO = {
-  id: string;
-  title: string;
-  subTitle: string;
-  description: string| null;
-  images: CreateImageDTO[];
-  tags: CreateTagDTO[];
-  pricing: SoftwarePricing;
-  link?: string | null;
-  githubLink?: string | null;
-  status: SoftwareProductStatus;
-  category?: SoftwareProductCategory | null;
-  blog?: { id: string }
-}
+export type UserPersona = {
+  bio: string;
+  name: string;
+  gender: string;
+  age: number;
+  goals: string[];
+  painPoints: string[];
+  image?: CreateImageDTO;
+};
+
+
+export type CreateReferralDTO = {
+  prefix: string | null;
+  type: ReferralType;
+  campaignId: string;
+  expires: Date | null;
+  description: string;
+  priority: ReferralPriority;
+  link: string;
+  fallback: string;
+  redirect: string;
+  click: number;
+  utmProps:
+  | {
+    utm_medium: string;
+    utm_campaign: string;
+    utm_source: string;
+    utm_segment: string;
+    utm_product_category: string;
+    utm_communication_theme: string;
+    utm_ad_type: string;
+    utm_funnel_location: string;
+    utm_earned_or_paid: "earned" | "paid";
+  }
+  | {};
+};

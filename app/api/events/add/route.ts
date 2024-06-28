@@ -15,3 +15,57 @@ export async function POST(req: Request) {
 
 
 }
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     CreateEventDTO:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *         date:
+ *           type: string
+ *           format: date-time
+ *         location:
+ *           type: string
+ *         description:
+ *           type: string
+ *         image:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/CreateImageDTO'
+ *         tags:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/CreateTagDTO'
+ *         eventLink:
+ *           type: string
+ *         status:
+ *           type: string
+ *           enum:
+ *             - UPCOMING
+ *             - CANCELLED
+ *             - COMPLETED
+ *         isVirtual:
+ *           type: boolean
+ *
+ * /api/events/add:
+ *   post:
+ *     summary: Create a new event
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CreateEventDTO'
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/CreateEventDTO'
+ */

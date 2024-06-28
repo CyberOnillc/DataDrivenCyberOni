@@ -1,18 +1,7 @@
 import { PrismaClient, Referral, ReferralPriority, ReferralType } from "@prisma/client";
+import { CreateReferralDTO } from "./DTOs";
 
-export type CreateReferralDTO = {
-    prefix: string | null;
-    username: string | null;
-    type: ReferralType;
-    campaignId: string;
-    expires: Date;
-    description: string;
-    priority: ReferralPriority;
-    link: string;
-    fallback: string;
-    redirect: string
-    click: number
-}
+
 
 
 export async function create(referral: CreateReferralDTO, prisma: PrismaClient) {
