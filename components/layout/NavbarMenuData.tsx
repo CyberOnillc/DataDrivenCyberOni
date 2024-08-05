@@ -24,7 +24,7 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
         }
 
         async function fetchBlogs() {
-            const res = await fetch('/api/blogs/home')
+            const res = await fetch('/api/blogs/home',)
             // console.log(res.status);
             if(res.status !== 200) return [];
             const { data } = await res.json()

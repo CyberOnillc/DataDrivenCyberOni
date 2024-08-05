@@ -5,9 +5,9 @@ import apiHandler from "@/errorHandler";
 
 const get = async () => {
     const featured = await getFeatured(prisma);
-    const {recent} = await getRecent(1, prisma);
-    const {popular} = await getPopular(1, prisma);
-    const {essential} = await getEssential(1, prisma);
+    const { recent } = await getRecent(1, prisma);
+    const { popular } = await getPopular(1, prisma);
+    const { essential } = await getEssential(1, prisma);
     return NextResponse.json({ message: "found", data: { featured, recent, popular, essential } })
 
 }
