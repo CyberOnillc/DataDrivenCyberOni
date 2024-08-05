@@ -142,7 +142,7 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
                 <>
                     <div>
                         <div>
-                            <div className="dark:gray-200 text-gray-500 my-2">Trending Blogs</div>
+                            <div className="dark:gray-200 text-gray-500 my-2">Our Latest Blogs</div>
                             <Image
                                 src={"/images/dash.png"}
                                 alt="dash"
