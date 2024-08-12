@@ -103,7 +103,7 @@ export type DisplayServiceDTO = Service & {
 };
 export type DisplaySubServiceDTO = SubService & {
   image?: Image | null;
-  CaseStudies: CaseStudy[];
+  CaseStudies: (CaseStudy & { images: Image[] }) [];
 };
 export type CreateSubServiceDTO = {
   id?: string;
@@ -245,7 +245,7 @@ export type CreateCaseStudyDTO = {
   id?: string;
   title: string;
   serviceId?: string | null;
-  subServices: { id: string }[];
+  subServices?: { id: string }[];
   preview: string;
   problemStatement: {
     title: string;
@@ -289,6 +289,8 @@ export type CreateCaseStudyDTO = {
   userPersonas: UserPersona[];
   competitorAnalysis: { title: string; analysis: string };
 };
+
+
 
 
 export type DisplayCaseStudy = CaseStudy & {

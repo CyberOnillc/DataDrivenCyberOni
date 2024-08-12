@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { seoUrl } from "@/lib/utils";
 import ImageWithTextOverlay from "../shared/ImageWithTextOverlay";
+import { CreateCaseStudyDTO } from "@/crud/DTOs";
 function PortfolioCarousel({ services }: { services: DisplayServiceDTO[] }) {
     const gridContainer = useRef<HTMLDivElement | null>(null);
     const serviceContainer = useRef<HTMLDivElement | null>(null);
@@ -130,11 +131,11 @@ function PortfolioCarousel({ services }: { services: DisplayServiceDTO[] }) {
                         className="flex w-full max-w-full  items-center justify-start gap-2 overflow-x-auto scrollbar-none  lg:grid  lg:grid-cols-4 lg:grid-rows-[25rem_1fr_1fr_1fr]"
                     >
                         {currentGrid.length > 0 ? (
-                            currentGrid?.map((caseStudy, index) => {
+                            currentGrid?.map((caseStudy: CaseStudy & { images: CaseImage[] }, index) => {
                                 return (
                                     <div
                                         key={index}
-                                        className={` w-1/2 h-60  flex-shrink-0 overflow-hidden rounded-lg lg:aspect-auto lg:h-full lg:w-full`}
+                                        className={` h-60 w-1/2  flex-shrink-0 overflow-hidden rounded-lg lg:aspect-auto lg:h-full lg:w-full`}
                                     >
                                         <div className="relative h-full w-full  overflow-hidden rounded-lg ">
                                             <ImageWithTextOverlay
@@ -142,22 +143,27 @@ function PortfolioCarousel({ services }: { services: DisplayServiceDTO[] }) {
                                                     <ReadMoreModal
                                                         link={`/casestudies/${seoUrl(
                                                             caseStudy.title,
-                                                            caseStudy.id,
+                                                            caseStudy.id as string,
                                                         )}`}
                                                         heading={caseStudy.title}
-                                                        points={caseStudy.userProblems as string[]}
+                                                        points={[
+                                                            (
+                                                                caseStudy.userProblems as {
+                                                                    problems: string;
+                                                                }
+                                                            )?.problems ?? "",
+                                                        ]}
                                                     />
                                                 }
-                                                title={
-                                                    caseStudy.userProblems &&
-                                                        (caseStudy.userProblems as string[])[0]
-                                                        ? (caseStudy.userProblems as string[])[0]
-                                                        : caseStudy.title
-                                                }
+                                                title={caseStudy.title}
                                                 image={`${caseStudy.images &&
-                                                    (caseStudy.images as unknown as CaseImage[])[0]
-                                                    ? (caseStudy.images as unknown as CaseImage[])[0].src
-                                                    : `https://picsum.photos/200?random=1`
+                                                        (
+                                                            caseStudy.images as unknown as CaseImage[]
+                                                        )[0]
+                                                        ? (
+                                                            caseStudy.images as unknown as CaseImage[]
+                                                        )[0].src
+                                                        : `https://picsum.photos/200?random=1`
                                                     }`}
                                                 width={400}
                                                 height={400}
