@@ -23,7 +23,6 @@ import {
   Tag,
   User,
 } from "@prisma/client";
-import { UserPersona } from "./casestudy";
 
 export type CreateCategory = {
   id?: string;
@@ -233,28 +232,69 @@ export type DisplayServiceCartItemDTO = ServiceCartItem & {
     | null;
   addons: DisplaySubServiceDTO[];
 };
-export type CreateCaseStudy = {
+export type UserPersona = {
+  bio: string;
+  name: string;
+  gender: string;
+  age: number;
+  goals: string[];
+  painPoints: string[];
+  image?: Image;
+}
+export type CreateCaseStudyDTO = {
   id?: string;
   title: string;
   serviceId?: string | null;
   subServices: { id: string }[];
   preview: string;
-  problemStatement: string;
-  userProblems: string[]; //comma seaprated
-  possibleSolutions: string[]; //comma seaprated
-  goals: string[]; //comma seaprated
+  problemStatement: {
+    title: string;
+    statement: string;
+  };
+  primaryResearch: {
+    title : string;
+    research: string;
+  };
+  userProblems: {
+    title: string;
+    problems: string
+  },
+  possibleSolutions: {
+    title: string;
+    solution: string;
+  };
+  goals: {
+    title: string;
+    goals: string;
+  }; //comma seaprated
   images: CreateImageDTO[];
-  uniqueFeatures: string;
-  userResearch: string;
-  keyLearning: string;
+  uniqueFeatures: {
+    title: string;
+    features: string[];
+  };
+  results: {
+    image?: CreateImageDTO;
+    title: string;
+    description: string;
+  };
+  userResearch: {
+    title: string;
+    research: string;
+  };
+  keyLearning: {
+    title: string;
+    learning: string;
+    image?: CreateImageDTO;
+  };
   userPersonas: UserPersona[];
-  competitiveAnalysis: CreateImageDTO[];
-  wireFrames?: CreateImageDTO[];
-  hifiDesign?: CreateImageDTO[];
-  userFlow?: CreateImageDTO[];
-  architecture?: CreateImageDTO[];
+  competitorAnalysis: { title: string; analysis: string };
 };
 
+
+export type DisplayCaseStudy = CaseStudy & {
+  images: Image[];
+  
+}
 export type CreateDiscountDTO = {
   id?: string;
   name: string;
