@@ -78,7 +78,7 @@ function ContactFormLOC(props: { onModal?: boolean, showModal?: boolean, setShow
   }
 
   return (
-    <div className="relative mx-auto h-full max-h-full overflow-hidden w-full rounded-lg dark:bg-[#4f01ea] p-6 shadow-lg">
+    <div className="relative mx-auto h-full max-h-full overflow-hidden w-full rounded-lg bg-white dark:bg-gray-900 p-6 shadow-lg text-black dark:text-white" >
       {props.setShowModal && <button className="absolute top-4 right-4 hover:text-red-500 cursor-pointer" onClick={() => props.setShowModal ? props.setShowModal(false) : {}}><X /></button>}
       {showForm && (
         <form className="h-full w-full lg:p-6 " onSubmit={handleSubmit}>
@@ -118,7 +118,7 @@ function ContactFormLOC(props: { onModal?: boolean, showModal?: boolean, setShow
               required
             >
               {referralOptions.map((option, index) => (
-                <option className="bg-white dark:bg-slate-950 text-white" key={index} value={option} >
+                <option className="bg-white dark:bg-slate-950 dark:text-white" key={index} value={option} >
                   {option}
                 </option>
               ))}

@@ -73,7 +73,7 @@ function LoginForm() {
               required
             />
             <label
-              className="absolute left-3 top-0 mb-2 block -translate-y-3 rounded-full px-1 text-sm  font-bold text-gray-500  backdrop-blur-sm transition-all peer-placeholder-shown:translate-y-3 peer-placeholder-shown:bg-white/50 peer-focus:-translate-y-3  peer-focus:text-blue-500   dark:bg-slate-900 dark:text-gray-50 dark:backdrop-blur-sm peer-placeholder-shown:dark:bg-slate-900"
+              className="absolute left-3 top-0 mb-2 block -translate-y-3 rounded-full px-1 text-sm  font-bold text-gray-500  backdrop-blur-sm transition-all peer-placeholder-shown:translate-y-3 peer-placeholder-shown:bg-white/80 peer-focus:-translate-y-3  peer-focus:text-blue-500   dark:bg-slate-900 dark:text-gray-50 dark:backdrop-blur-sm peer-placeholder-shown:dark:bg-slate-900"
               htmlFor="password"
             >
               Password
