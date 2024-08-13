@@ -71,11 +71,11 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
                   ? caseStudy.images[0].src
                   : "/placeholder.svg"
               }
-              blurDataURL="/placeholder.svg"
               width="550"
               height="550"
               alt="Hero"
               placeholder="blur"
+              blurDataURL="/placeholder.svg"
               className="mx-auto aspect-video overflow-hidden rounded-xl object-bottom sm:w-full lg:order-last lg:aspect-square"
             />
           </div>
@@ -100,10 +100,11 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
                 The Solution
               </div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                {caseStudy.possibleSolutions?.title ?? "Cyber Shop Product to the Rescue"}
+                {caseStudy.possibleSolutions?.title ??
+                  "Cyber Shop Product to the Rescue"}
               </h2>
               <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {caseStudy.possibleSolutions?.solution  ?? "Solution Statement"}
+                {caseStudy.possibleSolutions?.solution ?? "Solution Statement"}
               </p>
             </div>
           </div>
@@ -117,7 +118,8 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
                 Key Features
               </div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                {caseStudy.uniqueFeatures?.title ?? "Transforming Business Processes"}
+                {caseStudy.uniqueFeatures?.title ??
+                  "Transforming Business Processes"}
               </h2>
               <ul className="grid gap-2 py-4">
                 {caseStudy.uniqueFeatures?.features.map((feature, index) => (
@@ -126,7 +128,6 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
                     {feature}
                   </li>
                 )) ?? "No Key Features"}
-                
               </ul>
             </div>
           </div>
@@ -164,42 +165,31 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
                 Results
               </div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                {caseStudy.results?.title ?? "Measurable Impact" }
+                {caseStudy.results?.title ?? "Measurable Impact"}
               </h2>
               <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 {caseStudy.results?.description ?? ""}
               </p>
               <div className="grid grid-cols-2 gap-4 py-6">
-                <Card className="bg-background p-4 shadow-sm">
-                  <CardHeader>
-                    <CardTitle>30%</CardTitle>
-                    <CardDescription>
-                      Reduction in Operational Costs
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
-                <Card className="bg-background p-4 shadow-sm">
-                  <CardHeader>
-                    <CardTitle>25%</CardTitle>
-                    <CardDescription>Increase in Productivity</CardDescription>
-                  </CardHeader>
-                </Card>
-                <Card className="bg-background p-4 shadow-sm">
-                  <CardHeader>
-                    <CardTitle>20%</CardTitle>
-                    <CardDescription>
-                      Improvement in Customer Satisfaction
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
+                {caseStudy.results?.result?.map((result, index) => (
+                  <Card key={index} className="bg-background p-4 shadow-sm">
+                    <CardHeader>
+                      <CardTitle>{result.improvement}</CardTitle>
+                      <CardDescription>{result.description}</CardDescription>
+                    </CardHeader>
+                  </Card>
+                )) ?? null}
               </div>
             </div>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center rounded-md shadow-sm">
               <Image
-                src={"/images/casestudy-2.png"}
-                alt="image"
-                width={500}
-                height={500}
+                className="rounded-md shadow-sm"
+                src={ caseStudy.results?.image?.src ?? "/images/casestudy-2.png"}
+                placeholder="blur"
+                blurDataURL="/placeholder.svg"
+                alt="result-image"
+                width={720}
+                height={900}
               />
             </div>
           </div>
@@ -213,10 +203,12 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
                 Competitor Analysis
               </div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                {caseStudy.competitorAnalysis?.title ?? "Analyzing the Competition"}
+                {caseStudy.competitorAnalysis?.title ??
+                  "Analyzing the Competition"}
               </h2>
               <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {caseStudy.competitorAnalysis?.analysis ?? "Analyzing the Competition"}
+                {caseStudy.competitorAnalysis?.analysis ??
+                  "Analyzing the Competition"}
               </p>
             </div>
             <div>
@@ -241,10 +233,12 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
                 Primary Research
               </div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                {caseStudy.primaryResearch?.title ?? "Understanding the User Needs"}
+                {caseStudy.primaryResearch?.title ??
+                  "Understanding the User Needs"}
               </h2>
               <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {caseStudy.primaryResearch?.research ?? "Understanding the User Needs"}
+                {caseStudy.primaryResearch?.research ??
+                  "Understanding the User Needs"}
               </p>
             </div>
             <div>
@@ -277,7 +271,10 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
             </div>
             <div className="flex items-center justify-center">
               <Image
-                src={"/images/casestudy-3.png"}
+                className="rounded-md shadow-sm"
+                src={ caseStudy.keyLearning?.image?.src ?? "/images/casestudy-3.png"}
+                placeholder="blur"
+                blurDataURL="/placeholder.svg"
                 alt="Key Learnings"
                 width={500}
                 height={500}

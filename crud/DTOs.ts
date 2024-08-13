@@ -276,6 +276,10 @@ export type CreateCaseStudyDTO = {
     image?: CreateImageDTO;
     title: string;
     description: string;
+    result? : {
+      improvement: string;
+      description: string;
+    }[]
   };
   userResearch: {
     title: string;
