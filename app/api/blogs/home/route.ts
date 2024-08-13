@@ -2,6 +2,7 @@ import { getEssential, getFeatured, getPopular, getRecent } from "@/crud/blog";
 import prisma from "@/lib/prisma";
 import { NextResponse } from 'next/server'
 import apiHandler from "@/errorHandler";
+export const revalidate = 3600;
 
 const get = async () => {
     const featured = await getFeatured(prisma);

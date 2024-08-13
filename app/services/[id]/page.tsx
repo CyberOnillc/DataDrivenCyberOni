@@ -65,7 +65,7 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 async function Services({ params }: { params: { id: string } }) {
   const seoTitle = params.id
   const id = extractUUID(seoTitle)
-  const service = await read(id, prisma) as DisplayServiceDTO
+  const service = await read(id, prisma) as unknown as DisplayServiceDTO
   const services = await getAll(1, 10, prisma);
 
   if (!service) redirect('/404');
@@ -141,8 +141,8 @@ async function Services({ params }: { params: { id: string } }) {
           <div className="container mx-auto my-5 flex flex-wrap gap-2 lg:gap-5 px-5"
           >            {service.CaseStudies?.map((caseStudy, index) => (
             <CaseStudyCard key={index}
-              images={caseStudy.images  as unknown as CaseImage[]}
-              id={caseStudy.id}
+              images={caseStudy.images as CaseImage[]}
+              id={caseStudy.id as string}
               title={caseStudy.title} />
           ))}
           </div>

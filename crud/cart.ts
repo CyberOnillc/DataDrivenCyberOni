@@ -57,7 +57,11 @@ export const getServiceCart = async (userId: string, prisma: PrismaClient) => {
                         },
                         addons: {
                             include: {
-                                CaseStudies: true
+                                CaseStudies: {
+                                    include: {
+                                        images: true
+                                    }
+                                }
                             }
                         }
 

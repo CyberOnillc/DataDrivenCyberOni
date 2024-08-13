@@ -13,7 +13,7 @@ import {
   create as createTag,
   connectOrCreateObject as connectTags,
 } from "./tags";
-import { CreateImageDTO, CreateSubServiceDTO, CreateTagDTO } from "./DTOs";
+import { CreateCaseStudyDTO, CreateImageDTO, CreateSubServiceDTO, CreateTagDTO } from "./DTOs";
 import { createObject as createImageObject } from "./images";
 import {
   create as createSubService,
@@ -55,7 +55,7 @@ export type DisplayServiceDTO = Service & {
   tags?: Tag[];
   SubServices?: (SubService & { image: Image })[];
   ServiceDescription?: (ServiceDescription & { image: Image })[];
-  CaseStudies?: CaseStudy[];
+  CaseStudies?: (CaseStudy & { images: Image[] , subServices? : SubService[]})[];
 };
 
 async function create(service: CreateServiceDTO, prismaClient: PrismaClient) {
@@ -207,7 +207,11 @@ async function read(serviceId: string, prismaClient: PrismaClient) {
       SubServices: {
         include: {
           image: true,
-          CaseStudies: true,
+          CaseStudies: {
+            include: {
+              images: true
+            }
+          },
         },
       },
       ServiceDescription: {
@@ -267,8 +271,12 @@ export async function getFeatured(prisma: PrismaClient) {
     orderBy: { hourlyRate: "desc" },
     include: {
       tags: true,
-      image: true,
-      CaseStudies: true,
+      image: true,      
+      CaseStudies: {
+        include: {
+          images: true
+        }
+      },
     },
   });
   return records;
