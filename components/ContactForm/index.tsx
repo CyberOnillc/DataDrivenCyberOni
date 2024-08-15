@@ -160,7 +160,7 @@ function ContactFormLOC(props: { onModal?: boolean, showModal?: boolean, setShow
         <>
           <div className="flex w-full h-full flex-col items-center justify-center p-10 text-center">
             <Mail />
-            <Balancer>Check you email</Balancer>
+            <Balancer>Message Sent! Check your email</Balancer>
           </div>
         </>
       )}
