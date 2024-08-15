@@ -49,7 +49,7 @@ export default function Home({ searchParams }: { searchParams?: { softwareCatego
           <section className=" lg:grid grid-cols-2 grid-rows-2">
             <div className="my-10 flex flex-col items-center justify-center gap-5 lg:flex-row lg:col-span-1">
               <h2 className="font-kyiv text-3xl font-bold lg:w-[14em] lg:text-5xl">
-                Choose from over 10+ cutting—edge products
+                Choose one of our cutting—edge products
               </h2>
 
             </div>

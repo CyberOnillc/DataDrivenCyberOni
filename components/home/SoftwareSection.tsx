@@ -18,7 +18,7 @@ async function SoftwareSection({ categoryId }: { categoryId?: string | string[] 
     }
     return (
         <>
-            <SoftwareCategories />
+            {/* <SoftwareCategories /> */}
             <SoftwareCarousel
                 softwareProducts={softwares.map((item) => ({
                     image: item.images[0] ? item.images[0].src : "https://placehold.co/600x400",
