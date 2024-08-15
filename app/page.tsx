@@ -47,7 +47,7 @@ export default function Home({ searchParams }: { searchParams?: { softwareCatego
             <HeroAnimation />
           </div>
           <section className="lg:grid grid-cols-1 grid-rows-1 m-0 p-0">
-            <h2 className="font-kyiv text-3xl font-bold lg:w-[14em] lg:text-5xl m-0 p-0 leading-none">
+            <h2 className="font-kyiv text-3xl font-bold lg:w-[14em] lg:text-5xl m-0 p-0 leading-none my-5">
               Choose one of our cutting—edge products
             </h2>
 

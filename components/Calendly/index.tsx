@@ -18,11 +18,11 @@ const CalendlyPopup: React.FC<CalendlyPopupProps> = ({
 
 
   const buttonClass =
-    className || "rounded-full bg-white p-3 hover:shadow-md dark:bg-black";
+    className || "rounded-full bg-white py-3 px-6 hover:shadow-md dark:bg-black text-lg";
 
-    useEffect(() => {
-      setRootElement(root.current);
-    }, []);
+  useEffect(() => {
+    setRootElement(root.current);
+  }, []);
 
   return (
     <div ref={root} id="__next">
