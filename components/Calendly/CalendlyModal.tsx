@@ -31,7 +31,7 @@ function CalendlyModal({ open, onCloseModal }: { open: boolean, onCloseModal: ()
                 open={open}
                 onModalClose={closeModal}
                 rootElement={rootElement as HTMLElement}
-                url="https://calendly.com/cyberoni/quick-zoom-meeting"
+                url="https://www.cybershoptech.com/schedule"
 
 
             />}

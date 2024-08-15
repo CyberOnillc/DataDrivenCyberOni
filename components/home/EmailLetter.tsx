@@ -23,7 +23,7 @@ function EmailLetter() {
                 <Image className=" object-contain" src={'/images/cta.png'} alt="cta-image" height={500} width={500}></Image>
             </div>
             <div className="relative lg:flex lg:flex-col lg:justify-center mx-10 -top-20 lg:top-auto">
-                <div className="font-abel text-3xl p-2 text-center lg:text-left">Get exponential reach via AI Marketing</div>
+                <div className="font-abel text-3xl p-2 text-center lg:text-left">Get Industry Insights Straight To Your Inbox</div>
                 <form action={submit} className="p-1">
                     <div className="flex flex-col gap-5 lg:flex-row justify-center items-center">
                         <ClientInput
@@ -43,7 +43,7 @@ function EmailLetter() {
                                     <span>Adding to Mailing List... </span>
                                     <LoadingCircle /></>
                                     :
-                                    <><span>get in touch</span>
+                                    <><span>Get In Touch</span>
                                         <ArrowRight></ArrowRight></>
                             }
                         </button>

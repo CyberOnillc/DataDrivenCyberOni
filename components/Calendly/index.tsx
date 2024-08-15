@@ -28,7 +28,7 @@ const CalendlyPopup: React.FC<CalendlyPopupProps> = ({
     <div ref={root} id="__next">
       {root.current && <PopupButton
         LoadingSpinner={() => <LoadingDots />}
-        url="https://calendly.com/cyberoni/quick-zoom-meeting"
+        url="https://cybershoptech.com/schedule"
         rootElement={rootElement as HTMLElement}
         text={CTAText}
         className={buttonClass}
