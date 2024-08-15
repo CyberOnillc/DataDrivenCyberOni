@@ -33,7 +33,7 @@ export const homeSections: SectionProps[] = [
         . Just set it up and watch your business grow! Our tools enable you to
         quickly create and{" "}
         <span className="font-bold text-blue-500">
-          manage organic social media
+          manage organic social media {" "}
         </span>
         content tailored for your target audience
       </div>
