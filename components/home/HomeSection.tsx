@@ -82,7 +82,7 @@ const Section = ({
         {/* Image */}
         <div
           className={`container mx-auto flex flex-col items-center justify-center ${orderClass} lg:row-span-2 lg:flex lg:w-1/2 lg:items-center lg:justify-center`}
-          //ref={scope} // Apply the ref here
+        //ref={scope} // Apply the ref here
         >
           <Image src={image} alt={image} height={500} width={500} />
         </div>
@@ -101,9 +101,18 @@ const Section = ({
                   } px-5 items-center justify-end rounded-full  bg-white p-[0.6rem] dark:bg-gray-900`}
               >
                 Learn More{" "}
-                <span className="m-0 mx-3 w-fit bg-gradient-purple bg-clip-text text-center align-middle text-xl text-transparent">
-                  {!isDesktop ? <>&rarr;</> : imageFirst ? <>&larr;</> : <>&rarr;</>}
+                <span className="m-0 mx-3 w-fit bg-gradient-purple bg-clip-text text-center align-middle text-xl text-transparent flex items-center">
+                  {!isDesktop ? (
+                    <span className="ml-2 text-xl lg:text-2xl flex-shrink-0">→</span>
+                  ) : (
+                    imageFirst ? (
+                      <span className="ml-2 text-xl lg:text-2xl flex-shrink-0">←</span>
+                    ) : (
+                      <span className="ml-2 text-xl lg:text-2xl flex-shrink-0">→</span>
+                    )
+                  )}
                 </span>
+
               </Link>
             </div>
           </div>
