@@ -37,7 +37,7 @@ export default function Home({ searchParams }: { searchParams?: { softwareCatego
                 <div className="m-3 w-fit rounded-full bg-gradient-purple px-[0.1rem] py-[0.1rem]"
                 >
                   <CalendlyPopup
-                    CTAText="Schedule a consultation"
+                    CTAText="Schedule A Consultation"
                     className="rounded-full bg-white p-[0.4rem] dark:bg-gray-900"
                   />
                 </div>
@@ -52,7 +52,7 @@ export default function Home({ searchParams }: { searchParams?: { softwareCatego
             </h2>
 
             <Suspense fallback={<LoadingCarousel />}>
-              <SoftwareSection categoryId={searchParams?.softwareCategoryId}  />
+              <SoftwareSection categoryId={searchParams?.softwareCategoryId} />
             </Suspense>
           </section>
 

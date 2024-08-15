@@ -51,7 +51,7 @@ async function Enterprise() {
             <div id="__next" className="z-30 m-3">
               <CalendlyPopup
                 className="rounded-lg bg-[#0F172A] p-3 text-white dark:bg-blue-600"
-                CTAText="Schedule a consultation"
+                CTAText="Schedule A Consultation"
               />
             </div>
           </div>
