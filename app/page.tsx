@@ -47,7 +47,7 @@ export default function Home({ searchParams }: { searchParams?: { softwareCatego
             <HeroAnimation />
           </div>
           <section className=" lg:grid grid-cols-2 grid-rows-2">
-            <div className="my-10 flex flex-col items-center justify-center gap-5 lg:flex-row lg:col-span-1">
+            <div className=" flex flex-col items-center justify-center gap-5 lg:flex-row lg:col-span-1">
               <h2 className="font-kyiv text-3xl font-bold lg:w-[14em] lg:text-5xl">
                 Choose one of our cutting—edge products
               </h2>
