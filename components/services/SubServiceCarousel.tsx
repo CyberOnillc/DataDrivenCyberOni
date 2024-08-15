@@ -352,7 +352,7 @@ function SubServiceCarousel({
                     {currentDisplay?.CaseStudies.map((caseStudy) => (
                       <CaseStudyCard
                         key={caseStudy.id}
-                        id={caseStudy.id}
+                        id={caseStudy.id as  string}
                         title={caseStudy.title}
                         images={caseStudy.images as unknown as CaseImage[]}
                       />

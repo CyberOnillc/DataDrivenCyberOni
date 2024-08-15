@@ -1,17 +1,9 @@
-import CaseStudyCardSkeleton from "@/components/casestudies/CaseStudyCardSkeleton";
-import ServiceCardSkeleton from "@/components/services/ServiceCardSkeleton";
-import { LoadingSpinner } from "@/components/shared/icons";
+import Loading from "@/components/Loading";
 
-async function CaseStudyListLoader() {
-  return (
-    <div className="h-fit w-full">
-      <LoadingSpinner />
-    </div>
-  );
+
+export default function LoadCaseStudy() {
+    return (
+        <Loading />
+
+    )
 }
-
-async function getData(list: string) {
-  return [];
-}
-
-export default CaseStudyListLoader;

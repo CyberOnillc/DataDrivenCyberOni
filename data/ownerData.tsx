@@ -4,6 +4,7 @@ export const Owner = {
   url: "https://www.cybershoptech.com",
   address: "3070 Quebec Street , Denver CO , 80010",
   company: "CyberOni - Software Solutions",
+  orgId: process.env.ORG_ID,
   about:
     "CyberOni provides innovative software solutions tailored to meet the unique needs of small to enterprise businesses. Our team of experts specializes in creating custom software that drives growth, efficiency, and competitive advantage.",
   socials: {
