@@ -188,7 +188,7 @@ async function Enterprise() {
         <div className="container mx-auto px-4 ">
           <div className="text-center">
             <div className="font-bold text-[#5380EA]">Why choose us</div>
-            <div className="text-4xl font-bold">
+            <div className="text-4xl font-bold my-3">
               Why Select Cyberoni for Your Development Projects?
             </div>
             <div className="">
