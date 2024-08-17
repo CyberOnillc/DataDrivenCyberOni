@@ -129,7 +129,7 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
 
                 {
                     href: "#",
-                    name: "Books & Webinars",
+                    name: "Webinars",
                     subTitle: "All about how to use ",
                     icon: <Book className="fill-blue-700 text-gray-50" />,
                 },
