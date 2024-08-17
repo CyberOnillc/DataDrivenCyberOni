@@ -55,48 +55,53 @@ async function Enterprise() {
           </div>
         </div>
         <div className="container mx-auto my-5 lg:h-1/2">
-          <div className="flex max-h-full items-center justify-around gap-10 p-3 text-center">
-            <div>
+          <div className="flex flex-wrap items-center justify-around gap-y-6 gap-x-6 p-3 text-center">
+            <div className="flex flex-col items-center space-y-2">
               <Image
                 src={"/images/project.png"}
                 alt="project"
-                height={100}
+                className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20"
                 width={100}
-              ></Image>
+                height={100}
+              />
               <div>Projects</div>
               <div>200+</div>
             </div>
-            <div>
+            <div className="flex flex-col items-center space-y-2">
               <Image
                 src={"/images/client.png"}
                 alt="client"
-                height={100}
+                className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20"
                 width={100}
-              ></Image>
+                height={100}
+              />
               <div>Clients</div>
               <div>1345+</div>
             </div>
-            <div>
+            <div className="flex flex-col items-center space-y-2">
               <Image
                 src={"/images/experience.png"}
-                alt="exp"
-                height={100}
+                alt="experience"
+                className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20"
                 width={100}
-              ></Image>
+                height={100}
+              />
               <div>Experience</div>
               <div>7+</div>
             </div>
-            <div>
+            <div className="flex flex-col items-center space-y-2">
               <Image
                 src={"/images/companies.png"}
-                alt="conmpany"
-                height={100}
+                alt="companies"
+                className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20"
                 width={100}
-              ></Image>
+                height={100}
+              />
               <div>Companies</div>
               <div>65+</div>
             </div>
           </div>
+
 
           <div className="my-5 flex flex-col lg:flex-row items-center justify-center gap-8">
             <div className="w-full lg:w-1/2 text-center text-3xl text-[#5380EA] px-4">
