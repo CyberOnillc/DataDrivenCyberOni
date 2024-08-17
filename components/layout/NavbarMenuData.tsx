@@ -232,19 +232,19 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
                 {
                     href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126?id=Team%20Dashboard",
                     name: "Team Dashboard & Alerts",
-                    subTitle: "Monitor your metricse",
+                    subTitle: "Monitor your metrics",
                     icon: <AppWindow className="text-blue-700" />,
                 },
                 {
                     href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126?id=Behavioral%20Analytics",
                     name: "Behavioral Analytics",
-                    subTitle: "Real-time analytics user trends",
+                    subTitle: "Real-time analytics",
                     icon: <ActivitySquare className="text-blue-700" />,
                 },
                 {
                     href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126?id=Audience%20Segmentation",
                     name: "Audience Segmentation",
-                    subTitle: "Segments with perfect target",
+                    subTitle: "Segments with perfect targeting",
                     icon: <PieChart className="text-blue-700" />,
                 },
 
@@ -257,7 +257,7 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
                 {
                     href: "/services/Web-devlopment-06cafb96-2fb8-41fb-b34c-137a154f5126?id=Limitless%20Segmentation",
                     name: "Limitless Segmentation",
-                    subTitle: "Surface hidden trends",
+                    subTitle: "Uncover hidden trends",
                     icon: <Layers3 className="text-blue-700" />,
                 },
             ],
