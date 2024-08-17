@@ -80,20 +80,20 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
                 {
                     href: "/blogs",
                     name: "Our Blogs",
-                    subTitle: "Learn how to integrate",
+                    subTitle: "Latest Industry Insights",
                     icon: <Book className=" text-blue-700" />,
                 },
 
                 {
                     href: "/github",
                     name: "Developer Docs",
-                    subTitle: "Learn how to integrate",
+                    subTitle: "See Our Developer Profile",
                     icon: <TerminalSquare className=" text-blue-700" />,
                 },
                 {
                     href: "/github",
                     name: "Help Center ",
-                    subTitle: "All about how to use ",
+                    subTitle: "CyberOni HelpCenter",
                     icon: <LifeBuoy className="fill-blue-700 text-gray-50" />,
                 },
                 {
