@@ -164,7 +164,7 @@ async function Enterprise() {
       <section className="bg-[#EBF0FF] py-10 dark:bg-[#121212]">
         <div className="container mx-auto  flex flex-col gap-5 p-5 lg:flex-row">
           <div className="text-center lg:w-1/2 lg:text-left">
-            <div className="text-2xl font-bold text-[#2478FE]">
+            <div className="text-2xl font-bold text-[#2478FE] my-4">
               Service we Offer
             </div>
             <div className="font-nunito text-4xl font-extrabold">
