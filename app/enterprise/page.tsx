@@ -191,10 +191,8 @@ async function Enterprise() {
               Why Select Cyberoni for Your Development Projects?
             </div>
             <div className="">
-              Unlock the full potential of your online presence with Cyberoni.
-              We&apos;re committed to excellence, continuously enhancing our
-              methods and tools to ensure your web development experience is
-              second to none.
+              Maximize your online presence with Cyberoni. We deliver fast results without cutting corners, paying close attention to every detail to ensure your web development project is exactly what you need. Our team is committed to continually improving our methods and tools, so you get a top-notch solution that fits your business. With Cyberoni, you can count on a web development experience that’s efficient, precise, and tailored to your goals.
+
             </div>
           </div>
 

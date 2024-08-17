@@ -29,17 +29,16 @@ export const featureCards: FeatureCardProps[] = [
 
 
 export const HowItWorksSteps: StepCardProps[] = [
-
     {
         icon: <MessageSquareText className="h-20 w-20" />,
-        content: "Give one sentence describing the transformation your service offers from start to finish."
+        content: "We start with an in-depth consultation where we listen to your needs, goals, and challenges. This helps us understand your vision and craft a tailored strategy that aligns with your business objectives."
     },
     {
         icon: <Lightbulb className="h-20 w-20" />,
-        content: "Give one sentence describing the transformation your service offers from start to finish."
+        content: "Our team then brainstorms and develops innovative solutions that address your specific requirements. We focus on creating a detailed plan that ensures every aspect of your project is handled with precision and creativity."
     },
     {
         icon: <Mail className="h-20 w-20" />,
-        content: "Give one sentence describing the transformation your service offers from start to finish."
+        content: "Finally, we deliver a comprehensive solution, followed by ongoing support to ensure your project continues to deliver value. We keep you informed every step of the way, making adjustments as needed to meet your evolving needs."
     }
-]
+];
