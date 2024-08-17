@@ -35,21 +35,22 @@ function ReviewCarousel({ reviews }: { reviews: ReviewProps[] }) {
                 {wrappedSlice(reviews, currentIndex, currentIndex + 1).map((review, index) => (
                     <div
                         key={index}
-                        className="flex-1 p-4 rounded-lg bg-[#ffffff0e] border-4 border-[#AAC3F5] relative text-center justify-center mt-10 lg:px-8 pb-6 grid grid-cols-12 lg:grid-rows-[auto_1fr] grid-rows-[60px_minmax(0,_1fr)]"
+                        className="flex-1 p-6 rounded-lg bg-[#ffffff0e] border-4 border-[#AAC3F5] relative text-center justify-center mt-10 lg:px-8 pb-6 grid grid-cols-12 lg:grid-cols-3 grid-rows-[auto_auto_1fr] gap-y-4"
                     >
-                        <Image
-                            src={review.image}
-                            alt={`${review.name}'s Profile`}
-                            className="w-12 h-12 rounded-full object-cover lg:col-span-1 col-span-2"
-                            height={300}
-                            width={300}
-                        />
-                        <div className="ml-4 w-full lg:col-span-11 col-span-10 text-left h-fit">
-                            <h3 className="text-lg font-semibold">{review.name}</h3>
-                            <h3 className="text-guru-blue">{review.position}</h3>
+                        <div className="lg:col-span-1 col-span-2 flex justify-center items-center">
+                            <Image
+                                src={review.image}
+                                alt={`${review.name}'s Profile`}
+                                className="w-16 h-16 rounded-full object-cover"
+                                height={64}
+                                width={64}
+                            />
                         </div>
-                        <div className="lg:col-span-12 col-span-12"></div>
-                        <div className="mx-auto text-lg z-20 col-span-12 text-left">
+                        <div className="lg:col-span-2 col-span-10 text-left">
+                            <h3 className="text-lg font-semibold">{review.name}</h3>
+                            <h3 className="text-guru-blue text-base">{review.position}</h3>
+                        </div>
+                        <div className="col-span-12 text-left text-base lg:text-lg leading-relaxed">
                             {review.content}
                         </div>
                     </div>

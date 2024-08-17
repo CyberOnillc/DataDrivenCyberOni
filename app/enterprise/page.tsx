@@ -176,11 +176,10 @@ async function Enterprise() {
             <div className="text-2xl font-bold text-[#2478FE] my-4">
               Service we Offer
             </div>
-            <div className="font-nunito text-4xl font-extrabold">
-              Cyberoni is committed to forging genuine partnerships, delivering
-              exceptional value in every investment. Our expertise spans
-              multiple domains, including but not limited to:
+            <div className="font-nunito text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold">
+              Cyberoni is committed to forging genuine partnerships, delivering exceptional value in every investment. Our expertise spans multiple domains, including but not limited to:
             </div>
+
           </div>
           <div className="container overflow-x-auto lg:w-1/2 ">
             <div className="grid  w-fit gap-5  lg:grid-cols-2 lg:grid-rows-2">
