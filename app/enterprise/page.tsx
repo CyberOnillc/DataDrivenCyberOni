@@ -57,46 +57,50 @@ async function Enterprise() {
         <div className="container mx-auto my-5 lg:h-1/2">
           <div className="flex flex-wrap items-center justify-around gap-y-6 gap-x-6 p-3 text-center">
             <div className="flex flex-col items-center space-y-2">
-              <Image
-                src={"/images/project.png"}
-                alt="project"
-                className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20"
-                width={100}
-                height={100}
-              />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 relative">
+                <Image
+                  src={"/images/project.png"}
+                  alt="project"
+                  layout="fill"
+                  objectFit="contain"
+                />
+              </div>
               <div>Projects</div>
               <div>200+</div>
             </div>
             <div className="flex flex-col items-center space-y-2">
-              <Image
-                src={"/images/client.png"}
-                alt="client"
-                className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20"
-                width={100}
-                height={100}
-              />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 relative">
+                <Image
+                  src={"/images/client.png"}
+                  alt="client"
+                  layout="fill"
+                  objectFit="contain"
+                />
+              </div>
               <div>Clients</div>
               <div>1345+</div>
             </div>
             <div className="flex flex-col items-center space-y-2">
-              <Image
-                src={"/images/experience.png"}
-                alt="experience"
-                className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20"
-                width={100}
-                height={100}
-              />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 relative">
+                <Image
+                  src={"/images/experience.png"}
+                  alt="experience"
+                  layout="fill"
+                  objectFit="contain"
+                />
+              </div>
               <div>Experience</div>
               <div>7+</div>
             </div>
             <div className="flex flex-col items-center space-y-2">
-              <Image
-                src={"/images/companies.png"}
-                alt="companies"
-                className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20"
-                width={100}
-                height={100}
-              />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 relative">
+                <Image
+                  src={"/images/companies.png"}
+                  alt="companies"
+                  layout="fill"
+                  objectFit="contain"
+                />
+              </div>
               <div>Companies</div>
               <div>65+</div>
             </div>
