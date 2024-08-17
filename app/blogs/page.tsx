@@ -187,35 +187,17 @@ async function Blogs() {
 
       <div className="container mx-auto my-10">
         <div className="my-2 text-2xl font-bold">Random</div>
+        <div className="my-2 text-2xl font-bold">Random</div>
         {random && (
-          <Link
-            href={`/blogs/post/${seoUrl(random.title, random.id)}`}
-            className="container relative my-5 flex h-80 w-full flex-col overflow-hidden rounded-2xl shadow-lg md:flex-row-reverse"
-          >
-            <div className="absolute h-full w-full lg:static lg:w-1/2">
-              {random.images[0] ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <Image
-                  width={500}
-                  height={500}
-                  src={random.images[0].src}
-                  alt={stripFileExtension(
-                    random.images[0].name || "blog_preview",
-                  )}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <div className="h-full w-full bg-[#1c0042e7]"></div>
-              )}
-            </div>
-            <div className="z-30 w-full p-5 lg:w-1/2 lg:p-10 lg:dark:bg-slate-800 ">
-              <p className="my-2 text-lg font-thin text-white">
-                By {random.author.firstName}
-              </p>
-              <h2 className="mb-2 text-2xl font-semibold text-white">{random.title}</h2>
-              <p className="line-clamp-4 text-base text-white">{random.description}</p>
-            </div>
-          </Link>
+          <div className="my-5">
+            <DetailedCard
+              id={random.id}
+              author={random.author.firstName || ""}
+              title={random.title}
+              description={random.description}
+              images={random.images}
+            />
+          </div>
         )}
       </div>
 
@@ -234,9 +216,9 @@ async function Blogs() {
 
 async function getData() {
   const featured = await getFeatured(prisma);
-  const {recent} = await getRecent(1, prisma);
-  const {popular} = await getPopular(1, prisma);
-  const {essential} = await getEssential(1, prisma);
+  const { recent } = await getRecent(1, prisma);
+  const { popular } = await getPopular(1, prisma);
+  const { essential } = await getEssential(1, prisma);
   const categories = await getCategories("blog", prisma);
   return { featured, recent, essential, popular, categories };
 }
