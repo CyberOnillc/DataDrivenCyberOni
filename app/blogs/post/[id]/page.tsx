@@ -169,6 +169,14 @@ async function BlogPost({ params }: { params: { id: string } }) {
               )}
             </div>
           </Link>
+          <section>
+            <BlogCTA
+              button={ctaProps ? ctaProps.button : ""}
+              title={ctaProps ? ctaProps.title : ""}
+              subTitle={ctaProps ? ctaProps.subTitle : ""}
+              link={ctaProps ? ctaProps.link : ""}
+            />
+          </section>
           <div className="text-xl">
             {blog.author.firstName || blog.author.email}
           </div>
@@ -179,14 +187,7 @@ async function BlogPost({ params }: { params: { id: string } }) {
             viewAllLink={`/blogs/similar?id=${id}`}
           />
         </section>
-        <section>
-          <BlogCTA
-            button={ctaProps ? ctaProps.button : ""}
-            title={ctaProps ? ctaProps.title : ""}
-            subTitle={ctaProps ? ctaProps.subTitle : ""}
-            link={ctaProps ? ctaProps.link : ""}
-          />
-        </section>
+
         <CommentForm
           email={session?.user?.email as string}
           href={`${process.env.NEXTAUTH_URL}/blogs/post/${seoTitle}`}
