@@ -187,7 +187,6 @@ async function Blogs() {
 
       <div className="container mx-auto my-10">
         <div className="my-2 text-2xl font-bold">Random</div>
-        <div className="my-2 text-2xl font-bold">Random</div>
         {random && (
           <div className="my-5">
             <DetailedCard
