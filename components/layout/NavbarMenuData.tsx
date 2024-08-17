@@ -47,12 +47,12 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
             title: 'About us',
 
             links: [
-                { href: '/casestudies', icon: <ThumbsUp className="text-gray-100 fill-blue-500" />, name: 'Customer Stories', subTitle: "Our customers have to say" },
-                { href: '#', icon: <HeartHandshake className="text-gray-100 fill-blue-500" />, name: 'Partners', subTitle: "Become a our partners" },
-                { href: '#', icon: <Briefcase className="text-gray-100 fill-blue-500" />, name: 'Careers', subTitle: "We’re always hiring!" },
-                { href: '#', icon: <Newspaper className="text-gray-100 fill-blue-500" />, name: 'Press and media', subTitle: "News and updates" },
+                { href: '/casestudies', icon: <ThumbsUp className="text-gray-100 fill-blue-500" />, name: 'Customer Stories', subTitle: "What our customers have to say" },
+                { href: '/hire-a-dev', icon: <HeartHandshake className="text-gray-100 fill-blue-500" />, name: 'Partners', subTitle: "Become a partner" },
+                { href: '/apply/full-stack', icon: <Briefcase className="text-gray-100 fill-blue-500" />, name: 'Careers', subTitle: "We’re hiring global talen!" },
+                { href: '/blogs', icon: <Newspaper className="text-gray-100 fill-blue-500" />, name: 'Press and media', subTitle: "News and updates" },
 
-                { href: '/enterprise', icon: <Phone className="text-gray-100 fill-blue-500" />, name: 'Contact Us', subTitle: "Get in touch with sales" },
+                { href: '/contact', icon: <Phone className="text-gray-100 fill-blue-500" />, name: 'Contact Us', subTitle: "Get in touch with sales" },
             ]
         },
         {
@@ -66,8 +66,8 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
                         </div>
                         <div className="flex justify-center flex-col">
                             <div className="font-bold">Serving customers from across the globe</div>
-                            <div className="flex gap-2"><MapPin className="fill-blue-700 text-white dark:text-slate-900" />San Francisco, California</div>
-                            <div className="flex gap-2"><MapPin className="fill-blue-700 text-white dark:text-slate-900" />Seattle, Washington</div>
+                            <div className="flex gap-2"><MapPin className="fill-blue-700 text-white dark:text-slate-900" />Denver, Colorado</div>
+                            <div className="flex gap-2"><MapPin className="fill-blue-700 text-white dark:text-slate-900" />Los Angeles, California</div>
                         </div>
                     </div>
                 </div> as ReactNode
