@@ -47,9 +47,9 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
             title: 'About us',
 
             links: [
-                { href: '/casestudies', icon: <ThumbsUp className="text-gray-100 fill-blue-500" />, name: 'Customer Stories', subTitle: "Our customers have to say" },
-                { href: '/hire-a-dev', icon: <HeartHandshake className="text-gray-100 fill-blue-500" />, name: 'Partners', subTitle: "Become a our partners" },
-                { href: '/apply/full-stack', icon: <Briefcase className="text-gray-100 fill-blue-500" />, name: 'Careers', subTitle: "We’re always hiring!" },
+                { href: '/casestudies', icon: <ThumbsUp className="text-gray-100 fill-blue-500" />, name: 'Customer Stories', subTitle: "What our customers have to say" },
+                { href: '/hire-a-dev', icon: <HeartHandshake className="text-gray-100 fill-blue-500" />, name: 'Partners', subTitle: "Partner with us" },
+                { href: '/apply/full-stack', icon: <Briefcase className="text-gray-100 fill-blue-500" />, name: 'Careers', subTitle: "We're Hiring Ai Trainers" },
                 { href: '/blogs', icon: <Newspaper className="text-gray-100 fill-blue-500" />, name: 'Press and media', subTitle: "News and updates" },
 
                 { href: '/contact', icon: <Phone className="text-gray-100 fill-blue-500" />, name: 'Contact Us', subTitle: "Get in touch with sales" },

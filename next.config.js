@@ -47,12 +47,12 @@ const nextConfig = {
       },
       {
         source: "/apply/full-stack",
-        destination: "https://form.jotform.com/233470488980164",
+        destination: "https://forms.gle/pqqJKmvMHWxRECqe6",
         permanent: true,
       },
       {
         source: "/hire-a-dev",
-        destination: "https://form.jotform.com/233471176876163",
+        destination: "https://forms.gle/etPwemTJXhuXe6iv5",
         permanent: true,
       },
     
