@@ -6,7 +6,7 @@ export const featureCards: FeatureCardProps[] = [
     {
         image: "/images/team.png",
         title: "Experience",
-        description: "With Cyberoni, you gain access to a wealth of professional web development experience. We stay at the forefront of technology and trends to ensure that your project not only meets but exceeds industry standards. Our goal is to transform your vision into a digital reality, delivering a project that is not just complete but ahead of its time. Our team’s dedication to growth ensures your website will always be on the cutting edge."
+        description: "With Cyberoni, you gain access to a wealth of professional Web Development experience. We stay at the forefront of technology and trends to ensure that your project not only meets but exceeds industry standards. Our goal is to transform your vision into a digital reality, delivering a project that is not just complete but ahead of its time. Our team’s dedication to growth ensures your website will always be on the cutting edge."
     },
     {
         image: "/images/brain.png",

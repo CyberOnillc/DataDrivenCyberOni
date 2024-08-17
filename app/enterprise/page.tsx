@@ -110,7 +110,7 @@ async function Enterprise() {
               <span className="text-rose-600">Data Science</span>
             </p>
             <p>
-              and<span className="text-rose-600"> web development</span> agency
+              and<span className="text-rose-600"> Software Development</span> agency
               in Colorado.
             </p>
           </div>
