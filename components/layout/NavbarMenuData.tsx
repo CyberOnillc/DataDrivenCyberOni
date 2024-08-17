@@ -85,19 +85,19 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
                 },
 
                 {
-                    href: "/docs",
+                    href: "/github",
                     name: "Developer Docs",
                     subTitle: "Learn how to integrate",
                     icon: <TerminalSquare className=" text-blue-700" />,
                 },
                 {
-                    href: "/docs",
+                    href: "/github",
                     name: "Help Center ",
                     subTitle: "All about how to use ",
                     icon: <LifeBuoy className="fill-blue-700 text-gray-50" />,
                 },
                 {
-                    href: "/docs",
+                    href: "/github",
                     name: "Product Updates",
                     subTitle: "Newest feature releases",
                     icon: <Megaphone className="fill-blue-700 text-gray-50" />,
@@ -109,7 +109,7 @@ const UseMegaMenuData = ({ services, casestudies }: { services?: Blog[], casestu
             title: "Best Practices",
             links: [
                 {
-                    href: "/docs",
+                    href: "/github",
                     name: "FAQs",
                     subTitle: "Learn how to integrate",
                     icon: <HelpCircle className="fill-blue-700 text-gray-50" />,
