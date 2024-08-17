@@ -56,8 +56,8 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
     }
     metadata.category = service?.tags.join(" ")
     metadata.keywords = service?.tags?.map(tag => tag.name)
-    metadata.alternates= {
-      canonical : `/services/${seoTitle}`
+    metadata.alternates = {
+      canonical: `/services/${seoTitle}`
     }
   }
   return metadata
@@ -169,15 +169,51 @@ async function Services({ params }: { params: { id: string } }) {
 
 const faqs = [
   {
-    question: 'What is React ?',
-    answer: 'React is a JavaScript library for building user interfaces.',
+    question: 'What services does Cyberoni offer?',
+    answer: 'Cyberoni offers a wide range of software services including custom software development, data analytics, cloud solutions, and IT consulting. Our expertise spans across various industries, helping businesses leverage technology for growth and efficiency.',
   },
   {
-    question: 'How to install React ?',
-    answer: 'You can install React using npm or yarn.',
+    question: 'How does Cyberoni ensure the quality of its software solutions?',
+    answer: 'Quality is at the core of everything we do. We follow a rigorous quality assurance process, including automated testing, peer reviews, and continuous integration practices, to ensure that our software solutions meet the highest standards.',
   },
-  // Add more FAQs as needed
+  {
+    question: 'What industries does Cyberoni specialize in?',
+    answer: 'Cyberoni specializes in several industries, including finance, healthcare, retail, and logistics. Our experience across these sectors allows us to deliver solutions that are tailored to the specific needs and challenges of each industry.',
+  },
+  {
+    question: 'Can Cyberoni help with cloud migration?',
+    answer: 'Yes, Cyberoni offers comprehensive cloud migration services. We help businesses transition their existing systems to cloud platforms such as AWS, Azure, and Google Cloud, ensuring minimal disruption and maximum efficiency.',
+  },
+  {
+    question: 'What is the typical process for a project with Cyberoni?',
+    answer: 'Our process begins with a thorough consultation to understand your needs and objectives. We then proceed with planning and design, followed by development and testing. Throughout the project, we maintain clear communication to ensure alignment with your goals.',
+  },
+  {
+    question: 'Does Cyberoni provide ongoing support after project completion?',
+    answer: 'Absolutely. We offer a range of support and maintenance services to ensure that your software continues to operate smoothly after deployment. Our team is always available to assist with any updates or issues that may arise.',
+  },
+  {
+    question: 'How does Cyberoni handle data security?',
+    answer: 'Cyberoni takes data security very seriously. We implement best practices in cybersecurity, including data encryption, regular security audits, and compliance with industry standards such as GDPR and HIPAA, to protect your sensitive information.',
+  },
+  {
+    question: 'Can Cyberoni develop mobile applications?',
+    answer: 'Yes, we develop mobile applications for both iOS and Android platforms. Whether you need a consumer-facing app or an enterprise solution, our team has the expertise to deliver a high-quality, user-friendly mobile experience.',
+  },
+  {
+    question: 'How does Cyberoni stay up-to-date with the latest technology trends?',
+    answer: 'Our team continuously researches and adopts the latest technology trends. We invest in ongoing education and attend industry conferences to ensure that our solutions leverage cutting-edge tools and methodologies.',
+  },
+  {
+    question: 'What makes Cyberoni different from other software service providers?',
+    answer: 'Cyberoni stands out due to our deep technical expertise, client-centric approach, and commitment to innovation. We don’t just deliver software; we partner with our clients to provide solutions that drive real business value and growth.',
+  },
+  {
+    question: 'How do I get started with Cyberoni?',
+    answer: 'Getting started is easy. Simply contact us through our website or call our office to schedule a consultation. We’ll discuss your project needs and how Cyberoni can help you achieve your goals.',
+  },
 ];
+
 
 const serviceFeatures = [
   {
