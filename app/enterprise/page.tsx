@@ -28,35 +28,32 @@ async function Enterprise() {
       <section className="w-full ">
         <div className="relative bg-enterprise-bg bg-[length:100vw_50vw] bg-no-repeat lg:h-[50vh] dark:bg-[#061122]">
           <div className="container mx-auto flex h-full flex-col items-center justify-center ">
-            <div className=" relative line-clamp-3 w-screen overflow-visible text-center font-nunito text-6xl font-bold leading-relaxed lg:w-[800px]">
-              <Image
-                className="absolute z-0 w-full "
-                src={"/images/enterprise-hero.png"}
-                alt="enterprise-hero"
-                height={300}
-                width={900}
-              />
-              <div className="flex flex-col items-center justify-center text-center">
-                <p className="z-30 ">Welcome to </p>
-                <span className="z-30 text-[#5380EA] ">CyberOni</span>
-                <p className="z-30 ">Technologies</p>
+            <div className="absolute inset-0 bg-black opacity-50 z-10"></div> {/* Overlay */}
+            <Image
+              className="absolute z-0 w-full object-cover h-full"
+              src={"/images/enterprise-hero.png"}
+              alt="enterprise-hero"
+              layout="fill"
+            />
+            <div className="relative z-20 flex flex-col items-center justify-center text-center p-6">
+              <p className="text-6xl font-bold leading-relaxed text-white drop-shadow-md"> {/* Add text shadow */}
+                Welcome to
+                <span className="text-[#5380EA]"> CyberOni</span>
+                <br />
+                Technologies
+              </p>
+              <p className="mt-4 text-lg text-white drop-shadow-md"> {/* Add text shadow */}
+                Are you facing difficulties with your Software? Do you have a website but lack traffic? No need to worry.
+              </p>
+              <div id="__next" className="mt-6">
+                <CalendlyPopup
+                  className="rounded-lg bg-[#0F172A] p-3 text-white dark:bg-blue-600 hover:bg-[#1c2a3a]"
+                  CTAText="Schedule A Consultation"
+                />
               </div>
-            </div>
-
-            <div className="z-30 text-black dark:text-gray-100">
-              Are you facing difficulties with your Software? Do you have a
-              website but lack traffic? No need to worry.
-            </div>
-
-            <div id="__next" className="z-30 m-3">
-              <CalendlyPopup
-                className="rounded-lg bg-[#0F172A] p-3 text-white dark:bg-blue-600"
-                CTAText="Schedule A Consultation"
-              />
             </div>
           </div>
         </div>
-
         <div className="container mx-auto my-5 lg:h-1/2">
           <div className="flex max-h-full items-center justify-around gap-10 p-3 text-center">
             <div>

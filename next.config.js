@@ -32,7 +32,7 @@ const nextConfig = {
     return [
       {
         source: "/github",
-        destination: "https://github.com/TechWithTy/DataDrivenCyberOni",
+        destination: "https://github.com/CyberOnillc",
         permanent: true,
       },
       {
