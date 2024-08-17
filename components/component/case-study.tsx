@@ -288,16 +288,19 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid gap-10 sm:px-10 md:gap-16 lg:grid-cols-2 lg:gap-20">
             <div className="space-y-4">
-              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">
+              <div className="bg-primary text-white font-bold rounded-full px-6 py-3 text-center text-base md:text-lg lg:text-xl shadow-md hover:bg-primary/90 transition-colors">
                 Ready to Transform?
               </div>
+
               <h2 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem]">
                 Experience the Power of Cybershoptech Products
               </h2>
               <Link
-                href="#"
+                href="/schdule"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
                 prefetch={false}
+                rel="noopener noreferrer"
+
               >
                 Get a Demo
               </Link>
