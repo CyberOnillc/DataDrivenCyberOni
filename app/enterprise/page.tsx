@@ -43,7 +43,7 @@ async function Enterprise() {
                 Technologies
               </p>
               <p className="mt-4 text-lg text-white drop-shadow-md"> {/* Add text shadow */}
-                Are you facing difficulties with your Software? Do you have a website but lack traffic? No need to worry.
+                Are you facing difficulties with your Software? Do you have a website but lack traffic? No need to worry , We`ve got you covered.
               </p>
               <div id="__next" className="mt-6">
                 <CalendlyPopup
