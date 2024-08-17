@@ -15,6 +15,7 @@ export type ReviewProps = {
 
 function ReviewCarousel({ reviews }: { reviews: ReviewProps[] }) {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [expandedIndexes, setExpandedIndexes] = useState<number[]>([]);
 
     const nextSlide = () => {
         setCurrentIndex((currentIndex + 1) % reviews.length);
@@ -22,6 +23,14 @@ function ReviewCarousel({ reviews }: { reviews: ReviewProps[] }) {
 
     const prevSlide = () => {
         setCurrentIndex((currentIndex - 1 + reviews.length) % reviews.length);
+    };
+
+    const toggleExpand = (index: number) => {
+        if (expandedIndexes.includes(index)) {
+            setExpandedIndexes(expandedIndexes.filter(i => i !== index));
+        } else {
+            setExpandedIndexes([...expandedIndexes, index]);
+        }
     };
 
     const swipehandlers = useSwipe({
@@ -51,7 +60,15 @@ function ReviewCarousel({ reviews }: { reviews: ReviewProps[] }) {
                             <h3 className="text-guru-blue text-base">{review.position}</h3>
                         </div>
                         <div className="col-span-1 lg:col-span-3 text-base lg:text-lg leading-relaxed">
-                            {review.content}
+                            <p className={`${expandedIndexes.includes(index) ? '' : 'line-clamp-3'}`}>
+                                {review.content}
+                            </p>
+                            <button
+                                className="text-blue-500 text-sm mt-2"
+                                onClick={() => toggleExpand(index)}
+                            >
+                                {expandedIndexes.includes(index) ? 'Hide' : 'Show more'}
+                            </button>
                         </div>
                     </div>
                 ))}
