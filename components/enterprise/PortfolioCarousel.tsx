@@ -1,27 +1,19 @@
-"use client";
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import React, {
     MutableRefObject,
-    useEffect,
     useMemo,
     useRef,
     useState,
 } from "react";
 import { Image as CaseImage, CaseStudy } from "@prisma/client";
 import { DisplayServiceDTO } from "@/crud/service";
-import {
-    ArrowBigRight,
-    ArrowRight,
-    ArrowRightToLine,
-    ChevronLeft,
-    ChevronRight,
-    MoveRight,
-    X,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, MoveRight } from "lucide-react";
 import { seoUrl } from "@/lib/utils";
 import ImageWithTextOverlay from "../shared/ImageWithTextOverlay";
-import { CreateCaseStudyDTO } from "@/crud/DTOs";
+
 function PortfolioCarousel({ services }: { services: DisplayServiceDTO[] }) {
     const gridContainer = useRef<HTMLDivElement | null>(null);
     const serviceContainer = useRef<HTMLDivElement | null>(null);
@@ -31,18 +23,15 @@ function PortfolioCarousel({ services }: { services: DisplayServiceDTO[] }) {
         );
     }, [services]);
 
-    //const testArray = new Array(5).fill(servicesWithCaseStudies[0])
-
     const [currentGrid, setCurrentGrid] = useState(
-        servicesWithCaseStudies[0] ?
-            (servicesWithCaseStudies[0].CaseStudies ?? []) : []
+        servicesWithCaseStudies[0]
+            ? servicesWithCaseStudies[0].CaseStudies ?? []
+            : []
     );
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const nextSlide = (containerRef: MutableRefObject<HTMLDivElement | null>) => {
-        //scrollToElement(forwardTargetRef)
         if (containerRef.current) {
-
             containerRef.current.scrollTo({
                 left:
                     containerRef.current.scrollLeft +
@@ -53,8 +42,6 @@ function PortfolioCarousel({ services }: { services: DisplayServiceDTO[] }) {
     };
 
     const prevSlide = (containerRef: MutableRefObject<HTMLDivElement | null>) => {
-        //scrollToElement(backwardTargetRef)
-
         if (containerRef.current) {
             containerRef.current.scrollTo({
                 left:
@@ -66,126 +53,114 @@ function PortfolioCarousel({ services }: { services: DisplayServiceDTO[] }) {
     };
 
     return (
-        <div className="container mx-auto my-10 flex flex-col justify-center px-5  lg:my-20 lg:flex-row lg:justify-start">
-            <div className={`relative w-full my-4 flex gap-3 lg:my-0 lg:w-1/3`}>
-                <button
-                    type="button"
-                    className="w-4 cursor-pointer text-gray-400 lg:hidden"
-                    onClick={() => prevSlide(serviceContainer)}
-                >
-                    <ChevronLeft className="text-guru-blue" />
-                </button>
-                <div
-                    ref={serviceContainer}
-                    className="flex max-w-full justify-start gap-5  overflow-auto text-right scrollbar-none  lg:flex-col lg:gap-10 lg:overflow-hidden lg:px-10 lg:text-4xl"
-                >
-                    {servicesWithCaseStudies.map((service, index) => {
-                        if (service.CaseStudies && service.CaseStudies?.length > 0)
-                            return (
-                                <div
-                                    key={index}
-                                    className="flex cursor-pointer items-center  justify-center gap-2 hover:underline focus:text-[#5380EA]"
-                                >
-                                    <button
-                                        onClick={() => (
-                                            setCurrentGrid(service.CaseStudies || []),
-                                            setCurrentIndex(index)
-                                        )}
-                                        className="peer/item peer focus:text-[#5380EA]"
-                                    >
-                                        {service.title}
-                                    </button>
-                                    <MoveRight
-                                        className={`h-full w-10   ${currentIndex === index
-                                            ? "hidden lg:block lg:text-[#5380EA]"
-                                            : "hidden"
-                                            }`}
-                                    />
-                                </div>
-                            );
-                    })}
-
-
-                </div>
-                <button
-                    type="button"
-                    className="w-4  cursor-pointer text-gray-400 lg:hidden"
-                    onClick={() => nextSlide(serviceContainer)}
-                >
-                    <ChevronRight className="text-guru-blue" />
-                </button>
-            </div>
-
-            {
-                <div className={`relative my-4 flex gap-3 lg:my-0 lg:w-2/3`}>
+        <div className="container mx-auto my-10 flex flex-col justify-center px-5 lg:my-20 lg:flex-row lg:justify-start">
+            <div className="relative w-full my-4 flex gap-3 lg:my-0 lg:w-1/3">
+                {servicesWithCaseStudies.length > 0 && (
                     <button
                         type="button"
                         className="w-4 cursor-pointer text-gray-400 lg:hidden"
-                        onClick={() => prevSlide(gridContainer)}
+                        onClick={() => prevSlide(serviceContainer)}
                     >
                         <ChevronLeft className="text-guru-blue" />
                     </button>
-
-                    <div
-                        ref={gridContainer}
-                        className="flex w-full max-w-full  items-center justify-start gap-2 overflow-x-auto scrollbar-none  lg:grid  lg:grid-cols-4 lg:grid-rows-[25rem_1fr_1fr_1fr]"
-                    >
-                        {currentGrid.length > 0 ? (
-                            currentGrid?.map((caseStudy: CaseStudy & { images: CaseImage[] }, index) => {
-                                return (
-                                    <div
-                                        key={index}
-                                        className={` h-60 w-1/2  flex-shrink-0 overflow-hidden rounded-lg lg:aspect-auto lg:h-full lg:w-full`}
-                                    >
-                                        <div className="relative h-full w-full  overflow-hidden rounded-lg ">
-                                            <ImageWithTextOverlay
-                                                modal={
-                                                    <ReadMoreModal
-                                                        link={`/casestudies/${seoUrl(
-                                                            caseStudy.title,
-                                                            caseStudy.id as string,
-                                                        )}`}
-                                                        heading={caseStudy.title}
-                                                        points={[
-                                                            (
-                                                                caseStudy.userProblems as {
-                                                                    problems: string;
-                                                                }
-                                                            )?.problems ?? "",
-                                                        ]}
-                                                    />
-                                                }
-                                                title={caseStudy.title}
-                                                image={`${caseStudy.images &&
-                                                        (
-                                                            caseStudy.images as unknown as CaseImage[]
-                                                        )[0]
-                                                        ? (
-                                                            caseStudy.images as unknown as CaseImage[]
-                                                        )[0].src
-                                                        : `https://picsum.photos/200?random=1`
-                                                    }`}
-                                                width={400}
-                                                height={400}
-                                            />
-                                        </div>
-                                    </div>
-                                );
-                            })
-                        ) : (
-                            <div className="text-center w-full">No Case Studies Added</div>
-                        )}
-                    </div>
-
+                )}
+                <div
+                    ref={serviceContainer}
+                    className="flex max-w-full justify-start gap-5 overflow-auto text-right scrollbar-none lg:flex-col lg:gap-10 lg:overflow-hidden lg:px-10 lg:text-4xl"
+                >
+                    {servicesWithCaseStudies.length > 0 ? (
+                        servicesWithCaseStudies.map((service, index) => (
+                            <div
+                                key={index}
+                                className="flex cursor-pointer items-center justify-center gap-2 hover:underline focus:text-[#5380EA]"
+                            >
+                                <button
+                                    onClick={() => {
+                                        setCurrentGrid(service.CaseStudies || []);
+                                        setCurrentIndex(index);
+                                    }}
+                                    className="peer/item peer focus:text-[#5380EA]"
+                                >
+                                    {service.title}
+                                </button>
+                                <MoveRight
+                                    className={`h-full w-10 ${currentIndex === index
+                                        ? "hidden lg:block lg:text-[#5380EA]"
+                                        : "hidden"
+                                        }`}
+                                />
+                            </div>
+                        ))
+                    ) : (
+                        <div className="text-center w-full text-lg font-semibold">
+                            Case Studies Coming Soon
+                        </div>
+                    )}
+                </div>
+                {servicesWithCaseStudies.length > 0 && (
                     <button
                         type="button"
-                        className="w-4  cursor-pointer text-gray-400 lg:hidden"
-                        onClick={() => nextSlide(gridContainer)}
+                        className="w-4 cursor-pointer text-gray-400 lg:hidden"
+                        onClick={() => nextSlide(serviceContainer)}
                     >
                         <ChevronRight className="text-guru-blue" />
                     </button>
-                </div>
-            }
+                )}
+            </div>
+
+            <div className={`relative my-4 flex gap-3 lg:my-0 lg:w-2/3`}>
+                {currentGrid.length > 0 ? (
+                    <>
+                        <button
+                            type="button"
+                            className="w-4 cursor-pointer text-gray-400 lg:hidden"
+                            onClick={() => prevSlide(gridContainer)}
+                        >
+                            <ChevronLeft className="text-guru-blue" />
+                        </button>
+
+                        <div
+                            ref={gridContainer}
+                            className="flex w-full max-w-full items-center justify-start gap-2 overflow-x-auto scrollbar-none lg:grid lg:grid-cols-4 lg:grid-rows-[25rem_1fr_1fr_1fr]"
+                        >
+                            {currentGrid.map((caseStudy: CaseStudy & { images: CaseImage[] }, index) => (
+                                <div
+                                    key={index}
+                                    className="h-60 w-1/2 flex-shrink-0 overflow-hidden rounded-lg lg:aspect-auto lg:h-full lg:w-full"
+                                >
+                                    <div className="relative h-full w-full overflow-hidden rounded-lg">
+                                        <ImageWithTextOverlay
+                                            modal={
+                                                <ReadMoreModal
+                                                    link={`/casestudies/${seoUrl(caseStudy.title, caseStudy.id as string)}`}
+                                                    heading={caseStudy.title}
+                                                    points={[
+                                                        (caseStudy.userProblems as { problems: string; })?.problems ?? "",
+                                                    ]}
+                                                />
+                                            }
+                                            title={caseStudy.title}
+                                            image={caseStudy.images[0]?.src || `https://picsum.photos/200?random=1`}
+                                            width={400}
+                                            height={400}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <button
+                            type="button"
+                            className="w-4 cursor-pointer text-gray-400 lg:hidden"
+                            onClick={() => nextSlide(gridContainer)}
+                        >
+                            <ChevronRight className="text-guru-blue" />
+                        </button>
+                    </>
+                ) : (
+                    <div className="text-center w-full">No Case Studies Added</div>
+                )}
+            </div>
         </div>
     );
 }
@@ -199,9 +174,8 @@ const ReadMoreModal = ({
     heading: string;
     link: string;
 }) => {
-    const [showModal, setShowModal] = useState(false);
     return (
-        <div className="">
+        <div>
             <h2>{heading}</h2>
             <ul className="list-disc p-5">
                 {points.map((text, index) => (
