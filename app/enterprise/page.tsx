@@ -64,7 +64,7 @@ async function Enterprise() {
                 width={100}
               ></Image>
               <div>Projects</div>
-              <div>65+</div>
+              <div>200+</div>
             </div>
             <div>
               <Image
@@ -74,7 +74,7 @@ async function Enterprise() {
                 width={100}
               ></Image>
               <div>Clients</div>
-              <div>65+</div>
+              <div>1345+</div>
             </div>
             <div>
               <Image
@@ -84,7 +84,7 @@ async function Enterprise() {
                 width={100}
               ></Image>
               <div>Experience</div>
-              <div>65+</div>
+              <div>7+</div>
             </div>
             <div>
               <Image
