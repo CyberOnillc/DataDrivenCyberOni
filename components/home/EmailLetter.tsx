@@ -18,7 +18,7 @@ function EmailLetter() {
 
     }
     return (
-        <div className="rounded-lg flex flex-col justify-center lg:justify-normal lg:flex-row gap-5 bg-gradient-purple h-full lg:min-h-fit my-32  lg:my-10 px-10">
+        <div className="rounded-lg flex flex-col justify-center lg:justify-normal lg:flex-row gap-5 bg-gradient-purple h-full lg:min-h-fit lg:my-32  lg:my-10 px-10">
             <div className="animate-float relative flex-1 h-60 lg:h-full lg:w-1/2 lg:flex lg:justify-center lg:items-center -top-20 lg:top-0 lg:translate-y-0 overflow-hidden">
                 <Image className=" object-contain" src={'/images/cta.png'} alt="cta-image" height={500} width={500}></Image>
             </div>

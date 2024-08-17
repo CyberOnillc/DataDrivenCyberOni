@@ -209,11 +209,11 @@ async function Blogs() {
               )}
             </div>
             <div className="z-30 w-full p-5 lg:w-1/2 lg:p-10 lg:dark:bg-slate-800 ">
-              <p className="my-2 text-lg font-thin">
+              <p className="my-2 text-lg font-thin text-white">
                 By {random.author.firstName}
               </p>
-              <h2 className="mb-2 text-2xl font-semibold">{random.title}</h2>
-              <p className="line-clamp-4 text-base">{random.description}</p>
+              <h2 className="mb-2 text-2xl font-semibold text-white">{random.title}</h2>
+              <p className="line-clamp-4 text-base text-white">{random.description}</p>
             </div>
           </Link>
         )}
