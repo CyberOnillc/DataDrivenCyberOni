@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import useSwipe from "@/lib/hooks/use-swipe-gesture";
 import { wrappedSlice } from "@/lib/utils";
@@ -30,14 +30,14 @@ function ReviewCarousel({ reviews }: { reviews: ReviewProps[] }) {
     });
 
     return (
-        <div className='relative p-5' {...swipehandlers}>
-            <div className="flex flex-col lg:flex-row gap-6 p-5 px-10">
+        <div className="relative p-5" {...swipehandlers}>
+            <div className="flex flex-col gap-6 p-5 px-5 lg:px-10">
                 {wrappedSlice(reviews, currentIndex, currentIndex + 1).map((review, index) => (
                     <div
                         key={index}
-                        className="flex-1 p-6 rounded-lg bg-[#ffffff0e] border-4 border-[#AAC3F5] relative text-center justify-center mt-10 lg:px-8 pb-6 grid grid-cols-12 grid-rows-[auto_auto_1fr] gap-y-4 lg:grid-cols-3 lg:text-left text-center"
+                        className="flex-1 p-6 rounded-lg bg-[#ffffff0e] border-4 border-[#AAC3F5] relative text-center justify-center mt-10 lg:px-8 pb-6 grid grid-cols-1 lg:grid-cols-3 gap-y-4 lg:text-left text-center"
                     >
-                        <div className="col-span-12 lg:col-span-1 flex justify-center items-center">
+                        <div className="flex justify-center lg:justify-start lg:col-span-1 items-center">
                             <Image
                                 src={review.image}
                                 alt={`${review.name}'s Profile`}
@@ -46,11 +46,11 @@ function ReviewCarousel({ reviews }: { reviews: ReviewProps[] }) {
                                 width={80}
                             />
                         </div>
-                        <div className="col-span-12 lg:col-span-2 mt-4 lg:mt-0">
+                        <div className="mt-4 lg:mt-0 lg:col-span-2">
                             <h3 className="text-lg font-semibold">{review.name}</h3>
                             <h3 className="text-guru-blue text-base">{review.position}</h3>
                         </div>
-                        <div className="col-span-12 text-base lg:text-lg leading-relaxed">
+                        <div className="col-span-1 lg:col-span-3 text-base lg:text-lg leading-relaxed">
                             {review.content}
                         </div>
                     </div>
