@@ -100,7 +100,7 @@ async function Enterprise() {
 
           <div className="my-5  flex items-center justify-center">
             <div className="w-80 text-center text-3xl text-[#5380EA]">
-              Thank you for your interest in us!
+              We Automate Your Tasks, So You Can Focus On Bringing Value To Your Customers
             </div>
           </div>
           <div className="sm:text-3l my-5 flex flex-col items-center justify-center font-nunito text-5xl font-bold">
