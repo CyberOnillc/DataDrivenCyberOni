@@ -15,8 +15,12 @@ function ServiceCard({ id, image, previewContent, title }: ServiceCardProps) {
     return (
         <>
             <div className="flex flex-col justify-around rounded-xl shadow-lg hover:shadow-lg dark:shadow-[2px_3px_10px_0_#09090b] dark:hover:shadow-[2px_3px_40px_0_#09090b] dark:bg-zinc-900 p-5 h-full">
+<<<<<<< HEAD
                 {/*?commented out images to prevent alt
                  <Image
+=======
+                {/* <Image
+>>>>>>> c91237236213515aae7f48038551359566dd7c42
                     className="rounded-full h-10 w-10 mb-5"
                     src={image ? image.src : "https://picsum.photos/200?random=1"}
                     alt={title}

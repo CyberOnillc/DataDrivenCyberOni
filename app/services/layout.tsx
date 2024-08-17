@@ -15,7 +15,7 @@ function ServiceLayout({ children }: { children: ReactNode }) {
                     <div className="text-service-green">A TRUSTED COMPANY</div>
                     <h1 className="text-7xl">Next-Gen Software Services for Businesses.</h1>
                     <div className="border-l-4 border-service-green px-3">Checkout Services We Offer Below!</div>
-                    <Link href={'/schedule'} className="rounded-full p-3 bg-service-green text-white flex items-center w-fit gap-3 my-5 shadow-[0_10px_40px_0px_#33D3D454]">Stuck? Schedule Now<MoveRight /></Link>
+                    <Link href={'/schedule'} className="rounded-full p-3 bg-service-green text-white flex items-center w-fit gap-3 my-5 shadow-[0_10px_40px_0px_#33D3D454]">Stuck? Schedule Now <MoveRight /></Link>
 
                 </div>
                 <div className="lg:w-1/2">
