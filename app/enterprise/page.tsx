@@ -98,24 +98,25 @@ async function Enterprise() {
             </div>
           </div>
 
-          <div className="my-5  flex items-center justify-center">
-            <div className="w-80 text-center text-3xl text-[#5380EA]">
+          <div className="my-5 flex flex-col lg:flex-row items-center justify-center gap-8">
+            <div className="w-full lg:w-1/2 text-center text-3xl text-[#5380EA] px-4">
               We Automate Your Tasks, So You Can Focus On Bringing Value To Your Customers
             </div>
+            <div className="w-full lg:w-1/2 sm:text-3l flex flex-col items-center justify-center font-nunito text-4xl lg:text-5xl font-bold text-center lg:text-left px-4">
+              <p>Founded over 7 years ago, CyberOni</p>
+              <p>
+                Technologies is now the main{" "}
+                <span className="text-rose-600">Data Science</span>
+              </p>
+              <p>
+                and <span className="text-rose-600">Software Development</span> agency
+                in Colorado.
+              </p>
+            </div>
           </div>
-          <div className="sm:text-3l my-5 flex flex-col items-center justify-center font-nunito text-5xl font-bold">
-            <p>Founded over 7 years ago, CyberOni</p>
-            <p>
-              Technologies is now the main{" "}
-              <span className="text-rose-600">Data Science</span>
-            </p>
-            <p>
-              and<span className="text-rose-600"> Software Development</span> agency
-              in Colorado.
-            </p>
-          </div>
+
           <div className="px-5 font-nunito text-lg font-semibold text-[#475569]">
-            At Cyberoni, we blend advanced technology with strategic business
+            We blend advanced technology with strategic business
             insights to foster growth and prosperity for your brand. Our mission
             is to engineer bespoke digital solutions that aren&apos;t just
             effective but also resonate with your unique business identity. We
