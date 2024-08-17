@@ -13,7 +13,7 @@ function PayLater({ value, type }: { value?: string[], type?: 'service' | 'produ
                     <p className="text-emerald-800 dark:text-gray-100  dark whitespace-pre-wrap font-bold m-2 text-xs lg:text-base line-clamp-3">{value ? (value[3] || 'Custom add-ons without the monthly cost') : 'Custom add-ons without the monthly cost'}</p>
                 </div>
                 <div className="relative flex w-30 lg:w-60 justify-center items-center aspect-square rounded-[107px_122px_108px_96px/117px_137px_111px_107px] bg-gradient-to-tl from-rose-300 to-rose-500 backdrop-blur-sm p-6 shadow-md">
-                    <p className="text-rose-700 dark:text-gray-100 whitespace-pre-wrap font-bold m-2 text-xs lg:text-base line-clamp-3">{value ? (value[2] || 'Custom AI Integration') : 'Custom AI Integration'} </p>
+                    <p className="text-white dark:text-gray-100 whitespace-pre-wrap font-bold m-2 text-xs lg:text-base line-clamp-3">{value ? (value[2] || 'Custom AI Integration') : 'Custom AI Integration'} </p>
                 </div>
             </div>
             <Image src={'/images/pay-later.png'} alt="pay-later" height={500} width={500} />
