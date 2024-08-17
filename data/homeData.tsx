@@ -3,8 +3,8 @@ import { Company } from "@/components/home/CompanyCarousel";
 import { SlideProps } from "@/components/home/Slide";
 
 export const mainHero: SectionProps = {
-  title: "Business Data Science & Automation",
-  subTitle: "Building Blocks For Success",
+  title: "Understand Your Business Data",
+  subTitle: "Focus On Bringing Customers Value",
   content: (
     <div>
       Our cutting-edge tools are designed to automate your daily tasks, freeing
@@ -53,7 +53,7 @@ export const homeSections: SectionProps[] = [
         gather your target users preferences ensuring you’re focusing on what
         counts. Our tools react to changes, optimize processes, and
         automatically adjust to new data, helping you stay{" "}
-        <span className="font-bold text-blue-500">proactive and efficient</span>
+        <span className="font-bold text-blue-500">proactive and efficient.</span>
       </div>
     ),
     image: "/images/HomeSections/Data-1.png",
