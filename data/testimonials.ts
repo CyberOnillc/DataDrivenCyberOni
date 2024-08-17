@@ -1,7 +1,7 @@
 export const testimonials = [
   {
     name: "John Smith",
-    image: "/images/prof1.png", // Placeholder image path, replace with the actual path if needed
+    image: "/images/male.jpg", // Placeholder image path, replace with the actual path if needed
     content:
       "Cyberoni has transformed the way we approach data analytics. Their team delivered a customized solution that integrated seamlessly with our existing systems, enabling us to derive actionable insights from our data. Their professionalism and expertise are second to none.",
     position: "Chief Data Officer, FinTech Solutions",
@@ -10,7 +10,7 @@ export const testimonials = [
   },
   {
     name: "Elena Garcia",
-    image: "/images/prof2.png", // Placeholder image path, replace with the actual path if needed
+    image: "/images/female.jpg", // Placeholder image path, replace with the actual path if needed
     content:
       "We partnered with Cyberoni for a large-scale cloud migration project, and the results have been outstanding. They managed the entire process smoothly, with minimal disruption to our operations. Their deep understanding of cloud technologies and commitment to client satisfaction set them apart.",
     position: "VP of Technology, Healthcare Innovations",
@@ -19,7 +19,7 @@ export const testimonials = [
   },
   {
     name: "Michael Patel",
-    image: "/images/prof3.png", // Placeholder image path, replace with the actual path if needed
+    image: "/images/male.jpg", // Placeholder image path, replace with the actual path if needed
     content:
       "Cyberoni’s approach to software development is both innovative and client-focused. They took the time to understand our unique needs and delivered a solution that has significantly streamlined our business processes. Their ability to adapt and deliver under tight deadlines is impressive.",
     position: "CTO, Global Logistics Inc.",
@@ -28,7 +28,7 @@ export const testimonials = [
   },
   {
     name: "Sophia Hernandez",
-    image: "/images/prof4.png", // Placeholder image path, replace with the actual path if needed
+    image: "/images/female.jpg", // Placeholder image path, replace with the actual path if needed
     content:
       "The team at Cyberoni exceeded our expectations in every way. They provided end-to-end software development services for our e-commerce platform, resulting in a scalable and highly secure solution. Their proactive communication and technical expertise were key to the success of our project.",
     position: "Head of IT, Retail Dynamics",
@@ -37,7 +37,7 @@ export const testimonials = [
   },
   {
     name: "Robert Lee",
-    image: "/images/prof5.png", // Placeholder image path, replace with the actual path if needed
+    image: "/images/male.jpg", // Placeholder image path, replace with the actual path if needed
     content:
       "Our collaboration with Cyberoni has been a game-changer. Their data-driven approach to software development has enabled us to optimize our operations and improve decision-making across the board. Their commitment to quality and excellence is evident in every aspect of their work.",
     position: "CEO, Manufacturing Insights",
