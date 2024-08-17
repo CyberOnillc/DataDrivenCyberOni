@@ -1,43 +1,48 @@
 export const testimonials = [
   {
-    name: "Ashley Miller",
+    name: "John Smith",
     image: "/images/prof1.png", // Placeholder image path, replace with the actual path if needed
     content:
-      "Great and fast service. We looked at a great apartment only two days after our first conversation. I love the apartment and had a move-in date within a week of the tour. She was amazing.",
-    position: "Customer", // You may want to update the position based on the context.
-    response: "Thank your for your review 😊",
+      "Cyberoni has transformed the way we approach data analytics. Their team delivered a customized solution that integrated seamlessly with our existing systems, enabling us to derive actionable insights from our data. Their professionalism and expertise are second to none.",
+    position: "Chief Data Officer, FinTech Solutions",
+    response:
+      "Thank you for your kind words, John! We're glad to have been part of your data transformation journey.",
   },
   {
-    name: "Andrea W",
-    image: "/images/prof1.png", // Placeholder image path, replace with the actual path if needed
-    // Placeholder image path, replace with the actual path if needed
+    name: "Elena Garcia",
+    image: "/images/prof2.png", // Placeholder image path, replace with the actual path if needed
     content:
-      "Rotunda is amazing she came through and helped me get an apartment even when I had doubts. Thank you so much.",
-    position: "Customer",
-    // No response provided for this review
+      "We partnered with Cyberoni for a large-scale cloud migration project, and the results have been outstanding. They managed the entire process smoothly, with minimal disruption to our operations. Their deep understanding of cloud technologies and commitment to client satisfaction set them apart.",
+    position: "VP of Technology, Healthcare Innovations",
+    response:
+      "Thank you, Elena! We're thrilled to hear that the cloud migration has been a success for your organization.",
   },
   {
-    name: "Jamie Marie",
+    name: "Michael Patel",
     image: "/images/prof3.png", // Placeholder image path, replace with the actual path if needed
     content:
-      "Rotunda, is the TRUTH!!!! She found me thee most amazing apartment..in a great area!! Everything is in walking distance!! EVERYTHING! Being new to Denver. I am so glad for her services. She went above and beyond. To make sure that I was satisfied!",
-    position: "Customer",
-    response: "Thank you for your review",
+      "Cyberoni’s approach to software development is both innovative and client-focused. They took the time to understand our unique needs and delivered a solution that has significantly streamlined our business processes. Their ability to adapt and deliver under tight deadlines is impressive.",
+    position: "CTO, Global Logistics Inc.",
+    response:
+      "Thank you, Michael. It was a pleasure working with your team to deliver a solution that meets your needs.",
   },
   {
-    name: "Jacqueta Chambliss (MissJacqueta)",
-    image: "/images/prof1.png", // Placeholder image path, replace with the actual path if needed
+    name: "Sophia Hernandez",
+    image: "/images/prof4.png", // Placeholder image path, replace with the actual path if needed
     content:
-      "I’ve worked with Rotunda during my apartment search. She is very professional and responsive. Within a couple days, she had my first and only tour scheduled. Then by the end of the following week, I had secured my apartment. Rotunda …More", // You might want to expand the "…More" if there's more content.
-    position: "Customer",
-    response: "Thank you for the honest review",
+      "The team at Cyberoni exceeded our expectations in every way. They provided end-to-end software development services for our e-commerce platform, resulting in a scalable and highly secure solution. Their proactive communication and technical expertise were key to the success of our project.",
+    position: "Head of IT, Retail Dynamics",
+    response:
+      "Thank you for your feedback, Sophia! We're delighted to have contributed to the success of your e-commerce platform.",
   },
   {
-    name: "Tatyana Howard",
-    image: "/images/prof2.png", // Placeholder image path, replace with the actual path if needed
-    content: "Amazing work love everything she did for me",
-    position: "Customer",
-    // No response provided for this review
+    name: "Robert Lee",
+    image: "/images/prof5.png", // Placeholder image path, replace with the actual path if needed
+    content:
+      "Our collaboration with Cyberoni has been a game-changer. Their data-driven approach to software development has enabled us to optimize our operations and improve decision-making across the board. Their commitment to quality and excellence is evident in every aspect of their work.",
+    position: "CEO, Manufacturing Insights",
+    response:
+      "Thank you, Robert! We appreciate your trust in Cyberoni and look forward to continuing our partnership.",
   },
 ];
 
