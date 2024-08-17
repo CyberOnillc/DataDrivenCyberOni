@@ -1,51 +1,44 @@
-import CompanyCarousel from "@/components/home/CompanyCarousel";
-
+import { seoUrl } from "@/lib/utils";
+import { Image as ServiceImage } from "@prisma/client";
 import { MoveRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
 
+export type ServiceCardProps = {
+  id: string;
+  title: string;
+  previewContent: string;
+  image: ServiceImage;
+};
 
-function ServiceLayout({ children }: { children: ReactNode }) {
-    return (<>
-
-        <div>
-            <section className="container mx-auto flex flex-col lg:flex-row  gap-10 justify-center items-center">
-                <div className="p-5 lg:w-1/3">
-                    <div className="text-service-green">A TRUSTED COMPANY</div>
-                    <h1 className="text-7xl">Next-Gen Software Services for Businesses.</h1>
-                    <div className="border-l-4 border-service-green px-3">Checkout Services We Offer Below!</div>
-                    <Link href={'#'} className="rounded-full p-3 bg-service-green text-white flex items-center w-fit gap-3 my-5 shadow-[0_10px_40px_0px_#33D3D454]">Get Started <MoveRight /></Link>
-
-                </div>
-                <div className="lg:w-1/2">
-                    <Image className="object-fill" src={'/images/service-hero.png'} alt="service-hero" height={500} width={500} />
-                </div>
-
-            </section>
-            <section className="container mx-auto">
-                <div className="container my-4">
-                    <CompanyCarousel cards={companies}></CompanyCarousel>
-                </div>
-            </section>
-            <section>
-
-            </section>
-            {children}
-            <section>
-
-            </section>
-
+function ServiceCard({ id, image, previewContent, title }: ServiceCardProps) {
+  return (
+    <>
+      <div className="flex flex-col justify-between rounded-xl shadow-lg hover:shadow-lg dark:shadow-[2px_3px_10px_0_#09090b] dark:hover:shadow-[2px_3px_40px_0_#09090b] dark:bg-zinc-900 p-5 h-full space-y-5">
+        <div className="flex items-center space-x-4">
+          <Image
+            className="rounded-full h-10 w-10"
+            src={image ? image.src : "https://picsum.photos/200?random=1"}
+            alt={title}
+            height={40}
+            width={40}
+          />
+          <div className="border-l-4 border-service-green px-3 font-bold text-xl whitespace-nowrap overflow-hidden text-ellipsis">
+            {title}
+          </div>
         </div>
-
-
-    </>);
+        <div className="text-base text-gray-600 dark:text-gray-400 mb-5 line-clamp-3">
+          {previewContent}
+        </div>
+        <Link
+          href={`/services/${seoUrl(title, id)}#description`}
+          className="flex items-center gap-x-2 text-blue-500 font-semibold"
+        >
+          Learn more <MoveRight />
+        </Link>
+      </div>
+    </>
+  );
 }
 
-const companies = [{ name: 'google', image: '/images/Google cloud.png' },
-{ name: 'Ebay', image: '/images/Ebay.png' },
-{ name: 'Tux', image: '/images/Tux.png' },
-{ name: 'Spotify', image: '/images/Spotify.png' },]
-
-
-export default ServiceLayout;
+export default ServiceCard;
