@@ -18,7 +18,7 @@ function HowItWorks({ steps }: { steps: StepCardProps[] }) {
             </div>
             <Link href="/contact">
                 <a className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full my-10">
-                    Get In Contact
+                    Get In Touch!
                 </a>
             </Link>
         </div>

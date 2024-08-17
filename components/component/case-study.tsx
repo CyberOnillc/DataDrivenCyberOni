@@ -71,13 +71,14 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
                   ? caseStudy.images[0].src
                   : "/placeholder.svg"
               }
-              width="550"
-              height="550"
+              width={550}
+              height={550}
               alt="Hero"
               placeholder="blur"
               blurDataURL="/placeholder.svg"
-              className="mx-auto aspect-video overflow-hidden rounded-xl object-bottom sm:w-full lg:order-last lg:aspect-square"
+              className="mx-auto rounded-xl object-cover sm:w-full lg:order-last"
             />
+
           </div>
         </div>
       </section>
@@ -141,7 +142,7 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
             </h2>
             {caseStudy.userPersonas &&
               (caseStudy.userPersonas as unknown as UserPersona[]).length >
-                0 && (
+              0 && (
                 <div className="container mx-auto px-4 md:px-6">
                   {(caseStudy.userPersonas as unknown as UserPersona[]).map(
                     (user, index) => (
@@ -184,7 +185,7 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
             <div className="flex items-center justify-center rounded-md shadow-sm">
               <Image
                 className="rounded-md shadow-sm"
-                src={ caseStudy.results?.image?.src ?? "/images/casestudy-2.png"}
+                src={caseStudy.results?.image?.src ?? "/images/casestudy-2.png"}
                 placeholder="blur"
                 blurDataURL="/placeholder.svg"
                 alt="result-image"
@@ -272,7 +273,7 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
             <div className="flex items-center justify-center">
               <Image
                 className="rounded-md shadow-sm"
-                src={ caseStudy.keyLearning?.image?.src ?? "/images/casestudy-3.png"}
+                src={caseStudy.keyLearning?.image?.src ?? "/images/casestudy-3.png"}
                 placeholder="blur"
                 blurDataURL="/placeholder.svg"
                 alt="Key Learnings"
