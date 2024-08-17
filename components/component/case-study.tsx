@@ -289,7 +289,7 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
           <div className="grid gap-10 sm:px-10 md:gap-16 lg:grid-cols-2 lg:gap-20">
             <div className="space-y-4">
               <div className="bg-primary text-white font-bold rounded-full px-6 py-3 text-center text-base md:text-lg lg:text-xl shadow-md hover:bg-primary/90 transition-colors">
-                Ready to Transform?
+                Ready to make a transformation?
               </div>
 
               <h2 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem]">
