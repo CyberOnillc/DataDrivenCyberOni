@@ -105,7 +105,9 @@ async function Services({ params }: { params: { id: string } }) {
       </div>
 
       <section id="description" className="py-5  font-nunito container mx-auto lg:px-5">
-        <div className="text-center text-6xl font-bold">{service.title}</div>
+        <div className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+          {service.title}
+        </div>
         {service.ServiceDescription?.map((section, index) => (
           <FloatingImageSection key={index} section={section} />
         ))}
@@ -114,10 +116,10 @@ async function Services({ params }: { params: { id: string } }) {
       <section className="my-5 font-nunito"></section>
 
       <section className="my-5 font-nunito">
-        <div className="text-center font-nunito text-4xl font-semibold">
+        <div className="text-center font-nunito  text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold">
           Feedback from our clients
         </div>
-        <div className="text-center text-lg font-light">
+        <div className="text-center text-lg   sm:text-5xl md:text-6xl lg:text-7xl font-light">
           Our WORK speaks louder than our WORD. Find out how we helped clients
           overcome challenges and succeed.
         </div>
@@ -136,7 +138,7 @@ async function Services({ params }: { params: { id: string } }) {
       )}
       {service.CaseStudies && service.CaseStudies.length > 0 ? (
         <section className="my-5 font-nunito">
-          <div className="text-center text-4xl font-bold">Portfolio</div>
+          <div className="text-center  text-4xl sm:text-5xl md:text-6xl lg:text-7xlfont-bold">Portfolio</div>
 
           <div className="container mx-auto my-5 flex flex-wrap gap-2 lg:gap-5 px-5"
           >            {service.CaseStudies?.map((caseStudy, index) => (
@@ -151,7 +153,7 @@ async function Services({ params }: { params: { id: string } }) {
         <></>
       )}
       <section className="my-5 font-nunito">
-        <div className="text-center text-4xl font-bold">
+        <div className="text-center  text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
           Frequently Asked Questions
         </div>
 
