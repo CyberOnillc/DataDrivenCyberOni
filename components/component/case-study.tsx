@@ -23,6 +23,7 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
+'use client'
 import Link from "next/link";
 import {
   Card,
@@ -30,7 +31,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { SVGProps } from "react";
+import { SVGProps, useEffect } from "react";
 import Image from "next/image";
 import {
   CreateCaseStudyDTO,
@@ -42,7 +43,13 @@ import ProgressBar from "../blogs/BlogReadProgess";
 import UserPersonaCard from "../casestudies/UserPersonaCard";
 import { Image as DBImage } from "@prisma/client";
 
+
+
+
 export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
+  useEffect(() => {
+    console.log("Case Study", caseStudy)
+  }, [])
   return (
     <div className="flex min-h-[100dvh] flex-col">
       <section className="w-full py-12 md:py-24 lg:py-32">
@@ -50,24 +57,25 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none dark:text-white">
                   {caseStudy.title}
                 </h1>
-                <p className="text-muted-foreground max-w-[600px] md:text-xl">
+                <p className="text-muted-foreground max-w-[600px] md:text-xl dark:text-gray-300">
                   {caseStudy.preview}
                 </p>
                 <Link
                   href="#start"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring inline-flex h-10 items-center justify-center rounded-md px-8 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring inline-flex h-10 items-center justify-center rounded-md px-8 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500"
                   prefetch={false}
                 >
                   Read Case Study
                 </Link>
+
               </div>
             </div>
             <Image
               src={
-                caseStudy.images && caseStudy.images.length > 1
+                caseStudy.images && caseStudy.images.length > 0
                   ? caseStudy.images[0].src
                   : "/placeholder.svg"
               }
@@ -76,56 +84,44 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
               alt="Hero"
               placeholder="blur"
               blurDataURL="/placeholder.svg"
-              className="mx-auto rounded-xl object-cover sm:w-full lg:order-last"
+              className="mx-auto rounded-xl object-cover sm:w-full lg:order-last dark:shadow-xl"
             />
-
           </div>
         </div>
       </section>
-      <section id="start" className="bg-muted w-full py-12 md:py-24 lg:py-32">
+
+      <section id="start" className="bg-muted w-full py-12 md:py-24 lg:py-32 dark:bg-muted-dark">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
             <div>
-              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">
+              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm dark:bg-muted-dark">
                 The Problem
               </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl dark:text-white">
                 {caseStudy.problemStatement?.title ?? "Problem Statement"}
               </h2>
-              <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-300">
                 {caseStudy.problemStatement?.statement ?? "Problem Statement"}
-              </p>
-            </div>
-            <div>
-              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">
-                The Solution
-              </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                {caseStudy.possibleSolutions?.title ??
-                  "Cyber Shop Product to the Rescue"}
-              </h2>
-              <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {caseStudy.possibleSolutions?.solution ?? "Solution Statement"}
               </p>
             </div>
           </div>
         </div>
       </section>
+
       <section className="w-full py-12 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
             <div>
-              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">
+              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm dark:bg-muted-dark">
                 Key Features
               </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                {caseStudy.uniqueFeatures?.title ??
-                  "Transforming Business Processes"}
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl dark:text-white">
+                {caseStudy.uniqueFeatures?.title ?? "Transforming Business Processes"}
               </h2>
               <ul className="grid gap-2 py-4">
                 {caseStudy.uniqueFeatures?.features.map((feature, index) => (
                   <li key={index} className="flex items-center gap-2">
-                    <CheckIcon className="text-primary h-4 w-4" />
+                    <CheckIcon className="text-primary h-4 w-4 dark:text-primary-dark" />
                     {feature}
                   </li>
                 )) ?? "No Key Features"}
@@ -134,15 +130,15 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
           </div>
         </div>
       </section>
+
       <section className="w-full py-12 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 md:px-6">
           <div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl dark:text-white">
               User Stories
             </h2>
             {caseStudy.userPersonas &&
-              (caseStudy.userPersonas as unknown as UserPersona[]).length >
-              0 && (
+              (caseStudy.userPersonas as unknown as UserPersona[]).length > 0 && (
                 <div className="container mx-auto px-4 md:px-6">
                   {(caseStudy.userPersonas as unknown as UserPersona[]).map(
                     (user, index) => (
@@ -158,25 +154,26 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
           </div>
         </div>
       </section>
-      <section className="bg-muted w-full py-12 md:py-24 lg:py-32">
+
+      <section className="bg-muted w-full py-12 md:py-24 lg:py-32 dark:bg-muted-dark">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
             <div>
-              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">
+              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm dark:bg-muted-dark">
                 Results
               </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl dark:text-white">
                 {caseStudy.results?.title ?? "Measurable Impact"}
               </h2>
-              <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-300">
                 {caseStudy.results?.description ?? ""}
               </p>
               <div className="grid grid-cols-2 gap-4 py-6">
                 {caseStudy.results?.result?.map((result, index) => (
-                  <Card key={index} className="bg-background p-4 shadow-sm">
+                  <Card key={index} className="bg-background p-4 shadow-sm dark:bg-background-dark dark:shadow-md">
                     <CardHeader>
-                      <CardTitle>{result.improvement}</CardTitle>
-                      <CardDescription>{result.description}</CardDescription>
+                      <CardTitle className="dark:text-white">{result.improvement}</CardTitle>
+                      <CardDescription className="dark:text-gray-300">{result.description}</CardDescription>
                     </CardHeader>
                   </Card>
                 )) ?? null}
@@ -184,7 +181,7 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
             </div>
             <div className="flex items-center justify-center rounded-md shadow-sm">
               <Image
-                className="rounded-md shadow-sm"
+                className="rounded-md shadow-sm dark:shadow-md"
                 src={caseStudy.results?.image?.src ?? "/images/casestudy-2.png"}
                 placeholder="blur"
                 blurDataURL="/placeholder.svg"
@@ -196,126 +193,68 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
           </div>
         </div>
       </section>
+
       <section className="w-full py-12 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
             <div>
-              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">
+              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm dark:bg-muted-dark">
                 Competitor Analysis
               </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                {caseStudy.competitorAnalysis?.title ??
-                  "Analyzing the Competition"}
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl dark:text-white">
+                {caseStudy.competitorAnalysis?.title ?? "Analyzing the Competition"}
               </h2>
-              <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {caseStudy.competitorAnalysis?.analysis ??
-                  "Analyzing the Competition"}
+              <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-300">
+                {caseStudy.competitorAnalysis?.analysis ?? "Analyzing the Competition"}
               </p>
             </div>
             <div>
-              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">
+              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm dark:bg-muted-dark">
                 Goals
               </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl dark:text-white">
                 {caseStudy.goals?.title ?? "Defining the Objectives"}
               </h2>
-              <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-300">
                 {caseStudy.goals?.goals ?? "Defining the Objectives"}
               </p>
             </div>
           </div>
         </div>
       </section>
-      <section className="bg-muted w-full py-12 md:py-24 lg:py-32">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-            <div>
-              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">
-                Primary Research
-              </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                {caseStudy.primaryResearch?.title ??
-                  "Understanding the User Needs"}
-              </h2>
-              <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {caseStudy.primaryResearch?.research ??
-                  "Understanding the User Needs"}
-              </p>
-            </div>
-            <div>
-              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">
-                User Research
-              </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                {caseStudy.userResearch?.title ?? " user Research"}
-              </h2>
-              <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {caseStudy.userResearch?.research ?? "User Research"}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="w-full py-12 md:py-24 lg:py-32">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-            <div>
-              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">
-                Key Learnings
-              </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                {caseStudy.keyLearning?.title ?? "Insights and Takeaways"}
-              </h2>
-              <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {caseStudy.keyLearning?.learning ?? "Key Learnings"}
-              </p>
-            </div>
-            <div className="flex items-center justify-center">
-              <Image
-                className="rounded-md shadow-sm"
-                src={caseStudy.keyLearning?.image?.src ?? "/images/casestudy-3.png"}
-                placeholder="blur"
-                blurDataURL="/placeholder.svg"
-                alt="Key Learnings"
-                width={500}
-                height={500}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="w-full border-t py-12 md:py-24 lg:py-32">
+
+      <section className="w-full border-t py-12 md:py-24 lg:py-32 dark:border-gray-700">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid gap-10 sm:px-10 md:gap-16 lg:grid-cols-2 lg:gap-20">
             <div className="space-y-4">
-              <div className="bg-primary text-white font-bold rounded-full px-6 py-3 text-center text-base md:text-lg lg:text-xl shadow-md hover:bg-primary/90 transition-colors">
-                Ready to make a transformation?
+              <div className="bg-primary font-bold rounded-full px-6 py-3 text-center text-base md:text-lg lg:text-xl shadow-md hover:bg-primary/90 transition-colors dark:bg-primary-dark dark:text-primary-foreground-dark">
+                <span className="text-black dark:text-white">
+                  Ready to make a transformation?
+                </span>
               </div>
 
-              <h2 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem]">
+              <h2 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem] dark:text-white">
                 Experience the Power of Cybershoptech Products
               </h2>
               <Link
                 href="/schdule"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm font-medium shadow transition-colors dark:bg-primary-dark dark:text-primary-foreground-dark dark:hover:bg-primary-dark/90"
                 prefetch={false}
                 rel="noopener noreferrer"
-
               >
                 Get a Demo
               </Link>
             </div>
             <div className="flex flex-col items-start space-y-4">
-              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">
+              <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm dark:bg-muted-dark">
                 Contact Us
               </div>
-              <p className="text-muted-foreground mx-auto max-w-[700px] md:text-xl/relaxed">
-                Our team is ready to help you transform your business with
-                Cybershoptech Product. Get in touch to learn more.
+              <p className="text-muted-foreground mx-auto max-w-[700px] md:text-xl/relaxed dark:text-gray-300">
+                Our team is ready to help you transform your business with Cybershoptech Product. Get in touch to learn more.
               </p>
               <Link
                 href="/contact"
-                className="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 items-center justify-center rounded-md border px-4 py-2 text-sm font-medium shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
+                className="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 items-center justify-center rounded-md border px-4 py-2 text-sm font-medium shadow-sm transition-colors dark:bg-background-dark dark:border-gray-700 dark:hover:bg-accent-dark"
                 prefetch={false}
               >
                 Contact Sales
@@ -325,6 +264,7 @@ export function CaseStudy({ caseStudy }: { caseStudy: CreateCaseStudyDTO }) {
         </div>
       </section>
     </div>
+
   );
 }
 
