@@ -27,7 +27,7 @@
     "@sendgrid/mail": "^8.0.0",
     "@stripe/react-stripe-js": "^2.4.0",
     "@stripe/stripe-js": "^2.3.0",
-    "@techwithty/cyberoni-schema": "^1.0.23",
+    "@techwithty/cyberoni-schema": "^1.0.26",
     "@vercel/analytics": "^0.1.11",
     "@vercel/og": "^0.6.2",
     "@vercel/speed-insights": "^1.0.6",
