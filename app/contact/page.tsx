@@ -78,9 +78,18 @@ function ContactUs({ searchParams }: { searchParams: { name: string, email: stri
 
   const handleValueChange = (newValue: DateValueType) => {
 
+    // let date = newValue?.startDate
+    //   ? new Date(newValue?.startDate as string).toLocaleDateString()
+    //   : "";
+
     let date = newValue?.startDate
-      ? new Date(newValue?.startDate as string).toLocaleDateString()
+      ? typeof newValue.startDate === "string"
+        ? new Date(newValue.startDate).toLocaleDateString()
+        : newValue.startDate instanceof Date
+          ? newValue.startDate.toLocaleDateString()
+          : ""
       : "";
+
     setMovinDate(newValue);
     setFormData((prev) => ({ ...prev, date }));
   };
