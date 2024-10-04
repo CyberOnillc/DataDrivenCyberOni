@@ -90,7 +90,6 @@ function ContactUs({ searchParams }: { searchParams: { name: string, email: stri
         ? newValue.startDate.toLocaleDateString()
         : ""
       : "";
-    
     setMovinDate(newValue);
     setFormData((prev) => ({ ...prev, date }));
   };
